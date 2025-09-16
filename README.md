@@ -14,7 +14,7 @@ O projeto contribui para manter as atividades e descobertas científicas atualiz
 
 ## Tabela de Requisitos e User Stories
 
-Você pode consultar todos os **requisitos, sub-requisitos e user stories** do projeto neste [arquivo de requisitos](./documentação/requisitos.md.md).
+Você pode consultar todos os **requisitos, sub-requisitos e user stories** do projeto neste [arquivo de requisitos](./documentação/requisitos.md).
 
 
 ## Backlog do Produto
