@@ -57,3 +57,5 @@
 | MB-003 | Layout e funcionalidades da área de administração | 20 | MB | 3 |
 | MB-004 | Inserir dados iniciais de teste no banco | 13 | MB | 2 |
 | ES-010 | Documentar passo a passo de atualização de conteúdo pelos membros | 20 | ES | 2 |
+| ES-011 | DoD (Definition of Done) | 5 | ES | 1 |
+| ES-012 | DoR (Definiton of Ready) | 5 | ES | 1 |

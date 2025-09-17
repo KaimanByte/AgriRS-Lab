@@ -31,4 +31,5 @@
 | DD-011 | Criar layout no Figma (Contato) | 8  | DD |
 | DW-022 | Criar arquivo HTML (Contato) | 5  | DW |
 | DW-024 | Inserir mapa do laboratório dentro do INPE | 13 | DW |
-
+| ES-011 | DoD (Definition of Done) | 5 | ES | 1 |
+| ES-012 | DoR (Definiton of Ready) | 5 | ES | 1 |
