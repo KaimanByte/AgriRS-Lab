@@ -21,7 +21,7 @@ Você pode consultar todos os **requisitos, sub-requisitos e user stories** do p
 
 O backlog completo do projeto, incluindo tarefas, seções e valores, pode ser consultado [aqui](./documentação/backlog-produto.md).
 
-
+  
 ## Equipe
 
 | Nome | Função | GitHub | LinkedIn |
