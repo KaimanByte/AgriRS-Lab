@@ -24,6 +24,9 @@
 | DW-014 | Criar arquivo HTML (Projetos) | 5  | DW |
 | DW-015 | Aplicar design CSS (Projetos) | 8  | DW |
 | DW-016 | Inserir imagens e links adicionais | 5  | DW |
+| DD-009 | Criar layout no Figma (Notícias) | 13 | DD | 1 |
+| DW-017 | Criar arquivo HTML (Notícias) | 8  | DW | 1 |
+| DW-018 | Aplicar design CSS (Notícias) | 8  | DW | 1 |
 | DW-019 | Organizar notícias cronologicamente | 8  | DW |
 | DD-010 | Criar layout no Figma (Publicações) | 8  | DD |
 | DW-020 | Criar arquivo HTML (Publicações) | 5  | DW |
