@@ -31,9 +31,9 @@
 | DW-015 | Aplicar design CSS (Projetos) | 8  | DW | 1 |
 | ES-005 | Implementar CRUD de projetos (back-end) | 13 | ES | 2 |
 | DW-016 | Inserir imagens e links adicionais | 5  | DW | 1 |
-| DD-009 | Criar layout no Figma (Notícias) | 13 | DD | 2 |
-| DW-017 | Criar arquivo HTML (Notícias) | 8  | DW | 2 |
-| DW-018 | Aplicar design CSS (Notícias) | 8  | DW | 2 |
+| DD-009 | Criar layout no Figma (Notícias) | 13 | DD | 1 |
+| DW-017 | Criar arquivo HTML (Notícias) | 8  | DW | 1 |
+| DW-018 | Aplicar design CSS (Notícias) | 8  | DW | 1 |
 | ES-006 | Implementar CRUD de notícias (back-end) | 13 | ES | 2 |
 | DW-019 | Organizar notícias cronologicamente | 8  | DW | 1 |
 | DD-010 | Criar layout no Figma (Publicações) | 8  | DD | 1 |
