@@ -21,7 +21,14 @@ Você pode consultar todos os **requisitos, sub-requisitos e user stories** do p
 
 O backlog completo do projeto, incluindo tarefas, seções e valores, pode ser consultado [aqui](./documentação/backlog-produto.md).
 
-  
+
+## Protótipo no Figma
+
+O protótipo do website pode ser acessado clicando no link abaixo:  
+
+👉 [Acessar o protótipo no Figma](https://www.figma.com/design/K23V3Avem7YWoJbB8BKE7U/ABP---AgriRSLab?node-id=0-1&m=dev&t=rt6k9meCGb6z5Qwn-1)
+
+
 ## Equipe
 
 | Nome | Função | GitHub | LinkedIn |
