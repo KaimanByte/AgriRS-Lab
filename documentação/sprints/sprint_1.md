@@ -1,4 +1,4 @@
-# Sprint 1
+# Sprint Backlog
 
 | ID     | Seção / Atividade | Pontuação | Disciplina |
 |--------|-------------------|-----------|------------|
@@ -36,3 +36,17 @@
 | DW-024 | Inserir mapa do laboratório dentro do INPE | 13 | DW |
 | ES-011 | DoD (Definition of Done) | 5 | ES | 1 |
 | ES-012 | DoR (Definiton of Ready) | 5 | ES | 1 |
+
+
+# Cronograma de atividades da Sprint 1
+
+| Integrantes                      | 16/09       | 18/09 | 22/09 | 24/09         | 26/09 | 30/09 | 02/10 |
+|----------------------------------|-------------|-------|-------|---------------|-------|-------|-------|
+| Luka Gomes Souza Chaves (SM)     |             |       |       |               |       |       |       |
+| Erick Rost Santos (PO)           |             |       |       | DD-008        |       |       |       |
+| Gabriel Oliveira dos Santos      | DD-001/DD-002|       |       | DD-006        |       |       |       |
+| Rafael Prado de Melo Raimundo    | DD-003/DD-004|       |       | DD-011        |       |       |       |
+| Vitoria Barbara Vargas           |             |       |       | DD-007        |       |       |       |
+| Breno Augusto Santos Jesus       |             |       |       | DD-009        |       |       |       |
+| Thiago Guedes da Silva Tolosa    |             |       |       | DD-005        |       |       |       |
+| João Pedro Luvisari Severiano    | ES-012      |       |       | DD-010        |       |       |       |

@@ -17,9 +17,13 @@ O projeto contribui para manter as atividades e descobertas científicas atualiz
 Você pode consultar todos os **requisitos, sub-requisitos e user stories** do projeto neste [arquivo de requisitos](./documentação/requisitos.md).
 
 
-## Backlog do Produto
+## Sprints e Backlog
 
-O backlog completo do projeto, incluindo tarefas, seções e valores, pode ser consultado [aqui](./documentação/backlog-produto.md).
+📌 O acompanhamento das atividades do projeto pode ser feito a partir dos documentos abaixo:
+
+- [Backlog do Produto](./documentação/backlog-produto.md)  
+- [Requisitos e User Stories](./documentação/requisitos.md)  
+- [Cronograma da Sprint 1](./documentação/sprints/sprint_1.md)  
 
 
 ## Protótipo no Figma
