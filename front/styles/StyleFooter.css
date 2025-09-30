@@ -1,0 +1,150 @@
+footer {
+    background-color: #d9d9d9;
+    display: flex;
+    height: auto;
+    padding-top: 54px;
+    padding-left: 1.9%;
+    padding-right: 1.9%;
+    align-items: center;
+    justify-content: center;
+}
+#AgriRSfooter {
+    height: 76px;
+    width: 76px;
+    border-radius: 90px;
+}
+#divOne {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 9px;
+}
+#textolado {
+    display: flex;
+    flex-direction: column;
+}
+.titulo24 {
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+.texto16 {
+    font-weight: 200;
+    font-size: 16px;
+}
+#iconeMapa {
+    width: 11px;
+    height: 16px;
+    margin-right: 4px;
+}
+#iconeTelefone {
+    width: 12px;
+    height: 12px;
+    margin-right: 2px;
+}
+#divTwo {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2px;
+    justify-content: space-around;
+}
+#redesSociais {
+    margin-top: 10px;
+    margin-bottom: 5%;
+}
+#redesSociais img {
+    height: 23px;
+    width: 23px;
+    border-radius: 90px;
+}
+.foraLinha {
+    margin-left: 13.3%;
+    margin-right: 2.9%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.linha {
+    width: 1px;
+    background-color: black;
+    height: 140px;
+}
+#divThree {
+    margin-top: 23px;
+}
+#divThree ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+#divFour {
+    margin-top: 23px;
+}
+#divFour ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+#InpeFooter {
+    height: 55px;
+    width: 55px;
+}
+#FapespFooter {
+    height: 30px;
+    width: 55px;          /* Ajsutar */
+    padding-bottom: 17px;
+}
+#BdcFooter {
+    height: 44px;
+    width: 44px;
+}
+#CapesFooter {
+    height: 34px;
+    width: 37px;
+}
+#CnpqFooter {
+    height: 30px;
+    width: 46px;          /* Ajustar */
+    padding-bottom: 10px;
+}
+#ConabFooter {
+    height: 30px;
+    width: 60px;
+}
+#colaboradores2 {
+    margin-left: 6px;
+}
+/* Barra Brasil */
+#footer-brasil {
+   background: none repeat scroll 0% 0% #00420c;
+   padding: 1em 0px;
+   max-width: 100%;
+}
+
+.titulo-academico {
+  font-size: 20px;   /* ajuste o tamanho conforme desejar */
+  font-weight: bold; /* mantém o destaque */
+  text-align: center;
+}
+footer a {
+  text-decoration: none;
+  color: black;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: #2c6e49; /* verde suave no hover */
+}
+
+#redesSociais a img,
+#divFive a img {
+  transition: transform 0.3s;
+}
+
+#redesSociais a img:hover,
+#divFive a img:hover {
+  transform: scale(1.1); /* leve zoom no hover */
+}
