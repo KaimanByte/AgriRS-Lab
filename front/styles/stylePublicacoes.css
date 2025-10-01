@@ -10,7 +10,7 @@
 .publicacao {
     background: #fff;
     border-radius: 8px;
-    box-shadow: 8px 8px 4px rgba(217, 217, 217, 0.25), 8px 8px 4px rgba(0, 0, 0, 1);
+    box-shadow: 8px 8px 4px #6D6C69;
     padding: 1rem;
     text-align: center;
     display: flex;

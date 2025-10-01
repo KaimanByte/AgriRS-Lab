@@ -1,0 +1,136 @@
+.fita {
+    margin-bottom: 50px;
+    margin-top: 50px;
+    height: 70px;
+    background-color: #ACD4AE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.card h2 { 
+    text-align: center;
+    padding-top: 1vw;
+    margin: center;
+    font-display: block;
+    margin-bottom: 18px;
+}
+
+.cardMembro { 
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    transition: 300ms ease-in-out;
+    position: relative;
+    background-color: #d9d9d9;
+    width: 370px;
+    height: 450px;
+    border-radius: 18px
+}
+
+.cardMembro:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 12px 12px;
+}
+    
+.cardMembro::after {
+    content: "";
+    position: absolute;
+    inset: 0; 
+    background-color: rgba(172, 212, 174); 
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    border-radius: 18px;
+
+}
+
+.cardMembro:hover::after {
+    opacity: 1;
+}
+
+.cardMembro img {
+    position: inherit;
+    width: 90%;
+    height: 75%;
+    border-radius: 18px;
+    display: block;       
+    margin: 0 auto;
+}
+
+
+.cardMembro .overlay-text {
+    font-size: clamp(12px, 1.2vw, 16px);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+    overflow-y: auto;
+    max-height: 90%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.cardMembro:hover .overlay-text {
+    opacity: 1;
+}
+
+.cardMembro p {
+    font-weight: lighter;
+}
+
+.card a { 
+   position: fixed;
+   top: 90%;
+  padding-left: 138px;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+.card a:hover  {
+color: blue; 
+}
+
+.pesquisadores, .bolsistas, .doutorandos, .mestrandos {
+justify-content: center;
+flex-wrap: wrap;
+align-items: center;
+align-content: center;
+gap: 0px 70px;
+display: flex;
+flex-direction: row
+}
+
+.card h1 { 
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+

@@ -84,7 +84,7 @@
 .card {
   background-color: #D9D9D9;
   border-radius: 18px;
-  box-shadow: 8px 10px 15px rgba(0,0,0,0.35);
+  box-shadow: 8px 8px 4px #6D6C69;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -96,7 +96,7 @@
 }
 
 .card-header {
-  background-color:#8FD191;
+  background-color: #ACD4AE;
   padding: 16px;
    text-align:left;
    height:90px;
