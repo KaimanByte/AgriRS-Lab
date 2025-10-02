@@ -124,11 +124,7 @@ footer {
    max-width: 100%;
 }
 
-.titulo-academico {
-  font-size: 20px;   /* ajuste o tamanho conforme desejar */
-  font-weight: bold; /* mantém o destaque */
-  text-align: center;
-}
+
 footer a {
   text-decoration: none;
   color: black;

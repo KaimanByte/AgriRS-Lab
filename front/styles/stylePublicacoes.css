@@ -3,12 +3,12 @@
 .lista-publicacoes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    gap: 3rem;
     padding: 2rem;
 }
 
 .publicacao {
-    background: #fff;
+    background: #d9d9d9;
     border-radius: 8px;
     box-shadow: 8px 8px 4px #6D6C69;
     padding: 1rem;
@@ -60,6 +60,18 @@
 .filtro-unico {
   text-align: center;
   margin: 2rem 0;
+
+}
+
+.filtro-unico h2 {
+font-size: 18px;
+margin-bottom: 8px;
+}
+
+.titulo-academico {
+  font-size: 24px;   /* ajuste o tamanho conforme desejar */
+  font-weight: bold; /* mantém o destaque */
+  text-align: center;
 }
 
 .filtro-container {
