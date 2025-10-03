@@ -50,7 +50,7 @@ main {
     height: 620px;
     margin-bottom: 32px;
     box-shadow: 8px 8px 4px #6D6C69;
-    background-color: #ACD4AE;
+    background-color: #D9D9D9;
     border-radius: 32px;
     position: relative;
     overflow: hidden;
@@ -64,7 +64,7 @@ main {
     height: 100%;
     background-color: #D9D9D9;
     color: black;
-    font-size: 16px;
+    font-size: 18px;
     padding: 24px;
     text-align: center;
     border-radius: 32px;
@@ -79,7 +79,7 @@ main {
 
 .projeto:hover .descricaoProjeto {
     opacity: 1;
-    background-color: #D9D9D9;
+    background-color: #ACD4AE;
     border-bottom-left-radius: 32px;
     border-bottom-right-radius: 32px;
 
@@ -101,7 +101,7 @@ main {
 }
 
 .tituloProjeto {
-    background-color: #ACD4AE;
+    background-color: #D9D9D9;
     font-size: 22px;
     font-weight: bold;
     text-align: center;

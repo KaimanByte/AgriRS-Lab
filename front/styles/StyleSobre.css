@@ -17,8 +17,9 @@ main {
     flex-direction: column;
     overflow: hidden;
     margin-bottom: 5%;
-    box-shadow: 8px 8px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 8px 8px 4px #6D6C69;
 }
+
 #cardSobre .titulo36 {
     margin-top: 2%;
     margin-bottom: 2%;
@@ -62,8 +63,9 @@ main {
     margin-bottom: 5%;
     font-weight: 600;
     font-size: 36px;
-    box-shadow: 8px 8px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 8px 8px 4px #6D6C69;
 }
+
 .listaMain {
     display: flex;
     align-items: center;
@@ -88,8 +90,9 @@ main {
     line-height: 1.4em;
     white-space: normal; 
     word-break: break-word;
-    box-shadow: 8px 8px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 8px 8px 4px #6D6C69;
 }
+
 #cards {
     margin-bottom: 10%;
 }

@@ -1,0 +1,94 @@
+.logoContainer {
+  display: inline-block;
+}
+
+.logo1,
+.logo2 {
+  font-size: 100px;
+  font-weight: bold;
+}
+
+.logo1 {
+  color: black;
+}
+
+.logo2 {
+  color: white;
+}
+
+.subtitulo {
+  color: black;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+#inicioCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 24px;
+}
+
+/* Lista de publicações */
+.lista-publicacoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.publicacao {
+  background: #d9d9d9;
+  border-radius: 8px;
+  box-shadow: 8px 8px 4px #6D6C69;
+  padding-bottom: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.publicacao img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.publicacao h3 {
+  margin-bottom: 0.5rem;
+  color: #2c6e49;
+}
+
+.publicacao p {
+  font-size: 14px;
+  margin-bottom: 1rem;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* Botões */
+.botoes {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.botoes a {
+  background: #2c6e49;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.botoes a:hover {
+  background: #1f4d34;
+}

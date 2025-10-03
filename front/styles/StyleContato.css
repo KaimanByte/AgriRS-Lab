@@ -3,7 +3,7 @@
   padding: 30px;
   border-radius: 10px;
   width: 600px;
-  box-shadow: 10px 10px 10px rgba(0,0,0,0.2);
+  box-shadow: 8px 8px 4px #6D6C69;
   margin: 40px auto;
 }
 
@@ -29,7 +29,8 @@ label {
   font-size: 14px;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -41,11 +42,13 @@ textarea {
   resize: none;
   height: 80px;
 }
+
 h2 {
   text-align: center;
   color: #2e7d32;
   margin-bottom: 20px;
 }
+
 .contact-box {
   display: flex;
   justify-content: space-between;
@@ -53,18 +56,20 @@ h2 {
   padding: 25px;
   background: #e6e6e6;
   border-radius: 10px;
-  box-shadow: 6px 6px 12px rgba(0,0,0,0.25);
+  box-shadow: 8px 8px 4px #6D6C69;
   max-width: 1000px;
   width: 100%;
   margin: 40px auto;
 }
 
 /* Colunas */
-.left, .right {
+.left,
+.right {
   flex: 1;
 }
 
-.left h3, .right h3 {
+.left h3,
+.right h3 {
   color: #2e7d32;
   margin-bottom: 15px;
 }
@@ -112,15 +117,18 @@ a:hover {
   color: #fff;
   text-decoration: none;
 }
+
 .social-icons img {
   width: 40px;
   height: 40px;
-  border-radius: 50%; /* deixa redondinho */
+  border-radius: 50%;
+  /* deixa redondinho */
   transition: transform 0.2s;
 }
 
 .social-icons img:hover {
-  transform: scale(1.1); /* efeito de zoom */
+  transform: scale(1.1);
+  /* efeito de zoom */
 }
 
 .x {
@@ -151,24 +159,26 @@ a:hover {
     justify-content: center;
   }
 }
+
 .mapa {
   border: 2px solid #000000
 }
-.map-container {
-      width: 80%;
-      height: 200px;
-      border: 2px solid #000000;
-      border-radius: 10px;
-      overflow: hidden;
-    }
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
+.map-container {
+  width: 80%;
+  height: 200px;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
 
 body {
-    margin: 0;
-    width: 100%;
+  margin: 0;
+  width: 100%;
 }

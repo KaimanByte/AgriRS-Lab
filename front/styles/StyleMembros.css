@@ -50,7 +50,7 @@
     content: "";
     position: absolute;
     inset: 0; 
-    background-color: rgba(172, 212, 174); 
+    background-color: #ACD4AE; 
     opacity: 0;
     transition: opacity 300ms ease-in-out;
     border-radius: 18px;

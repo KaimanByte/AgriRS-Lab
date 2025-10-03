@@ -27,6 +27,7 @@
 | **DW-016** | Inserir imagens e links adicionais               | 5         | DW         | 1 |
 | **DW-017** | Criar arquivo HTML (Notícias)                    | 8         | DW         | 1 |
 | **DW-018** | Aplicar design CSS (Notícias)                    | 8         | DW         | 1 |
+| **DD-009** | Criar layout no Figma (Notícias)                 | 13        | DW         | 1 |
 | **DD-010** | Criar layout no Figma (Publicações)              | 8         | DD         | 1 |
 | **DW-020** | Criar arquivo HTML (Publicações)                 | 5         | DW         | 1 |
 | **DW-021** | Aplicar design CSS (Publicações)                 | 8         | DW         | 1 |
