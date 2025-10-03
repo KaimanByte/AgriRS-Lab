@@ -1,8 +1,8 @@
 footer {
     background-color: #d9d9d9;
     display: flex;
-    height: auto;
-    padding-top: 54px;
+    height: 250px;
+    padding-top: auto;
     padding-left: 1.9%;
     padding-right: 1.9%;
     align-items: center;
