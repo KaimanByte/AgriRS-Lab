@@ -1,5 +1,7 @@
 # Sprint 1
 
+## Sprint Backlog
+
 | ID      | Seção / Atividade                                   | Pontuação | Disciplina | Sprint |
 |---------|-----------------------------------------------------|-----------|------------|--------|
 | **DD-001** | Definir cores, tipografia, espaçamento e estilos de botões | 8         | DD         | 1 |
@@ -42,27 +44,33 @@
 | **SO-004** | Configuração VScode                              | 5         | SO         | 1 |
 | **SO-005** | Configuração Git/Github                          | 5         | SO         | 1 |
 
+---
 
-# 📌 Backlog de Gestão do Projeto
+## Backlog de Gestão do Projeto
 
 | ID      | Atividade | Pontuação | Disciplina | Sprint |
 |---------|-----------|-----------|------------|--------|
 | **ES-014** | **Scrum Master:** Facilitar cerimônias ágeis (Daily, Planning, Review, Retrospective), acompanhar impedimentos, garantir comunicação eficaz e apoiar a equipe na aplicação do DoD. | 20 | ES | 1 |
 | **ES-015** | **Product Owner:** Refinar e priorizar backlog, alinhar requisitos com stakeholders, validar entregas nas reviews e garantir clareza nos critérios de aceitação. | 20 | ES | 1|
 
+---
 
+## 📅 Cronograma de Atividades por Integrante
 
-# 📅 Cronograma de Atividades por Integrante
+| Integrantes                           | 16/set        | 18/set           | 22/set           | 24/set           | 26/set                               | 30/set                               | 02/out   |
+|---------------------------------------|---------------|------------------|------------------|------------------|---------------------------------------|---------------------------------------|----------|
+| Breno Augusto Santos Jesus            | ES-011        | DD-009           | DD-009           | DD-009           | DW-017/DW-018                       | DW-017/DW-018                       | DW-004   |
+| Erick Rost Santos (PO)                | ES-015/SO-005 | DD-008/ES-015    | DD-008/ES-015    | DD-008/ES-015    | ES-015/DW-015/DW-014              | ES-015/DW-015/DW-014              | ES-015   |
+| Gabriel Oliveira dos Santos           | DD-001        | DD-006           | DD-006           | DD-006           | DW-008/DW-009                       | DW-008/DW-009                       | DW-007   |
+| João Pedro Luvisari Severiano         | ES-012        | DD-010           | DD-010           | DD-010           | DW-020/DW-021                       | DW-020/DW-021                       | DW-010   |
+| Luka Gomes Souza Chaves (SM)          | ES-014/SO-004 | ES-014           | ES-014           | ES-014           | ES-014/DW-002/DW-001              | ES-014/DW-002/DW-001              | ES-014   |
+| Rafael Prado de Melo Raimundo         | DD-003        | DD-011           | DD-011           | ES-013           | DW-022/DW-023                       | DW-022/DW-023                       | DW-024   |
+| Thiago Guedes da Silva Tolosa         | DD-004        | DD-005           | DD-005           | DW-027           | DW-006/DW-005/DW-027              | DW-006/DW-005                       | DW-013   |
+| Vitoria Barbara Vargas                | DD-002        | DD-007           | DD-007           | DD-007           | DW-011/DW-012                       | DW-011/DW-012                       | DW-016   |
 
+---
 
-| Integrantes                     | 9/16/2025          | 9/18/2025       | 9/22/2025       | 9/24/2025       | 9/26/2025 | 9/30/2025 | 10/2/2025 |
-|---------------------------------|------------------|-----------------|-----------------|-----------------|-----------|-----------|-----------|
-| Luka Gomes Souza Chaves SM       | ES-014 / SO-004  | ES-014          | ES-014          | ES-014          |           |           |           |
-| Erick Rost Santos PO             | ES-015 / SO-005  | DD-008 / ES-015 | DD-008 / ES-015 | DD-008 / ES-015 |           |           |           |
-| Gabriel Oliveira dos Santos      | DD-001           | DD-006          | DD-006          | DD-006          |           |           |           |
-| Rafael Prado de Melo Raimundo    | DD-003           | DD-011          | DD-011          | ES-013          |           |           |           |
-| Vitoria Barbara Vargas           | DD-002           | DD-007          | DD-007          | DD-007          |           |           |           |
-| Breno Augusto Santos Jesus       | ES-011           | DD-009          | DD-009          | DD-009          |           |           |           |
-| Thiago Guedes da Silva Tolosa    | DD-004           | DD-005          | DD-005          | DW-027          |           |           |           |
-| João Pedro Luvisari Severiano    | ES-012           | DD-010          | DD-010          | DD-010          |           |           |           |
+## Sprint Burndown
+<img src="./Burndown_Sprint1.png" alt="Burndown Chart" width="700"/>
+
 
