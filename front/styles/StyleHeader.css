@@ -80,3 +80,20 @@ nav a {
     text-align: center;
     color: black;
 }
+
+#imagemFundoInicio {
+    background-image: url("../imagens/Inicio/ImagemFundoInicio.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 628px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 64px;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}

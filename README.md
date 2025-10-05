@@ -23,7 +23,7 @@ Você pode consultar todos os **requisitos, sub-requisitos e user stories** do p
 
 - [Backlog do Produto](./documentação/backlog-produto.md)  
 - [Requisitos e User Stories](./documentação/requisitos.md)  
-- [Cronograma da Sprint 1](./documentação/sprints/sprint_1.md)  
+- [Dados da Sprint 1](./documentação/sprints/sprint_1.md)  
 
 
 ## Protótipo no Figma
