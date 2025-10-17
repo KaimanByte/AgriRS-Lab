@@ -17,7 +17,7 @@
 }
 
 .subtitulo {
-  color: black;
+  color: white;
   font-size: 22px;
   font-weight: bold;
   margin-top: 5px;
@@ -71,7 +71,7 @@
 .fundoCard {
   height: 128px;
   width: 100%;
-  background-color: #ACD4AE;
+  background-color: #36894E;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,8 +87,8 @@
 .botao {
   gap: 0.5rem;
   flex-wrap: wrap;
-  background: #ACD4AE;
-  color: black;
+  background: #36894E;
+  color: white;
   padding: 0.5rem 1rem;
   border-radius: 18px;
   text-decoration: none;
@@ -98,5 +98,5 @@
 }
 
 .botao:hover {
-  background: #8FD191;
+  background: #256428;
 }
