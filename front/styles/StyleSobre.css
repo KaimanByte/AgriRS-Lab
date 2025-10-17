@@ -10,7 +10,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ACD4AE;
+    background-color: #36894E;
     width: 85%;
     height: 492px;
     border-radius: 28px;
@@ -23,6 +23,7 @@ main {
 #cardSobre .titulo36 {
     margin-top: 2%;
     margin-bottom: 2%;
+    color: white;
 }
 .titulo36 {
     font-weight: bold;
@@ -84,13 +85,14 @@ main {
     text-align: center; 
     padding: 30px; 
     width: 30%;
-    background-color: #bce1bb;
+    background-color: #36894E;
     border-radius: 12px;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.4em;
     white-space: normal; 
     word-break: break-word;
     box-shadow: 8px 8px 4px #6D6C69;
+    color: white;
 }
 
 #cards {

@@ -11,7 +11,7 @@
   margin-top: 15px;
   width: 100%;
   padding: 10px;
-  background-color: #2e7d32;
+  background-color: #36894E;
   border: none;
   border-radius: 15px;
   color: white;
@@ -45,7 +45,7 @@ textarea {
 
 h2 {
   text-align: center;
-  color: #2e7d32;
+  color: #36894E;
   margin-bottom: 20px;
 }
 
@@ -70,7 +70,7 @@ h2 {
 
 .left h3,
 .right h3 {
-  color: #2e7d32;
+  color: #36894E;
   margin-bottom: 15px;
 }
 
@@ -144,7 +144,7 @@ a:hover {
 }
 
 .rg {
-  background: #2e7d32;
+  background: #36894E;
 }
 
 /* Responsivo */

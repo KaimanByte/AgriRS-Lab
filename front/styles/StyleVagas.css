@@ -82,16 +82,18 @@
 
 }
 
+#align-cards-container {
+  display: flex;
+  justify-content: center;
+}
+
 .cards-container {
-  width: 88%;
+  width: 90%;
   height: auto;
-  margin: 40px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 55px;
-  padding: 0 20px;
-
-
+  margin: 40px;
 }
 
 .card {
@@ -101,15 +103,13 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  font-family: "Lato", sans-serif;
   text-align: left;
-  min-height: 790px;
-  height: auto;
-
+  min-height: 320px;
+  min-width: 260px;
 }
 
 .card-header {
-  background-color: #ACD4AE;
+  background-color: #36894E;
   padding: 16px;
   text-align: left;
   height: 90px;
@@ -122,11 +122,10 @@ justify-content: center;
 
 .card-header h3 {
   margin: 0;
-  font-size: clamp(1.5rem, 2vw, 2.25rem);
+  font-size: clamp(0.75rem, 3vw, 1.5rem);
   /*A fonte não fica menor que 1.5rem (24px),3vw o tamanho da fonte crescer proporcional à largura da tela, a fonte não passa de  2.25rem (36px)*/
-  color: #1b1b1b;
+  color: white;
   text-align: left;
-  padding: 20px 20px 20px 0;
 }
 
 .card-body {
@@ -135,14 +134,14 @@ justify-content: center;
   flex: 1;
   padding: 1.5rem;
   /* equivalente a 24px, mas fica mais flexível */
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(0.5rem, 3vw, 1rem);
   line-height: 1.2;
 }
 
 .card-body h4 {
   margin-top: 16px;
   margin-bottom: 8px;
-  color: #2e7d32;
+  color: #36894E;
   font-size: 24px;
   text-align: left;
 }
@@ -186,5 +185,5 @@ justify-content: center;
 
 .prazo-verde {
   font-weight: bold;
-  color: #2e7d32;
+  color: #36894E;
 }

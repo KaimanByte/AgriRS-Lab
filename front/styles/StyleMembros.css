@@ -2,14 +2,14 @@
     margin-bottom: 50px;
     margin-top: 50px;
     height: 70px;
-    background-color: #ACD4AE;
+    background-color: #36894E;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 32px;
     font-weight: bold;
     text-align: center;
-    color: black;
+    color: white;
 }
 
 .card {
@@ -50,11 +50,10 @@
     content: "";
     position: absolute;
     inset: 0; 
-    background-color: #ACD4AE; 
+    background-color: #36894E; 
     opacity: 0;
     transition: opacity 300ms ease-in-out;
     border-radius: 18px;
-
 }
 
 .cardMembro:hover::after {
@@ -85,7 +84,7 @@
     padding-right: 20px;
     padding-top: 20px;
     box-sizing: border-box;
-    color: black;
+    color: white;
     font-size: 16px;
     font-weight: bold;
     opacity: 0;
@@ -96,7 +95,7 @@
 
 a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .cardMembro:hover .overlay-text {
@@ -112,7 +111,7 @@ a {
    top: 90%;
   padding-left: 138px;
     text-decoration: none;
-    color: black;
+    color: white;
     font-size: 20px;
 }
 .card a:hover  {
