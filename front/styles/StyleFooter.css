@@ -144,3 +144,60 @@ footer a:hover {
 #divFive a img:hover {
   transform: scale(1.1); /* leve zoom no hover */
 }
+
+/* ========================================================= */
+/* === ADIÇÕES DE RESPONSIVIDADE ============================ */
+/* ========================================================= */
+
+@media (max-width: 1024px) {
+  footer {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .foraLinha {
+    display: none;
+  }
+
+  #divOne,
+  #divTwo,
+  #divThree,
+  #divFour,
+  #divFive {
+    margin: 10px 0;
+  }
+
+  #redesSociais {
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  #AgriRSfooter {
+    height: 60px;
+    width: 60px;
+  }
+
+  .titulo24 {
+    font-size: 20px;
+  }
+
+  .texto16 {
+    font-size: 14px;
+  }
+
+  #redesSociais img {
+    height: 20px;
+    width: 20px;
+  }
+}

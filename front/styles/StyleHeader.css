@@ -101,3 +101,114 @@ nav a {
     text-align: center;
     color: white;
 }
+/* ========================================================= */
+/* === ADIÇÕES DE RESPONSIVIDADE E MENU HAMBURGUER ========= */
+/* ========================================================= */
+
+#menu-toggle {
+    display: none;
+    font-size: 20px;
+    background: none;
+    border: 2px solid #36894E;
+    border-radius: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: #36894E;
+    transition: all 0.3s ease;
+}
+
+#menu-toggle:hover {
+    background: #36894E;
+    color: #fff;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    nav {
+        font-size: 18px;
+    }
+
+    nav ul {
+        width: 80vw;
+    }
+
+    nav > img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* MOBILE (menu clicável funcional) */
+@media (max-width: 768px) {
+    nav {
+        justify-content: space-between;
+        padding: 10px 20px;
+        position: relative;
+    }
+
+    #menu-toggle {
+        display: block;
+        z-index: 1100;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #FFFAF3;
+        border-top: 2px solid #c1bfae;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+        opacity: 0;
+        transform: translateY(-15px);
+        pointer-events: none;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+
+    /* Quando ativo (botão clicado) */
+    nav ul.ativo {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+
+    nav li {
+        text-align: center;
+        width: 100%;
+    }
+
+    nav li a {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        font-size: 18px;
+    }
+
+    nav li:hover {
+        background-color: #36894E;
+        border-radius: 0;
+    }
+
+    #imagemFundo {
+        font-size: 40px;
+        height: 200px;
+    }
+}
+
+/* Extra small (até 480px) */
+@media (max-width: 480px) {
+    #menu-toggle {
+        font-size: 18px;
+        padding: 5px 10px;
+    }
+
+    nav li a {
+        font-size: 16px;
+    }
+}
