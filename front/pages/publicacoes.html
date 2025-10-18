@@ -31,7 +31,11 @@
   <header>
     <nav>
       <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
-      <ul>
+
+      <!-- 🔹 Botão do menu hambúrguer adicionado -->
+      <button id="menu-toggle" aria-label="Abrir menu">☰ Menu</button>
+
+      <ul id="nav-links">
         <li><a href="index.html">Início</a></li>
         <li><a href="sobre.html">Sobre</a></li>
         <li><a href="vagas.html">Vagas</a></li>
@@ -283,6 +287,7 @@
       </div>
     </block>
   </footer>
+
   <script>
     const criterio = document.getElementById("criterio");
     const btnFiltrar = document.getElementById("btnFiltrar");
@@ -291,7 +296,6 @@
     btnFiltrar.addEventListener("click", () => {
       if (criterio.value) {
         alert(`Filtrando publicações por: ${criterio.value}`);
-        // Aqui você pode implementar a lógica real de filtragem dos cards
       } else {
         alert("Selecione um critério para filtrar.");
       }
@@ -300,10 +304,27 @@
     btnLimpar.addEventListener("click", () => {
       criterio.value = "";
       alert("Filtros limpos!");
-      // Aqui você pode restaurar todos os cards
+    });
+
+    /* 🔹 SCRIPT DO MENU HAMBURGUER */
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    const navItems = document.querySelectorAll("#nav-links a");
+
+    toggle.addEventListener("click", () => {
+      navLinks.classList.toggle("ativo");
+    });
+
+    // Fecha o menu ao clicar em um link (melhor UX)
+    navItems.forEach(item => {
+      item.addEventListener("click", () => {
+        navLinks.classList.remove("ativo");
+      });
     });
   </script>
+
   <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 </body>
 
 </html>
+"<!-- Atualiza��o de layout -->" 

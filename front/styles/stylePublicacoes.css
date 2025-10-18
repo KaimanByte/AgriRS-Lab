@@ -1,4 +1,3 @@
-
 /* Lista de publicações */
 .lista-publicacoes {
     display: grid;
@@ -162,4 +161,60 @@ margin-bottom: 8px;
 .search-btn svg {
   width: 40px;
   height: 40px;
+}
+
+/* ========================================================= */
+/* === ADIÇÕES DE RESPONSIVIDADE ============================ */
+/* ========================================================= */
+
+@media (max-width: 1024px) {
+  .lista-publicacoes {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .lista-publicacoes {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .pesquisa {
+    font-size: 28px;
+  }
+
+  .pesquisa2 input[type="text"] {
+    font-size: 18px;
+    height: 45px;
+  }
+
+  .botoes a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pesquisa {
+    font-size: 24px;
+  }
+
+  .filtro-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .filtro-container select,
+  .filtro-container button {
+    width: 90%;
+  }
+
+  .publicacao h3 {
+    font-size: 18px;
+  }
+
+  .publicacao p {
+    font-size: 16px;
+  }
 }
