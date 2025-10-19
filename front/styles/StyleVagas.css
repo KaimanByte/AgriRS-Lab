@@ -9,14 +9,14 @@
   font-size: clamp(1.5rem, 2.5vw, 2.25rem);
   /*tamanho da fonte de forma responsiva*/
   text-align: center;
-  font-size: 36px;
   margin-top: 2rem;
   /*espaço anterior*/
 
 }
 
 .pesquisa h2 {
-  font-size: 28px;
+  font-size: 1.5rem;
+  margin-bottom:1rem;
 }
 
 /*Campo para pesquisar*/
@@ -25,13 +25,12 @@
   /*rorna flexível, itens alinhados horizontalmente*/
   align-items: center;
   text-align: center;
-  display: inline-flex;
-  gap: 5px;
+  gap: 0.3125rem;
   /*Espaço entre os itens do flex*/
-  margin-top: auto;
+  margin-top: 1.5rem;
   width: 100%;
-  max-width: 1200px;
-  padding: 0 10px;
+  max-width: 75rem;
+  padding: 0 0.625rem;
   /*Espaço interno lateral*/
   margin-left: auto;
   margin-right: auto;
@@ -43,10 +42,10 @@
   flex: 1;
   min-width: 0;
   width: 100%;
-  height: 55px;
-  padding: 6px 10px;
-  font-size: 24px;
-  border-radius: 18px;
+  height: 3.4375rem;
+  padding: 0.375rem 0.625rem;
+  font-size: 1.5rem;
+  border-radius: 1.125rem;
   background-color: #D9D9D9;
   border: none;
   outline: none;
@@ -70,15 +69,15 @@
 
 /*Tamanho da Lupa*/
 .search-btn svg {
-  width: 60px;
-  height: 80px;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
 
 }
 
 .card-header button {
-  height: 40px;
+  height: 2.5rem;
   padding: 0 12px;
-  font-size: 18px;
+  font-size: 1.125rem;
 
 }
 
@@ -98,19 +97,19 @@
 
 .card {
   background-color: #D9D9D9;
-  border-radius: 32px;
-  box-shadow: 8px 8px 4px #6D6C69;
+  border-radius: 2rem;
+  box-shadow: 0.5rem 0.5rem 0.25rem #6D6C69;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   text-align: left;
-  min-height: 320px;
+  min-height: 20rem;
   min-width: 260px;
 }
 
 .card-header {
   background-color: #36894E;
-  padding: 16px;
+  padding: 1rem;
   text-align: left;
   height: 90px;
   width: 100%;
@@ -139,16 +138,16 @@ justify-content: center;
 }
 
 .card-body h4 {
-  margin-top: 16px;
-  margin-bottom: 8px;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
   color: #36894E;
-  font-size: 24px;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
   text-align: left;
 }
 
 .card-body ul,
 .card-body ol {
-  margin: 0 0 16px 20px;
+  margin: 0 0 1rem 1.25rem;
 }
 
 .card-body p {
@@ -165,8 +164,8 @@ justify-content: center;
   background-color: #e7f3ff;
   color: #0079D0;
   text-decoration: none;
-  border-radius: 18px;
-  border: 1px solid #b0c4de;
+  border-radius: 1.125rem;
+  border: 0.0625rem solid #b0c4de;
   font-weight: 600;
   transition: background 0.3s;
   margin-top: auto;
@@ -187,3 +186,105 @@ justify-content: center;
   font-weight: bold;
   color: #36894E;
 }
+
+/* Tablets e monitores médios */
+@media (max-width: 1024px) {
+  .cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem auto;
+  }
+
+  .pesquisa2 input[type="text"] {
+    font-size: 1.125rem;
+  }
+
+  .search-btn svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* Celulares grandes (até 768px) */
+@media (max-width: 768px) {
+  .pesquisa {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .pesquisa2 {
+  display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pesquisa2 input[type="text"] {
+   flex: 1;
+    height: 3rem;
+    font-size: 1rem;
+  }
+  
+
+  .search-btn {
+    height: 3rem;
+    padding: 0.25rem;
+  }
+
+  .search-btn svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .card-body {
+    font-size: 0.9rem;
+    padding: 1rem;
+  }
+
+  .card-body h4 {
+    font-size: 1.1rem;
+  }
+
+  .card-button {
+    font-size: 0.875rem;
+    width: 100%;
+  }
+
+  .botoes a {
+    font-size: 14px;
+  }
+}
+
+
+/* Celulares pequenos (até 480px) */
+@media (max-width: 480px) {
+  .pesquisa {
+    font-size: 1.25rem;
+  }
+
+  
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .card {
+    min-height: auto;
+  }
+
+  .card-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .card-body p,
+  .card-body ul,
+  .card-body ol {
+    font-size: 0.875rem;
+  }
+
+  .card-button {
+    width: 100%;
+    font-size: 0.875rem;
+  }
+}
+

@@ -32,7 +32,11 @@
     <header>
         <nav>
             <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
-            <ul>
+
+            <!-- 🔹 Botão do menu hambúrguer adicionado -->
+      <button id="menu-toggle" aria-label="Abrir menu">☰ Menu</button>
+
+            <ul id="nav-links">
                 <li><a href="index.html">Início</a></li>
                 <li><a href="sobre.html">Sobre</a></li>
                 <li><a href="vagas.html">Vagas</a></li>
@@ -51,7 +55,7 @@
 
     <main>
     <section class="pesquisa">
-        <h2>Oportunidades Disponíveis</h2>
+        <h2 class="titulo-academico">Oportunidades Disponíveis</h2>
         <div class="pesquisa2">
             <input type="text" placeholder="Pesquise">
             <button class="search-btn" aria-label="Pesquisar">
@@ -272,6 +276,24 @@
             </div>
         </block>
     </footer>
+    <script>
+    /* 🔹 SCRIPT DO MENU HAMBURGUER */
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    const navItems = document.querySelectorAll("#nav-links a");
+
+    toggle.addEventListener("click", () => {
+      navLinks.classList.toggle("ativo");
+    });
+
+    // Fecha o menu ao clicar em um link (melhor UX)
+    navItems.forEach(item => {
+      item.addEventListener("click", () => {
+        navLinks.classList.remove("ativo");
+      });
+    });
+  </script>
+    
     <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 </body>
 </html>
