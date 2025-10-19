@@ -1,21 +1,32 @@
+html {
+  font-size: 16px; /* base: 1rem = 16px */
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  font-family: sans-serif;
+}
+
+/* Formulário */
 .form-container {
   background-color: #d9d9d9;
-  padding: 30px;
-  border-radius: 10px;
-  width: 600px;
-  box-shadow: 8px 8px 4px #6D6C69;
-  margin: 40px auto;
+  padding: 1.875rem; /* 30px */
+  border-radius: 0.625rem; /* 10px */
+  width: 37.5rem; /* 600px */
+  box-shadow: 0.5rem 0.5rem 0.25rem #6D6C69; /* 8px 8px 4px */
+  margin: 2.5rem auto; /* 40px */
 }
 
 .btn {
-  margin-top: 15px;
+  margin-top: 0.9375rem; /* 15px */
   width: 100%;
-  padding: 10px;
+  padding: 0.625rem; /* 10px */
   background-color: #36894E;
   border: none;
-  border-radius: 15px;
+  border-radius: 0.9375rem; /* 15px */
   color: white;
-  font-size: 14px;
+  font-size: 0.875rem; /* 14px */
   cursor: pointer;
 }
 
@@ -25,41 +36,42 @@
 
 label {
   display: block;
-  margin: 10px 0 5px;
-  font-size: 14px;
+  margin: 0.625rem 0 0.3125rem; /* 10px 0 5px */
+  font-size: 0.875rem; /* 14px */
 }
 
 input,
 textarea {
   width: 100%;
-  padding: 8px;
+  padding: 0.5rem; /* 8px */
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 0.5rem; /* 8px */
   outline: none;
 }
 
 textarea {
   resize: none;
-  height: 80px;
+  height: 5rem; /* 80px */
 }
 
 h2 {
   text-align: center;
   color: #36894E;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem; /* 20px */
 }
 
+/* Box de contato */
 .contact-box {
   display: flex;
   justify-content: space-between;
-  gap: 40px;
-  padding: 25px;
+  gap: 2.5rem; /* 40px */
+  padding: 1.5625rem; /* 25px */
   background: #e6e6e6;
-  border-radius: 10px;
-  box-shadow: 8px 8px 4px #6D6C69;
-  max-width: 1000px;
+  border-radius: 0.625rem; /* 10px */
+  box-shadow: 0.5rem 0.5rem 0.25rem #6D6C69;
+  max-width: 62.5rem; /* 1000px */
   width: 100%;
-  margin: 40px auto;
+  margin: 2.5rem auto; /* 40px */
 }
 
 /* Colunas */
@@ -71,26 +83,24 @@ h2 {
 .left h3,
 .right h3 {
   color: #36894E;
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem; /* 15px */
 }
 
 .left img {
   width: 100%;
-  border-radius: 6px;
-  margin-bottom: 15px;
+  border-radius: 0.375rem; /* 6px */
+  margin-bottom: 0.9375rem; /* 15px */
 }
 
-/* Texto */
 p {
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem; /* 15px */
   color: #333;
 }
 
 .icon {
-  margin-right: 6px;
+  margin-right: 0.375rem; /* 6px */
 }
 
-/* Links */
 a {
   color: #0077cc;
   text-decoration: none;
@@ -103,15 +113,15 @@ a:hover {
 /* Redes sociais */
 .social-icons {
   display: flex;
-  gap: 15px;
+  gap: 0.9375rem; /* 15px */
 }
 
 .social {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 2.5rem; /* 40px */
+  height: 2.5rem; /* 40px */
   border-radius: 50%;
   font-weight: bold;
   color: #fff;
@@ -119,16 +129,14 @@ a:hover {
 }
 
 .social-icons img {
-  width: 40px;
-  height: 40px;
+  width: 2.5rem; /* 40px */
+  height: 2.5rem;
   border-radius: 50%;
-  /* deixa redondinho */
   transition: transform 0.2s;
 }
 
 .social-icons img:hover {
   transform: scale(1.1);
-  /* efeito de zoom */
 }
 
 .x {
@@ -147,28 +155,16 @@ a:hover {
   background: #36894E;
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-  .contact-box {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .social-icons {
-    justify-content: center;
-  }
-}
-
+/* Mapa */
 .mapa {
-  border: 2px solid #000000
+  border: 0.125rem solid #000000; /* 2px */
 }
 
 .map-container {
   width: 80%;
-  height: 200px;
-  border: 2px solid #000000;
-  border-radius: 10px;
+  height: 12.5rem; /* 200px */
+  border: 0.125rem solid #000000;
+  border-radius: 0.625rem; /* 10px */
   overflow: hidden;
 }
 
@@ -178,7 +174,35 @@ iframe {
   border: 0;
 }
 
-body {
-  margin: 0;
-  width: 100%;
+/* Responsivo */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px; /* texto um pouco menor em telas pequenas */
+  }
+
+  .form-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .contact-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .left img {
+    max-width: 90%;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 10rem;
+  }
 }
