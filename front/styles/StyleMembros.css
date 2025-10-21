@@ -93,6 +93,11 @@
     max-height: 90%;
 }
 
+.subtexto { 
+margin-top: 2rem;
+    text-align: center;
+}
+
 a {
     text-decoration: none;
     color: white;
@@ -133,3 +138,14 @@ flex-direction: row
     margin-bottom: 10px;
 }
 
+@media (max-width: 768px) {
+.fita {
+    font-size: 28px;
+}
+
+.card {
+    margin-bottom: 38px;
+    margin-top: 38px;
+}
+
+}
