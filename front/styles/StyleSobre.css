@@ -6,95 +6,245 @@ main {
     flex: 1;
     flex-direction: column;
 }
+
 #cardSobre {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #36894E;
     width: 85%;
-    height: 492px;
-    border-radius: 28px;
+    height: auto;
+    border-radius: 1.75rem;
     flex-direction: column;
     overflow: hidden;
     margin-bottom: 5%;
-    box-shadow: 8px 8px 4px #6D6C69;
+    padding-top: 1rem;
+    box-shadow: 0.5rem 0.5rem 0.25rem #6D6C69;
+    box-sizing: border-box;
 }
 
 #cardSobre .titulo36 {
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 0; /* CORRIGIDO: remove margem superior */
+    margin-bottom: 0; /* CORRIGIDO: remove margem inferior */
     color: white;
+    padding: 1.5rem;
+    text-align: center;
+    background-color: transparent; /* CORRIGIDO: fundo transparente, usa o verde do pai */
+    width: 100%;
+    box-sizing: border-box;
 }
+
 .titulo36 {
     font-weight: bold;
-    font-size: 36px;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
 }
+
 #cardSobreInterno {
     background-color: #d9d9d9;
     height: 100%;
     width: 100%;
-    border-bottom-left-radius: 28px;
-    border-bottom-right-radius: 28px;
+    border-radius: 0px 0px 1.75rem 1.75rem;
     display: grid;
     grid-template-columns: 65% 35%;
-    gap: 10%;
+    gap: 2%;
     align-items: center;
-    padding-left: 4%;
-    padding-right: 2%;
-    padding-top: 0;
+    padding: 2rem;
+    box-sizing: border-box;
 }
+
 #AgrirsMain {
-    width: 50%;
-    aspect-ratio: 1/1;
+    width: 100%; /* CORRIGIDO: ocupa 100% da coluna */
+    max-width: 15rem; /* NOVO: limita tamanho máximo */
+    aspect-ratio: 1 / 1;
     border-radius: 100%;
+    margin: 0 auto; /* NOVO: centraliza */
 }
+
 #textoCard {
-    font-size: 24px;
+    font-size: 1.25rem; /* CORRIGIDO: reduzido de 1.5rem */
     display: flex;
     text-align: left;
+    line-height: 1.6; /* NOVO: melhora legibilidade */
 }
+
 #areasAtuacao {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 144px;
+    height: auto; /* CORRIGIDO: altura automática */
+    min-height: 9rem;
     width: 30%;
     background-color: #d9d9d9;
-    border-radius: 28px;
+    border-radius: 1.75rem;
     margin-bottom: 5%;
+    padding: 1.5rem; /* NOVO: padding interno */
     font-weight: 600;
-    font-size: 36px;
-    box-shadow: 8px 8px 4px #6D6C69;
+    font-size: 2.25rem;
+    box-shadow: 0.5rem 0.5rem 0.25rem #6D6C69;
+    text-align: center; /* NOVO: texto centralizado */
+    box-sizing: border-box; /* NOVO: inclui padding no cálculo */
 }
 
 .listaMain {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%; /* NOVO: garante largura total */
+    padding: 0 2rem; /* NOVO: respiro lateral */
+    box-sizing: border-box;
 }
+
 .listaMain ul {
     display: flex;
     list-style: none;
-    gap: 5%;
+    gap: 2%; /* CORRIGIDO: reduzido de 5% */
     margin-bottom: 10%;
+    padding: 0; /* NOVO: remove padding padrão */
+    width: 100%; /* NOVO: largura total */
 }
+
 .listaMain ul li {
     display: flex;
     align-items: center;
     justify-content: center; 
     text-align: center; 
-    padding: 30px; 
+    padding: 1.875rem;
     width: 30%;
     background-color: #36894E;
-    border-radius: 12px;
-    font-size: 20px;
+    border-radius: 0.75rem;
+    font-size: 1.25rem;
     line-height: 1.4em;
     white-space: normal; 
     word-break: break-word;
-    box-shadow: 8px 8px 4px #6D6C69;
+    box-shadow: 0.5rem 0.5rem 0.25rem #6D6C69;
     color: white;
+    box-sizing: border-box; /* NOVO */
 }
 
 #cards {
     margin-bottom: 10%;
+}
+
+/* ========== MEDIA QUERIES CORRIGIDAS ========== */
+
+/* Tablets */
+@media (max-width: 900px) {
+    #cardSobre {
+        padding: 1rem;
+    }
+    #cardSobreInterno {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        border-radius: 1.75rem;
+    }
+
+    #AgrirsMain {
+        max-width: 12rem;
+    }
+
+    #textoCard {
+        font-size: 1.125rem;
+    }
+
+    #areasAtuacao {
+        width: 50%;
+        font-size: 2rem;
+    }
+
+    .listaMain ul {
+        gap: 1rem;
+    }
+
+    .listaMain ul li {
+        font-size: 1.125rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    main {
+        padding-top: 2rem;
+    }
+
+    #cardSobre {
+        width: 95%;
+        min-height: auto; /* remove altura mínima em mobile */
+        border-radius: 1.25rem;
+        margin-bottom: 2rem;
+    }
+
+    #cardSobre .titulo36 {
+        font-size: 1.25rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    #cardSobreInterno {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 1.75rem;
+    }
+
+    #AgrirsMain {
+        width: 60%;
+        max-width: 10rem;
+        margin-bottom: 1rem;
+    }
+
+    #textoCard {
+        font-size: 1rem;
+        line-height: 1.5;
+        text-align: justify; /* melhora leitura em mobile */
+    }
+
+    #areasAtuacao {
+        width: 85%;
+        min-height: auto;
+        font-size: 1.5rem;
+        padding: 1.25rem;
+        margin: 1.5rem auto;
+        box-shadow: 0.3rem 0.3rem 0.15rem #6D6C69;
+    }
+
+    .listaMain {
+        padding: 0 1rem;
+    }
+
+    .listaMain ul {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+
+    .listaMain ul li {
+        width: 100%;
+        padding: 1.25rem;
+        font-size: 1rem;
+        box-shadow: 0.3rem 0.3rem 0.15rem #6D6C69;
+    }
+}
+
+/* Mobile pequeno (menos de 400px) */
+@media (max-width: 400px) {
+    #cardSobre .titulo36 {
+        font-size: 1.125rem;
+    }
+
+    #textoCard {
+        font-size: 0.9375rem;
+    }
+
+    #areasAtuacao {
+        width: 90%;
+        font-size: 1.25rem;
+        padding: 1rem;
+    }
+
+    .listaMain ul li {
+        font-size: 0.9375rem;
+        padding: 1rem;
+    }
 }
