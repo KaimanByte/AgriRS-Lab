@@ -12,10 +12,8 @@ main {
     justify-content: space-between;
     margin-top: 64px;
     margin-bottom: 82px;
-    width: 40%;
+    width: 80%;
     height: 48px;
-    width: 929px;
-
 }
 
 .botao {
@@ -47,7 +45,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 620px;
+    height: 580 px;
     width: 90%;
     margin-bottom: 5rem;
     box-shadow: 8px 8px 4px #6D6C69;
@@ -72,7 +70,7 @@ main {
     opacity: 0;
     transition: opacity 300ms ease-in-out;
     z-index: 2;
-    display: flex; 
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -119,5 +117,52 @@ main {
     border-top-right-radius: 32px;
     color: white;
     z-index: 3;
+}
+
+/* Tablets e monitores médios */
+@media (max-width: 1024px) {
+    .lista-projetos {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin: 2rem auto;
+    }
+}
+
+/* Celulares grandes (até 768px) */
+@media (max-width: 768px) {
+
+    .botao {
+        font-size: 16px;
+        width: 140px;
+        height: 36px;
+    }
+}
+
+/* Celulares pequenos (até 480px) */
+@media (max-width: 480px) {
+
+    .botao {
+        font-size: 16px;
+        width: 110px;
+        height: 32px;
+    }
+
+    .tituloProjeto {
+        font-size: 16px;
+    }
+
+    .projeto .descricaoProjeto {
+        font-size: 16px;
+}
+
+.projeto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 440px;
+    width: 90%;
+    margin-bottom: 3rem;
+}
 
 }
