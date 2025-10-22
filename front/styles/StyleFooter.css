@@ -1,8 +1,9 @@
 footer {
     background-color: #d9d9d9;
     display: flex;
-    height: 250px;
-    padding-top: auto;
+    height: auto;
+    margin-bottom: 0;
+    padding-top: 2%;
     padding-left: 1.9%;
     padding-right: 1.9%;
     align-items: center;
@@ -135,13 +136,11 @@ footer a:hover {
   color: #2c6e49; /* verde suave no hover */
 }
 
-#redesSociais a img,
-#divFive a img {
+footer a img {
   transition: transform 0.3s;
 }
 
-#redesSociais a img:hover,
-#divFive a img:hover {
+footer a img:hover {
   transform: scale(1.1); /* leve zoom no hover */
 }
 
@@ -159,10 +158,31 @@ footer a:hover {
 
 @media (max-width: 768px) {
   footer {
+    padding-top: 0;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 1.5rem;
+  }
+  #apareceNoFooter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  #apaga {
+    display: none;
+  }
+  #aparece {
+    display: inline;
+    justify-content: center;
+    align-items: center;
+  }
+  #divOne {
+    display: contents;
+    align-items: center;
+    justify-content: center;
   }
 
   .foraLinha {
