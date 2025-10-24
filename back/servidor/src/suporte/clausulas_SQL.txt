@@ -1,0 +1,21 @@
+-- Apaga tabela se já existir
+DROP TABLE IF EXISTS tbpublicacao;
+
+-- Cria tabela de publicações
+CREATE TABLE tbpublicacao (
+  idpublicacao SERIAL PRIMARY KEY,
+  titulo VARCHAR(150) NOT NULL,
+  descricao TEXT,
+  imagem_url TEXT,
+  pdf_url TEXT,
+  citacao_url TEXT,
+  doi_url TEXT,
+  criado_em TIMESTAMP DEFAULT now(),
+  atualizado_em TIMESTAMP DEFAULT now()
+);
+
+-- Insere registros de teste
+INSERT INTO tbpublicacao (titulo, descricao, imagem_url, pdf_url, citacao_url, doi_url)
+VALUES
+('Modelo de Publicação', 'Publicação exemplo criada para teste da API.', 
+ '../imagens/Publicacoes/pb01.png', 'pb01.pdf', 'pb01_citacao.txt', 'https://doi.org/xxxx/pb01');

@@ -77,6 +77,7 @@
         <li><a href="publicacoes.html" class="ativo">Publicações</a></li>
         <li><a href="contato.html">Contato</a></li>
       </ul>
+<<<<<<< HEAD
       <a title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="../imagens/Header/Inpe.png" id="Inpeheader"></a>
       </nav>
     </header>
@@ -115,6 +116,67 @@
         <button id="btnFiltrar">Filtrar</button>
         <button id="btnLimpar">Limpar</button>
       </div>
+=======
+      <img src="../imagens/Header/Inpe.png" id="Inpeheader">
+    </nav>
+  </header>
+
+  <div id="imagemFundo">Publicações</div>
+
+  <!-- Barra de pesquisa e filtros -->
+  <section class="pesquisa">
+    <h2 class="titulo-academico">Acompanhe nossos trabalhos acadêmicos</h2>
+    <div class="pesquisa2">
+      <input type="text" placeholder="Pesquise">
+      <button class="search-btn" aria-label="Pesquisar">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-linecap="round"
+          stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+  </section>
+  <section class="filtro-unico">
+    <h2>Filtrar Publicações</h2>
+    <div class="filtro-container">
+      <select id="criterio">
+        <option value="">Selecione um critério</option>
+        <option value="palavra">Palavra-chave</option>
+        <option value="tipo">Tipo de publicação</option>
+        <option value="ano">Ano de publicação</option>
+      </select>
+      <button id="btnFiltrar">Filtrar</button>
+      <button id="btnLimpar">Limpar</button>
+    </div>
+  </section>
+
+  <!-- 🔹 CRUD Dinâmico (movido para ficar entre filtros e lista de publicações) -->
+  <section class="crud-publicacoes">
+    <h2>Gerenciar Publicações (CRUD)</h2>
+
+    <ul id="lista"></ul>
+
+    <!-- Formulário para adicionar -->
+    <form id="formAdd">
+      <input type="text" id="titulo" placeholder="Título" required>
+      <input type="text" id="descricao" placeholder="Descrição" required>
+      <input type="url" id="imagem_url" placeholder="URL da imagem (imagem_url)">
+      <input type="url" id="pdf_url" placeholder="URL do PDF (pdf_url)">
+      <input type="url" id="citacao_url" placeholder="URL da citação (citacao_url)">
+      <input type="url" id="doi_url" placeholder="URL DOI (doi_url)">
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <!-- Lista dinâmica -->
+  </section>
+
+  <!-- Lista de publicações -->
+  <main>
+    <!-- substitui os artigos estáticos por um container que será preenchido dinamicamente -->
+    <section class="lista-publicacoes" id="publicacoes-container">
+      <!-- cards serão inseridos aqui dinamicamente -->
+>>>>>>> main
     </section>
 
     <!-- Lista de publicações -->
@@ -455,6 +517,7 @@
         }
       });
 
+<<<<<<< HEAD
       btnLimpar.addEventListener("click", () => {
         criterio.value = "";
         alert("Filtros limpos!");
@@ -485,3 +548,173 @@
   </body>
 </html>
 "<!-- Atualiza��o de layout -->"
+=======
+  <script>
+    // Script do CRUD + render dos cards principais
+    const API = "http://localhost:3030/publicacao";
+    let PUBLICACOES = {}; // mapa local id -> objeto pub
+
+    function formatDate(v) {
+      if (!v) return "-";
+      const d = new Date(v);
+      if (isNaN(d)) return v;
+      return d.toLocaleString('pt-BR');
+    }
+
+    // Renderiza os cards na área principal usando a mesma estilização (.publicacao)
+    function renderPublicacoesCards() {
+      const container = document.getElementById("publicacoes-container");
+      container.innerHTML = "";
+      const pubs = Object.values(PUBLICACOES);
+      if (!pubs || pubs.length === 0) {
+        container.innerHTML = '<p class="mensagem">Nenhuma publicação disponível.</p>';
+        return;
+      }
+
+      pubs.forEach(pub => {
+        const art = document.createElement("article");
+        // mantém classe publicacao para usar CSS existente e adiciona card para filtro/exemplo
+        art.className = "publicacao card";
+        art.innerHTML = `
+          <img src="${pub.imagem_url || '../imagens/Publicacoes/pb01.png'}" alt="${(pub.titulo || '').replace(/"/g,'')}" />
+          <h3>${pub.titulo || ''}</h3>
+          <p>${pub.descricao || ''}</p>
+          <div class="botoes">
+            ${pub.pdf_url ? `<a href="${pub.pdf_url}" target="_blank" rel="noopener">PDF</a>` : ''}
+            ${pub.citacao_url ? `<a href="${pub.citacao_url}" target="_blank" rel="noopener">Citação</a>` : ''}
+            ${pub.doi_url ? `<a href="${pub.doi_url}" target="_blank" rel="noopener">DOI</a>` : ''}
+          </div>
+          <small class="timestamps">Criado: ${formatDate(pub.criado_em)} • Atualizado: ${formatDate(pub.atualizado_em)}</small>
+        `;
+        container.appendChild(art);
+
+        // guarda display original para permitir filtro por termo
+        art.dataset.displayOriginal = getComputedStyle(art).display || "block";
+      });
+    }
+
+    // Carregar lista (CRUD) e também repopular os cards principais
+    function carregar() {
+      fetch(API)
+        .then(r => r.json())
+        .then(data => {
+          const lista = document.getElementById("lista");
+          lista.innerHTML = "";
+          PUBLICACOES = {};
+          data.forEach(pub => {
+            PUBLICACOES[pub.idpublicacao] = pub;
+            const li = document.createElement("li");
+            li.innerHTML = `
+              <img class="item-thumb" src="${pub.imagem_url || '../imagens/Publicacoes/pb01.png'}" alt="${(pub.titulo||'').replace(/"/g,'')}" />
+              <div class="item-text">
+                <b>${pub.titulo}</b> - <span class="descricao">${pub.descricao}</span>
+                <div class="item-links">
+                  ${pub.pdf_url ? `<a href="${pub.pdf_url}" target="_blank" rel="noopener">PDF</a>` : ''}
+                  ${pub.citacao_url ? `<a href="${pub.citacao_url}" target="_blank" rel="noopener">Citação</a>` : ''}
+                  ${pub.doi_url ? `<a href="${pub.doi_url}" target="_blank" rel="noopener">DOI</a>` : ''}
+                </div>
+                <small class="timestamps">Criado: ${formatDate(pub.criado_em)} • Atualizado: ${formatDate(pub.atualizado_em)}</small>
+              </div>
+              <div class="crud-actions">
+                <button class="btn-edit" onclick="editar(${pub.idpublicacao})">Editar</button>
+                <button class="btn-delete" onclick="excluir(${pub.idpublicacao})">Excluir</button>
+              </div>
+            `;
+            lista.appendChild(li);
+          });
+
+          renderPublicacoesCards();
+        })
+        .catch(err => {
+          console.error('Erro ao carregar publicações:', err);
+          document.getElementById("lista").innerHTML = '<li class="mensagem">Erro ao carregar publicações.</li>';
+          document.getElementById("publicacoes-container").innerHTML = '<p class="mensagem">Erro ao carregar publicações.</p>';
+        });
+    }
+
+    // Adicionar
+    document.getElementById("formAdd").addEventListener("submit", e => {
+      e.preventDefault();
+      const titulo = document.getElementById("titulo").value;
+      const descricao = document.getElementById("descricao").value;
+      const imagem_url = document.getElementById("imagem_url").value;
+      const pdf_url = document.getElementById("pdf_url").value;
+      const citacao_url = document.getElementById("citacao_url").value;
+      const doi_url = document.getElementById("doi_url").value;
+
+      fetch(API, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({titulo, descricao, imagem_url, pdf_url, citacao_url, doi_url})
+      }).then(() => {
+        document.getElementById("formAdd").reset();
+        carregar();
+      }).catch(err => console.error('Erro ao adicionar publicação:', err));
+    });
+
+    // Editar (usa PUBLICACOES para pré-preencher)
+    function editar(id) {
+      const cur = PUBLICACOES[id];
+      if (!cur) return alert('Publicação não encontrada para editar.');
+      const novoTitulo = prompt("Novo título:", cur.titulo || "");
+      if (novoTitulo === null) return;
+      const novaDescricao = prompt("Nova descrição:", cur.descricao || "");
+      if (novaDescricao === null) return;
+      const novaImagem = prompt("URL da imagem (imagem_url):", cur.imagem_url || "");
+      if (novaImagem === null) return;
+      const novoPdf = prompt("URL do PDF (pdf_url):", cur.pdf_url || "");
+      if (novoPdf === null) return;
+      const novaCitacao = prompt("URL da citação (citacao_url):", cur.citacao_url || "");
+      if (novaCitacao === null) return;
+      const novoDoi = prompt("URL DOI (doi_url):", cur.doi_url || "");
+      if (novoDoi === null) return;
+
+      fetch(`${API}/${id}`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          titulo: novoTitulo,
+          descricao: novaDescricao,
+          imagem_url: novaImagem,
+          pdf_url: novoPdf,
+          citacao_url: novaCitacao,
+          doi_url: novoDoi
+        })
+      }).then(() => carregar())
+        .catch(err => console.error('Erro ao editar publicação:', err));
+    }
+
+    // Excluir
+    function excluir(id) {
+      if (!confirm('Confirma exclusão?')) return;
+      fetch(`${API}/${id}`, { method: "DELETE" })
+        .then(() => carregar())
+        .catch(err => console.error('Erro ao excluir publicação:', err));
+    }
+
+    // filtro de busca para os cards principais
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.querySelector(".pesquisa2 input");
+      searchInput.addEventListener("input", function () {
+        const termo = searchInput.value.toLowerCase().trim();
+        const cards = document.querySelectorAll(".lista-publicacoes .card");
+        cards.forEach(card => {
+          const displayOriginal = card.dataset.displayOriginal || "block";
+          const textoCard = card.textContent.toLowerCase();
+          if (termo === "" || textoCard.includes(termo)) {
+            card.style.display = displayOriginal;
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+
+    carregar();
+  </script>
+
+  <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+</body>
+
+</html>
+>>>>>>> main
