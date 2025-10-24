@@ -12,19 +12,31 @@ O site busca:
 
 O projeto contribui para manter as atividades e descobertas científicas atualizadas para a comunidade e promove a divulgação do laboratório para interessados em conhecer ou colaborar com o trabalho desenvolvido.
 
-## Tabela de Requisitos e User Stories
+<a id="sprint"></a>
+## Entregas de Sprints
 
-Você pode consultar todos os **requisitos, sub-requisitos e user stories** do projeto neste [arquivo de requisitos](./documentação/requisitos.md).
+Todas as entregas serão realizadas conforme os prazos acordados com o cliente. Para cada ciclo de desenvolvimento, será gerado um relatório completo por sprint e uma planilha de tarefas, na aba **Tasks**, que detalha cada atividade executada, o responsável, a data de conclusão e uma descrição do trabalho realizado. A relação detalhada das sprints e tarefas é apresentada abaixo.
+
+<div align="center">
+
+| Sprint | Entrega       | Status |                 Relatório                  |
+|------: |---------------|:------:|:------------------------------------------:|
+| 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](./documentação/sprints/sprint_1.md)|
+| 2      | 📅 04/11/2025 | 🚧  | [Ver Backlog](./documentação/sprints/sprint_2.md)|
+| 3      | 📅 25/11/2025 | —      | —                                          |
 
 
-## Sprints e Backlog
+</div>
 
-📌 O acompanhamento das atividades do projeto pode ser feito a partir dos documentos abaixo:
+**Legenda:**
+- ✅ **Finalizada**
+- 🚧 **Em Progresso**
+- `—` **Não iniciado**
 
-- [Backlog do Produto](./documentação/backlog-produto.md)  
-- [Requisitos e User Stories](./documentação/requisitos.md)  
-- [Dados da Sprint 1](./documentação/sprints/sprint_1.md)  
+## Recursos do Produto
 
+- **Requisitos e Prioridades do Sistema:** [Acesse aqui](./documentação/requisitos.md)  
+  Lista detalhada de requisitos funcionais e não funcionais, utilizados como referência para o desenvolvimento do projeto.
 
 ## Protótipo no Figma
 
