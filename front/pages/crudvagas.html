@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Publicações - AgriRSlab</title>
+  <link rel="stylesheet" href="../styles/StyleCrudVagas.css"/>
+  <link rel="stylesheet" href="../styles/StyleHeader.css" />
+  <link rel="stylesheet" href="../styles/StyleFooterCrud.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader" />
+      <ul id="nav-links">
+        <li><a href="crudvagas.html">Vagas</a></li>
+        <li><a href="crud.noticias.html">Notícias</a></li>
+        <li><a href="crudpublicacoes.html">Publicações</a></li>
+      </ul>
+      <img src="../imagens/Header/Inpe.png" id="Inpeheader" />
+    </nav>
+  </header>
+
+  <div class="crud-container">
+  <form class="crud-form" id="crud-form">
+    <h2 class="crud-form-titulo">Vagas</h2>
+      <div class="cinza">
+      <input type="text" name="titulo" placeholder="TÍTULO" required />
+      <input type="text" name="prazo" placeholder="PRAZO" />
+      <textarea name="descricao" placeholder="DESCRIÇÃO"></textarea>
+      <textarea name="requisitos" placeholder="REQUISITOS (separados por ;)"></textarea>
+      <textarea name="processo_selecao" placeholder="PROCESSOS DE SELEÇÃO (separados por ;)"></textarea>
+      <input type="text" name="contato" placeholder="CONTATO" />
+      <button type="submit">Adicionar</button>
+  </div>
+  </form>
+  
+  <div class="crud-cards" id="crud-cards"></div>
+  
+</div>
+
+<footer>
+    <p>© 2025 AgriRSlab. Todos os direitos reservados.</p>
+  </footer>
+
+<script>
+  const API_URL = "http://localhost:3030/oportunidades";
+  const form = document.getElementById("crud-form");
+  const cardsContainer = document.getElementById("crud-cards");
+  let editandoId = null;
+
+  async function carregarCards() {
+    const res = await fetch(API_URL);
+    const oportunidades = await res.json();
+    cardsContainer.innerHTML = "";
+
+    oportunidades.forEach(o => {
+      const card = document.createElement("div");
+      card.classList.add("crud-card");
+
+      card.innerHTML = `
+        <h3>${o.titulo}</h3>
+        <p>${o.descricao}</p>
+        ${o.requisitos ? `<h4>Requisitos:</h4><ul>${o.requisitos.split(";").map(r => `<li>${r.trim()}</li>`).join("")}</ul>` : ""}
+        ${o.processo_selecao ? `<h4>Processo de Seleção:</h4><ol>${o.processo_selecao.split(";").map(p => `<li>${p.trim()}</li>`).join("")}</ol>` : ""}
+        ${o.prazo ? `<p><strong>Prazo:</strong> ${o.prazo}</p>` : ""}
+        <p><strong>Contato:</strong> ${o.contato}</p>
+        <div class="crud-actions">
+          <button class="crud-edit-btn" onclick="editarCard(${o.id})"><a href="#"">Editar</a></button>
+          <button class="crud-delete-btn" onclick="excluirCard(${o.id})">Excluir</button>
+        </div>
+      `;
+      cardsContainer.appendChild(card);
+    });
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const dados = Object.fromEntries(new FormData(form));
+
+    try {
+      if (editandoId) {
+        await fetch(`${API_URL}/${editandoId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dados)
+        });
+        editandoId = null;
+      } else {
+        await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dados)
+        });
+      }
+
+      form.reset();
+      carregarCards();
+    } catch (err) {
+      console.error("Erro ao salvar:", err);
+    }
+  });
+
+  async function editarCard(id) {
+    const res = await fetch(`${API_URL}/${id}`);
+    const dados = await res.json();
+
+    for (const campo in dados) {
+      if (form.elements[campo]) {
+        form.elements[campo].value = dados[campo];
+      }
+    }
+
+    editandoId = id;
+  }
+
+  async function excluirCard(id) {
+    if (confirm("Tem certeza que deseja excluir esta oportunidade?")) {
+      await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      carregarCards();
+    }
+  }
+
+  carregarCards();
+</script>
+</body>
+</html>

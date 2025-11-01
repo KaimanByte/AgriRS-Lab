@@ -1,0 +1,27 @@
+CREATE TABLE tboportunidades (
+  id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  titulo TEXT NOT NULL,
+  descricao TEXT,
+  requisitos TEXT,
+  processo_selecao TEXT,
+  prazo TEXT,
+  contato TEXT
+);
+
+INSERT INTO tboportunidades (
+  titulo,
+  descricao,
+  requisitos,
+  processo_selecao,
+  prazo,
+  contato
+) VALUES (
+  'Iniciação Científica',
+  'Programa de bolsas para estudantes desenvolverem projetos de pesquisa',
+  'Estudante de graduação a partir do 3º semestre; Coeficiente de rendimento mínimo de 7,0; Dedicação de 20h semanais ao projeto; Participação em eventos científicos',
+  'Submissão de proposta de projeto; Currículo Lattes atualizado; Carta de aceite de um orientador; Avaliação pela comissão científica',
+  'A ser definido',
+  'agrirslab@gmail.com'
+);
+
+

@@ -1,0 +1,22 @@
+DROP TABLE IF EXISTS tbnoticias;
+
+CREATE TABLE tbnoticias (
+    idnoticia INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    titulo VARCHAR(250) NOT NULL,
+    link VARCHAR(250) NOT NULL,
+    postagem DATE NOT NULL,
+    exibir BOOLEAN DEFAULT TRUE,
+    descricao TEXT,
+    url_leiamais VARCHAR(500)
+);
+
+-- Inserindo uma notícia padrão de exemplo
+INSERT INTO tbnoticias (titulo, link, postagem, exibir, descricao, url_leiamais)
+VALUES (
+    'Lançamento do novo portal de notícias',
+    'http://exemplo.com/noticia1',
+    CURRENT_DATE,
+    TRUE,
+    'O portal de notícias foi lançado com o objetivo de fornecer informações atualizadas e confiáveis.',
+    'http://exemplo.com/noticia1-completa'
+);
