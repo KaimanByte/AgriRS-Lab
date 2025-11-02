@@ -1,68 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Publicações - AgriRSlab</title>
-    <link rel="stylesheet" href="../styles/StylePublicacoes.css" />
-    <link rel="stylesheet" href="../styles/StyleHeader.css" />
-    <link rel="stylesheet" href="../styles/StyleFooter.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <div id="footer-brasil">
-      <div
-        id="barra-brasil"
-        style="
-          background: #7f7f7f;
-          height: 20px;
-          padding: 0 0 0 10px;
-          display: block;
-        "
-      >
-        <ul id="menu-barra-temp" style="list-style: none">
-          <li
-            style="
-              display: inline;
-              float: left;
-              padding-right: 10px;
-              margin-right: 10px;
-              border-right: 1px solid #ededed;
-            "
-          >
-            <a
-              href="http://brasil.gov.br"
-              style="
-                font-family: sans, sans-serif;
-                text-decoration: none;
-                color: white;
-              "
-              >Portal do Governo Brasileiro</a
-            >
-          </li>
-          <li>
-            <a
-              style="
-                font-family: sans, sans-serif;
-                text-decoration: none;
-                color: white;
-              "
-              href="http://epwg.governoeletronico.gov.br/barra/atualize.html"
-              >Atualize sua Barra de Governo</a
-            >
-          </li>
-        </ul>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publicações - AgriRSlab</title>
+  <link rel="stylesheet" href="../styles/stylePublicacoes.css">
+  <link rel="stylesheet" href="../styles/StyleHeader.css">
+  <link rel="stylesheet" href="../styles/StyleFooter.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="footer-brasil">
+    <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
+      <ul id="menu-barra-temp" style="list-style:none;">
+        <li style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED">
+          <a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal
+            do Governo Brasileiro</a>
+        </li>
+        <li>
+          <a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a>
+        </li>
+      </ul>
     </div>
-    <header>
-      <nav>
-        <a title="AgriRSlab" href="index.html"><img src="../imagens/Header/AgriRSlab.png" id="Agriheader"></a>
+  </div>
+  <header>
+    <nav>
+      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
 
       <!-- 🔹 Botão do menu hambúrguer adicionado -->
       <button id="menu-toggle" aria-label="Abrir menu">☰ Menu</button>
@@ -115,154 +82,17 @@
         <button id="btnFiltrar">Filtrar</button>
         <button id="btnLimpar">Limpar</button>
       </div>
+  
+    <ul id="lista"></ul>
+  </section>
+
+  <!-- Lista de publicações -->
+  <main>
+    <!-- substitui os artigos estáticos por um container que será preenchido dinamicamente -->
+    <section class="lista-publicacoes" id="publicacoes-container">
+      <!-- cards serão inseridos aqui dinamicamente -->
     </section>
-
-    <!-- Lista de publicações -->
-    <main>
-      <section class="lista-publicacoes">
-        <article class="publicacao">
-          <img src="../imagens/Publicacoes/pb01.png" alt="Publicação 1" />
-          <h3>
-            Comparação de Modelos Globais para Mapeamento da Cobertura do Solo
-          </h3>
-          <p>
-            Estudo comparativo entre três bases globais de dados revela
-            diferenças na classificação da cobertura do solo na Mata Atlântica
-            entre 2011 e 2021, destacando a importância de ajustes regionais
-            para melhorar a precisão dos modelos.
-          </p>
-          <div class="botoes">
-            <a href="pb01.pdf" target="_blank">PDF</a>
-            <a href="pb01_citacao.txt" target="_blank">Citação</a>
-            <a href="https://doi.org/xxxx/pb01" target="_blank">DOI</a>
-          </div>
-        </article>
-
-        <article class="publicacao">
-          <img src="../imagens/Publicacoes/pb02.jpg" alt="Publicação 2" />
-          <h3>
-            Mapeamento de Traços Funcionais Florestais na Mata Atlântica via
-            Satélite
-          </h3>
-          <p>
-            Utilizando sensores remotos, o trabalho mapeia características
-            funcionais da vegetação nativa em áreas de transição com o Cerrado,
-            contribuindo para ações de conservação e restauração ecológica.
-          </p>
-          <div class="botoes">
-            <a href="pb02.pdf" target="_blank">PDF</a>
-            <a href="pb02_citacao.txt" target="_blank">Citação</a>
-            <a href="https://doi.org/xxxx/pb02" target="_blank">DOI</a>
-          </div>
-        </article>
-
-        <article class="publicacao">
-          <img src="../imagens/Publicacoes/pb03.png" alt="Publicação 3" />
-          <h3>
-            Classificadores e Correlação Espacial em Modelagem de Uso da Terra
-          </h3>
-          <p>
-            A pesquisa aplica algoritmos de classificação e análise espacial
-            para identificar padrões de uso da terra, mostrando como a
-            correlação local melhora a precisão dos modelos de ocupação
-            territorial.
-          </p>
-          <div class="botoes">
-            <a href="pb03.pdf" target="_blank">PDF</a>
-            <a href="pb03_citacao.txt" target="_blank">Citação</a>
-            <a href="https://doi.org/xxxx/pb03" target="_blank">DOI</a>
-          </div>
-        </article>
-
-        <article class="publicacao">
-          <img src="../imagens/Publicacoes/pb04.png" alt="Publicação 4" />
-          <h3>
-            Modelos Estatísticos para Estimativa de Biomassa na Mata Atlântica
-          </h3>
-          <p>
-            Modelos multivariados baseados em dados de campo e imagens de
-            satélite são usados para estimar biomassa aérea, oferecendo suporte
-            ao monitoramento de carbono e à gestão de serviços ecossistêmicos.
-          </p>
-          <div class="botoes">
-            <a href="pb04.pdf" target="_blank">PDF</a>
-            <a href="pb04_citacao.txt" target="_blank">Citação</a>
-            <a href="https://doi.org/xxxx/pb04" target="_blank">DOI</a>
-          </div>
-        </article>
-
-        <article class="publicacao">
-          <img src="../imagens/Publicacoes/pb05.jpeg" alt="Publicação 5" />
-          <h3>
-            Sensoriamento Remoto de Traços Funcionais de Plantas: Estado Atual e
-            Futuro
-          </h3>
-          <p>
-            O estudo utiliza NDVI e imagens de satélite para monitorar o
-            crescimento de pastagens entre 2015 e 2019, destacando o potencial
-            do sensoriamento remoto na análise funcional da vegetação e
-            apontando avanços futuros com sensores hiperespectrais.
-          </p>
-          <div class="botoes">
-            <a href="pb05.pdf" target="_blank">PDF</a>
-            <a href="pb05_citacao.txt" target="_blank">Citação</a>
-            <a href="https://doi.org/xxxx/pb05" target="_blank">DOI</a>
-          </div>
-        </article>
-
-        <article class="publicacao">
-          <img src="../imagens/Publicacoes/pb06.png" alt="Publicação 6" />
-          <h3>
-            Detecção Global de Manguezais com Abordagem Baseada em Sensoriamento
-            Remoto
-          </h3>
-          <p>
-            Mapas e amostras binárias revelam padrões de desmatamento na
-            Amazônia brasileira.
-          </p>
-          <div class="botoes">
-            <a href="pb06.pdf" target="_blank">PDF</a>
-            <a href="pb06_citacao.txt" target="_blank">Citação</a>
-            <a href="https://doi.org/xxxx/pb06" target="_blank">DOI</a>
-          </div>
-        </article>
-        <article class="publicacao">
-          <img src="../imagens/Publicacoes/pb07.jpg" alt="Publicação 7" />
-          <h3>
-            Estimativa de Biomassa Arbórea com Dados de Inventário Florestal
-          </h3>
-          <p>
-            Modelos de aprendizado de máquina aplicados a dados de sensoriamento
-            remoto permitem extrair métricas fenológicas como SOS, POS, EOS e
-            LOS, revelando padrões sazonais de uso agrícola no Matopiba.
-          </p>
-          <div class="botoes">
-            <a href="pb07.pdf" target="_blank">PDF</a>
-            <a href="pb07_citacao.txt" target="_blank">Citação</a>
-            <a href="https://doi.org/xxxx/pb07" target="_blank">DOI</a>
-          </div>
-        </article>
-
-        <article class="publicacao">
-          <img src="../imagens/Publicacoes/pb08.png" alt="Publicação 8" />
-          <h3>
-            Mapeamento Global de Carbono Vegetal com Imagens de Satélite e
-            Aprendizado de Máquina
-          </h3>
-          <p>
-            Mapa global de produção de cana-de-açúcar em 2021 revela os
-            principais países produtores e sua relevância científica,
-            relacionando volume agrícola com número de publicações acadêmicas
-            por região.
-          </p>
-          <div class="botoes">
-            <a href="pb08.pdf" target="_blank">PDF</a>
-            <a href="pb08_citacao.txt" target="_blank">Citação</a>
-            <a href="https://doi.org/xxxx/pb08" target="_blank">DOI</a>
-          </div>
-        </article>
-      </section>
-    </main>
+  </main>
 
     <footer>
       <div id="footer-brasil"></div>
@@ -455,15 +285,16 @@
         }
       });
 
-      btnLimpar.addEventListener("click", () => {
-        criterio.value = "";
-        alert("Filtros limpos!");
-      });
+    btnLimpar.addEventListener("click", () => {
+      criterio.value = "";
+      alert("Filtros limpos!");
+    });
+  </script>
 
-      /* 🔹 SCRIPT DO MENU HAMBURGUER */
-      const toggle = document.getElementById("menu-toggle");
-      const navLinks = document.getElementById("nav-links");
-      const navItems = document.querySelectorAll("#nav-links a");
+  <script>
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    const navItems = document.querySelectorAll("#nav-links a");
 
       toggle.addEventListener("click", () => {
         navLinks.classList.toggle("ativo");
@@ -477,11 +308,93 @@
       });
     </script>
 
-    <script
-      defer
-      src="https://barra.brasil.gov.br/barra.js"
-      type="text/javascript"
-    ></script>
-  </body>
+  <script>
+  const API = "http://localhost:3030/publicacao";
+  let PUBLICACOES = {};
+
+  function formatDate(v) {
+    if (!v) return "-";
+    const d = new Date(v);
+    if (isNaN(d)) return v;
+    return d.toLocaleString('pt-BR');
+  }
+
+  function renderPublicacoesCards() {
+    const container = document.getElementById("publicacoes-container");
+    container.innerHTML = "";
+    const pubs = Object.values(PUBLICACOES);
+    if (!pubs || pubs.length === 0) {
+      container.innerHTML = '<p class="mensagem">Nenhuma publicação disponível.</p>';
+      return;
+    }
+
+    pubs.forEach(pub => {
+      const art = document.createElement("article");
+      art.className = "publicacao card";
+      art.innerHTML = `
+        <img src="${pub.imagem_url || '../imagens/Publicacoes/pb01.png'}" alt="${(pub.titulo || '').replace(/"/g,'')}" />
+        <h3>${pub.titulo || ''}</h3>
+        <p>${pub.descricao || ''}</p>
+        <div class="botoes">
+          ${pub.pdf_url ? `<a href="${pub.pdf_url}" target="_blank" rel="noopener">PDF</a>` : ''}
+          ${pub.citacao_url ? `<a href="${pub.citacao_url}" target="_blank" rel="noopener">Citação</a>` : ''}
+          ${pub.doi_url ? `<a href="${pub.doi_url}" target="_blank" rel="noopener">DOI</a>` : ''}
+        </div>
+        <small class="timestamps">Criado: ${formatDate(pub.criado_em)} • Atualizado: ${formatDate(pub.atualizado_em)}</small>
+      `;
+      container.appendChild(art);
+      art.dataset.displayOriginal = getComputedStyle(art).display || "block";
+    });
+  }
+
+  function renderListaLateral() {
+    const lista = document.getElementById("lista");
+    lista.innerHTML = "";
+    const pubs = Object.values(PUBLICACOES);
+    if (!pubs || pubs.length === 0) {
+      lista.innerHTML = '<li class="mensagem">Nenhuma publicação disponível.</li>';
+      return;
+    }
+
+    
+  }
+
+  function carregar() {
+    fetch(API)
+      .then(r => r.json())
+      .then(data => {
+        PUBLICACOES = {};
+        data.forEach(pub => {
+          PUBLICACOES[pub.idpublicacao] = pub;
+        });
+        renderListaLateral();
+        renderPublicacoesCards();
+      })
+      .catch(err => {
+        console.error('Erro ao carregar publicações:', err);
+        document.getElementById("lista").innerHTML = '<li class="mensagem">Erro ao carregar publicações.</li>';
+        document.getElementById("publicacoes-container").innerHTML = '<p class="mensagem">Erro ao carregar publicações.</p>';
+      });
+  }
+
+  // Filtro de busca para os cards principais
+  document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector(".pesquisa2 input");
+    searchInput.addEventListener("input", function () {
+      const termo = searchInput.value.toLowerCase().trim();
+      const cards = document.querySelectorAll(".lista-publicacoes .card");
+      cards.forEach(card => {
+        const displayOriginal = card.dataset.displayOriginal || "block";
+        const textoCard = card.textContent.toLowerCase();
+        card.style.display = termo === "" || textoCard.includes(termo) ? displayOriginal : "none";
+      });
+    });
+
+    carregar();
+  });
+</script>
+
+  <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+</body>
+
 </html>
-"<!-- Atualiza��o de layout -->"

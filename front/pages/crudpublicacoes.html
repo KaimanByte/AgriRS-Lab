@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crud Publicações - AgriRSlab</title>
+  <link rel="stylesheet" href="../styles/StyleCrudPublicacoes.css" />
+  <link rel="stylesheet" href="../styles/StyleHeader.css"/>
+  <link rel="stylesheet" href="../styles/StyleFooterCrud.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader" />
+      <ul id="nav-links">
+        <li><a href="crudvagas.html">Vagas</a></li>
+        <li><a href="crud.noticias.html">Notícias</a></li>
+        <li><a href="crudpublicacoes.html">Publicações</a></li>
+      </ul>
+      <img src="../imagens/Header/Inpe.png" id="Inpeheader" />
+    </nav>
+  </header>
+
+  <main>
+    <section class="crud-publicacoes">
+      <h2 id="crud-titulo">Publicações</h2>
+      <div class="cinza">
+
+      <form id="formAdd">
+        <input type="text" id="titulo" placeholder="TÍTULO" required/>
+        <textarea type="text" id="descricao" placeholder="DESCRIÇÃO" required></textarea>
+        <input type="text" id="imagem_url" placeholder="URL DA IMAGEM (imagem_url)"/>
+        <input type="text" id="pdf_url" placeholder="URL DO PDF (pdf_url)"/>
+        <input type="text" id="citacao_url" placeholder="URL DA CITAÇÃO (citacao_url)"/>
+        <input type="text" id="doi_url" placeholder="URL DOI (doi_url)"/>
+        <button type="submit">Adicionar</button>
+      </form>
+      
+    </section>
+    <ul id="lista"></ul>
+    <section class="lista-publicacoes">
+      <div id="publicacoes-container">
+        <!-- Cards serão inseridos aqui dinamicamente -->
+         </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 AgriRSlab. Todos os direitos reservados.</p>
+  </footer>
+  <script>
+const API = "http://localhost:3030/publicacao";
+let PUBLICACOES = {};
+
+function formatDate(v) {
+  const d = new Date(v);
+  return isNaN(d) ? "-" : d.toLocaleString('pt-BR');
+}
+
+function renderLista() {
+  const lista = document.getElementById("lista");
+  lista.innerHTML = "";
+  Object.values(PUBLICACOES).forEach(pub => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <img class="item-thumb" src="${pub.imagem_url || 'https://via.placeholder.com/50'}" alt="${pub.titulo || ''}" />
+      <div class="item-text">
+        <b>${pub.titulo}</b> - <span class="descricao">${pub.descricao}</span>
+        <div class="item-links">
+          ${pub.pdf_url ? `<a href="${pub.pdf_url}" target="_blank">PDF</a>` : ''}
+          ${pub.citacao_url ? `<a href="${pub.citacao_url}" target="_blank">Citação</a>` : ''}
+          ${pub.doi_url ? `<a href="${pub.doi_url}" target="_blank">DOI</a>` : ''}
+        </div>
+        <small class="timestamps">Criado: ${formatDate(pub.criado_em)} • Atualizado: ${formatDate(pub.atualizado_em)}</small>
+      </div>
+      <div class="crud-actions">
+        <button id="azul" onclick="editar(${pub.idpublicacao})">Editar</button>
+        <button id="vermelho" onclick="excluir(${pub.idpublicacao})">Excluir</button>
+      </div>
+    `;
+    lista.appendChild(li);
+  });
+}
+
+function carregar() {
+  fetch(API)
+    .then(r => r.json())
+    .then(data => {
+      PUBLICACOES = {};
+      data.forEach(pub => PUBLICACOES[pub.idpublicacao] = pub);
+      renderLista();
+    });
+}
+
+document.getElementById("formAdd").addEventListener("submit", e => {
+  e.preventDefault();
+  const dados = ["titulo", "descricao", "imagem_url", "pdf_url", "citacao_url", "doi_url"]
+    .reduce((acc, id) => (acc[id] = document.getElementById(id).value, acc), {});
+  fetch(API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(dados)
+  }).then(() => {
+    e.target.reset();
+    carregar();
+  });
+});
+
+function editar(id) {
+  const pub = PUBLICACOES[id];
+  if (!pub) return;
+  const campos = ["titulo", "descricao", "imagem_url", "pdf_url", "citacao_url", "doi_url"];
+  const atualizados = {};
+  for (let campo of campos) {
+    const novo = prompt(`Novo ${campo}:`, pub[campo] || "");
+    if (novo === null) return;
+    atualizados[campo] = novo;
+  }
+  fetch(`${API}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(atualizados)
+  }).then(() => carregar());
+}
+
+function excluir(id) {
+  if (confirm("Confirma exclusão?")) {
+    fetch(`${API}/${id}`, { method: "DELETE" }).then(() => carregar());
+  }
+}
+  carregar();
+</script>
+</body>
+</html>

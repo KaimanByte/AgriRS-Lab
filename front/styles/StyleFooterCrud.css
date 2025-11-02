@@ -1,9 +1,8 @@
 footer {
     background-color: #d9d9d9;
     display: flex;
-    height: auto;
-    margin-bottom: 0;
-    padding-top: 2%;
+    height: 250px;
+    padding-top: auto;
     padding-left: 1.9%;
     padding-right: 1.9%;
     align-items: center;
@@ -123,101 +122,4 @@ footer {
    background: none repeat scroll 0% 0% #00420c;
    padding: 1em 0px;
    max-width: 100%;
-}
-
-
-footer a {
-  text-decoration: none;
-  color: black;
-  transition: color 0.3s;
-}
-
-footer a:hover {
-  color: #2c6e49; /* verde suave no hover */
-}
-
-footer a img {
-  transition: transform 0.3s;
-}
-
-footer a img:hover {
-  transform: scale(1.1); /* leve zoom no hover */
-}
-
-/* ========================================================= */
-/* === ADIÇÕES DE RESPONSIVIDADE ============================ */
-/* ========================================================= */
-
-@media (max-width: 1024px) {
-  footer {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 2rem 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  footer {
-    padding-top: 0;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.5rem;
-  }
-  #apareceNoFooter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-  #apaga {
-    display: none;
-  }
-  #aparece {
-    display: inline;
-    justify-content: center;
-    align-items: center;
-  }
-  #divOne {
-    display: contents;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .foraLinha {
-    display: none;
-  }
-
-  #divOne,
-  #divTwo,
-  #divThree,
-  #divFour,
-  #divFive {
-    margin: 10px 0;
-  }
-
-  #redesSociais {
-    margin: 10px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  #AgriRSfooter {
-    height: 60px;
-    width: 60px;
-  }
-
-  .titulo24 {
-    font-size: 20px;
-  }
-
-  .texto16 {
-    font-size: 14px;
-  }
-
-  #redesSociais img {
-    height: 20px;
-    width: 20px;
-  }
 }

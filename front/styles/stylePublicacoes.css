@@ -1,7 +1,7 @@
 /* Lista de publicações */
 .lista-publicacoes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 0.35fr));
     gap: 3rem;
     padding: 2rem;
 }
