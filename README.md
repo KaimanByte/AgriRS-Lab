@@ -1,5 +1,19 @@
 # ABP - Website do Laboratório de Sensoriamento Remoto Agrícola (AgriRS Lab)
 
+<p align="center">
+  <img src="./documentação/imagens/LogoKaymanByte.png"
+       alt="Logo 404NotFound"
+       style="max-width: 260px; width: 60%; height: auto;">
+</p>
+
+<p align="center">
+  <a href="#descrição-do-projeto">Sobre o Projeto</a> |
+  <a href="#entregas-de-sprints">Entrega de Sprints</a> |
+  <a href="#recursos-do-produto">Recursos do Produto</a> |
+  <a href="#protótipo-no-figma">Protótipo</a> |
+  <a href="#equipe">Nossa Equipe</a>
+</p>
+
 ## Descrição do Projeto
 O projeto ABP (Aprendizagem Baseada em Projeto) desenvolvido como atividade do 1° semestre do curso de **Desenvolvimento de Software Multiplataforma** da **Fatec Jacareí**, tem como objetivo criar um website para o **Laboratório de Sensoriamento Remoto Agrícola do INPE (AgriRS Lab)**.  
 
@@ -22,7 +36,7 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 | Sprint | Entrega       | Status |                 Relatório                  |
 |------: |---------------|:------:|:------------------------------------------:|
 | 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](./documentação/sprints/sprint_1.md)|
-| 2      | 📅 04/11/2025 | 🚧  | [Ver Backlog](./documentação/sprints/sprint_2.md)|
+| 2      | 📅 04/11/2025 | ✅  | [Ver Backlog](./documentação/sprints/sprint_2.md)|
 | 3      | 📅 25/11/2025 | —      | —                                          |
 
 
@@ -33,10 +47,23 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 - 🚧 **Em Progresso**
 - `—` **Não iniciado**
 
-## Recursos do Produto
+## Recursos do Produto 
 
-- **Requisitos e Prioridades do Sistema:** [Acesse aqui](./documentação/requisitos.md)  
+- **Backlog do Produto:** [Acesse aqui](./documentação/requisitos.md)  
   Lista detalhada de requisitos funcionais e não funcionais, utilizados como referência para o desenvolvimento do projeto.
+
+- **Modelagem do Banco de Dados:** [Acesse aqui](./documentação/imagens/ModelagemBancoDados.jpeg)  
+  Descrição e diagrama das entidades, relacionamentos e estrutura do banco de dados utilizado no sistema, servindo como base para o desenvolvimento e integração com o backend.
+
+- **Definition of Ready (DoR):** [Acesse aqui](./documentação/Definition-of-Ready-Kaiman-Byte.md)  
+  Critérios que definem quando uma *user story* está devidamente preparada para entrar em uma sprint, garantindo clareza, estimativa e entendimento pelo time.
+
+- **Definition of Done (DoD):** [Acesse aqui](./documentação/Definition-of-Done-Kaiman-Byte.md)  
+  Conjunto de critérios que determinam quando uma tarefa ou *user story* é considerada concluída, assegurando qualidade, revisão e alinhamento com os padrões do projeto.
+
+- **Diagrama de Caso de Uso (UML):** [Acesse aqui](./documentação/UML/UML%20-%20User%20Case.pdf)  
+  Representação visual das interações entre os usuários (atores) e o sistema, ilustrando os principais casos de uso e funcionalidades do projeto.
+
 
 ## Protótipo no Figma
 

@@ -62,10 +62,19 @@ Realizar a **adaptação do design** do site com base no feedback do cliente, en
 ---
 
 ## Sprint Burndown
-Em andamento...
+<img src="./Burndown/Burndown_Sprint2.png" alt="Burndown Chart" width="700"/>
 
 ---
 
 ## 🔄 Retrospectiva da Sprint 2
-Em andamento...
+Nesta sprint, o time mostrou maior adaptação ao Scrum e trabalhou com mais ritmo e organização. Conseguimos entregar um site totalmente responsivo para tablets e dispositivos móveis, além de ajustar as cores conforme o feedback do cliente, tornando o visual mais vivo e atrativo.
+
+Implementamos as páginas de Publicações, Notícias e Vagas com integração ao banco de dados via Node.js, e desenvolvemos a tela de login e o CRUD de gerenciamento funcional.
+
+A equipe evoluiu tecnicamente e se mostrou mais entrosada, garantindo entregas de qualidade e consolidando a base para as próximas sprints.
+
+---
+
+## Modelagem do Banco de Ddaos
+<img src="../imagens/ModelagemBancoDados.jpeg" alt="Burndown Chart" width="700"/>
 

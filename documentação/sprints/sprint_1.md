@@ -78,7 +78,7 @@ Foram definidos **cores, tipografia, espaçamentos e estilos**, criados **layout
 ---
 
 ## Sprint Burndown
-<img src="./Burndown_Sprint1.png" alt="Burndown Chart" width="700"/>
+<img src="./Burndown/Burndown_Sprint1.png" alt="Burndown Chart" width="700"/>
 
 ---
 
