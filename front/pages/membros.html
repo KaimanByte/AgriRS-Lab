@@ -33,21 +33,25 @@
         </div>
     </div>
     <header>
-        <nav>
-            <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="vagas.html">Vagas</a></li>
-                <li><a href="membros.html">Membros</a></li>
-                <li><a href="projetos.html">Projetos</a></li>
-                <li><a href="noticias.html">Notícias</a></li>
-                <li><a href="publicacoes.html">Publicações</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
-            <img src="../imagens/Header/Inpe.png" id="Inpeheader">
-        </nav>
-    </header>
+    <nav>
+      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
+
+      <!-- 🔹 Botão do menu hambúrguer adicionado -->
+      <button id="menu-toggle" aria-label="Abrir menu">☰ Menu</button>
+
+      <ul id="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="vagas.html">Vagas</a></li>
+        <li><a href="membros.html">Membros</a></li>
+        <li><a href="projetos.html">Projetos</a></li>
+        <li><a href="noticias.html">Notícias</a></li>
+        <li><a href="publicacoes.html" class="ativo">Publicações</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <img src="../imagens/Header/Inpe.png" id="Inpeheader">
+    </nav>
+  </header>
 
     <div id="imagemFundo">Membros</div>
     <div class="fita"> Coordenadores</div>
@@ -544,6 +548,22 @@
             </div>
         </block>
     </footer>
+    <script>
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    const navItems = document.querySelectorAll("#nav-links a");
+
+      toggle.addEventListener("click", () => {
+        navLinks.classList.toggle("ativo");
+      });
+
+      // Fecha o menu ao clicar em um link (melhor UX)
+      navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          navLinks.classList.remove("ativo");
+        });
+      });
+    </script>
     <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 
 </body>

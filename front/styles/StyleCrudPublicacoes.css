@@ -1,0 +1,263 @@
+.crud-publicacoes {
+  max-width: 1000px;
+  margin: 4em auto 2em auto;
+  border-radius: 8px;
+  font-family: sans-serif;
+}
+
+
+.crud-publicacoes h2 {
+  background-color: #36894E;
+  color: white;
+  text-align: center;
+  margin: 0;
+padding: 1rem;
+  border-radius: 8px 8px 0 0;
+  font-size: 2.2em;
+
+}
+
+
+.cinza {
+  background-color: #D9D9D9;
+  padding: 1em;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.cinza input,
+.cinza textarea {
+   padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+ width: 100%;
+ resize: vertical;
+}
+
+
+.cinza button {
+  width: 120px;
+    padding: 0.5em;
+    background: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: start;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+
+.cinza button:hover {
+  background-color: #2b6e3e;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+
+/* Lista */
+#lista {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 4rem 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+/* Item da lista (cartão) */
+#lista li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  font-size: 15px;
+  margin-left: 28rem;
+  margin-right: 28rem;
+}
+
+/* Texto do item */
+#lista li b {
+  color: #234e33;
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+/* A área que contém título e descrição (para quebra correta) */
+.item-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item-text .descricao {
+  color: #444;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* Links dentro do item da lista */
+.item-links {
+  display: inline-flex;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.item-links a {
+  background: #36894E;
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.item-links a:hover {
+  background: #2b5f3b;
+}
+
+/* Timestamps */
+.timestamps {
+  color: #777;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+#crud-titulo {
+  font-size: 2.20rem;
+}
+
+/* Ações (botões) */
+.crud-actions {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Botões padrões */
+.crud-actions button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+
+/* Botões específicos */
+.crud-actions .btn-edit {
+  background: #ffd966;
+  color: #3b2f00;
+}
+
+.crud-actions .btn-delete {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+.crud-actions button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+}
+
+/* Formulário de adição */
+#formAdd {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 95%; 
+}
+
+#formAdd input[type="text"] {
+  padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+#formAdd button[type="submit"] {
+width: 120px;
+  margin-bottom: 1.5rem;
+    background: #006937;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: start; /* alinha à esquerda dentro do grid */
+
+}
+
+#formAdd button[type="submit"]:hover {
+  background: #2b5f3b;
+}
+
+/* Mensagens pequenas (ex.: sem itens) */
+.crud-publicacoes .mensagem {
+  color: #666;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+/* Miniatura dentro da lista do CRUD */
+.item-thumb {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: #f0f0f0;
+}
+
+#azul {
+  background-color: #1497ee;
+    border: none;
+    margin-right: 5px;
+    color: #fff;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+#vermelho {
+  background-color: #e74c3c;
+    border: none;
+    color: #fff;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+#azul:hover {
+  background-color: #0e6faf;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+#vermelho:hover {
+  background-color: #a80000;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.btn-adicionar {
+    background-color: #006937;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.btn-adicionar:hover {
+    background-color: #004925;
+}

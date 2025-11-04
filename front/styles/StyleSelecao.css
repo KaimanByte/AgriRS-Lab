@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* Centraliza horizontalmente o conteúdo */
+  justify-content: center;   /* Centraliza verticalmente (opcional) */
+  width: 100%;               /* Usa toda a largura da tela */
+  min-height: 100vh;         /* Faz o body ocupar toda a altura da tela */
+  background-color: #FFFAF3;
+}
+
+#cinza {
+  background-color: rgb(213, 213, 213);
+  padding: 5rem;
+  border-radius: 20px;
+  
+  box-shadow: 6px 6px 6px #6D6C69;
+}
+
+img {
+  height: 300px;
+  aspect-ratio: 1 / 1;       /* Mantém formato quadrado */
+  border-radius: 50%;        /* Deixa a imagem redonda */
+  object-fit: cover;         /* Evita distorção da imagem */
+  display: block;            /* Melhora comportamento padrão */
+  margin: 20px auto;         /* Centraliza e adiciona espaçamento */
+  box-shadow: 3px 3px 6px #6D6C69;
+}
+
+#selecao-titulo {
+  text-align: center;
+  color: black;
+  font-size: 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  padding: 1rem 0 1rem 0;
+}
+
+#opcoes {
+  margin-top: 1rem;
+  display: flex;
+  gap: 2rem;
+}
+
+#opcoes a {
+  display: block;
+  text-decoration: none;
+}
+
+.opcoes-cards {
+  font-size: 25px;
+  width: 220px;
+  background-color: #36894E;
+  padding: 2rem 0.5rem 2rem 0.5rem;
+  color: #FFFAF3;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 3px 3px 6px #6D6C69;
+}
+.opcoes-cards:hover {
+   transform: translateY(-5px); 
+  box-shadow: 12px 12px 6px #6D6C69;
+  cursor: pointer;
+}
+

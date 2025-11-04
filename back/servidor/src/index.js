@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import rotaPublicacao from "./roteador/publicacaoRota.js"; // <== Caminho exato!
+import rotaPublicacao from "./roteador/publicacaoRota.js"; 
+import vagasRouter from "./roteador/vagasRota.js";
+import noticiaRota from './roteador/noticiaRota.js';
 
 dotenv.config();
 
@@ -9,10 +11,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Rotas principais
-app.use("/publicacao", rotaPublicacao); // <== Precisa ser antes da rota de erro!
+app.use("/publicacao", rotaPublicacao); 
+app.use("/oportunidades", vagasRouter);
+app.use('/noticias', noticiaRota);
+app.use('/noticia', noticiaRota); // garante compatibilidade singular/plural
 
-// Rota padrão
 app.use((req, res) => res.status(404).json({ erro: "Rota desconhecida" }));
 
 app.listen(process.env.PORTA, () => {

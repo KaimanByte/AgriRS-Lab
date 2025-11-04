@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Publicações - AgriRSlab</title>
-  <link rel="stylesheet" href="../styles/StylePublicacoes.css">
+  <link rel="stylesheet" href="../styles/stylePublicacoes.css">
   <link rel="stylesheet" href="../styles/StyleHeader.css">
   <link rel="stylesheet" href="../styles/StyleFooter.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,8 +22,7 @@
             do Governo Brasileiro</a>
         </li>
         <li>
-          <a style="font-family:sans,sans-serif; text-decoration:none; color:white;"
-            href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a>
+          <a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a>
         </li>
       </ul>
     </div>
@@ -197,23 +196,24 @@
       criterio.value = "";
       alert("Filtros limpos!");
     });
+  </script>
 
-    /* 🔹 SCRIPT DO MENU HAMBURGUER */
+  <script>
     const toggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");
     const navItems = document.querySelectorAll("#nav-links a");
 
-    toggle.addEventListener("click", () => {
-      navLinks.classList.toggle("ativo");
-    });
-
-    // Fecha o menu ao clicar em um link (melhor UX)
-    navItems.forEach(item => {
-      item.addEventListener("click", () => {
-        navLinks.classList.remove("ativo");
+      toggle.addEventListener("click", () => {
+        navLinks.classList.toggle("ativo");
       });
-    });
-  </script>
+
+      // Fecha o menu ao clicar em um link (melhor UX)
+      navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          navLinks.classList.remove("ativo");
+        });
+      });
+    </script>
 
   <script>
   const API = "http://localhost:3030/publicacao";

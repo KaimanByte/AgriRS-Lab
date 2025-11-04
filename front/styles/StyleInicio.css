@@ -30,6 +30,8 @@
   flex-direction: column;
   width: 100%;
   margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
 }
 
 /* Lista de publicações */
@@ -99,4 +101,65 @@
 
 .botao:hover {
   background: #256428;
+}
+
+@media (max-width: 1024px) {
+  .lista-publicacoes {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .logo1,
+  .logo2 {
+    font-size: 80px;
+  }
+
+  .subtitulo {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .lista-publicacoes {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  .logo1,
+  .logo2 {
+    font-size: 60px;
+  }
+
+  .subtitulo {
+    font-size: 18px;
+  }
+
+  .botao {
+    font-size: 14px;
+    width: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .logo1,
+  .logo2 {
+    font-size: 48px;
+  }
+
+  .subtitulo {
+    font-size: 16px;
+  }
+
+  .botao {
+    width: 90%;
+  }
+
+  .publicacao h3 {
+    font-size: 20px;
+  }
+
+  .publicacao p {
+    font-size: 14px;
+  }
 }

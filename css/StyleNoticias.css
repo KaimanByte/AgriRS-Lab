@@ -1,0 +1,91 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+#formNoticias {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #34495e;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52,152,219,0.3);
+}
+
+textarea.form-control {
+    min-height: 100px;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border: none;
+    margin-right: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    border: none;
+}
+
+.table {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.table thead th {
+    background-color: #34495e;
+    color: white;
+    border: none;
+}
+
+.table tbody tr:hover {
+    background-color: #f5f6fa;
+}
+
+.btn-info {
+    background-color: #2ecc71;
+    border: none;
+    margin-right: 5px;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+}

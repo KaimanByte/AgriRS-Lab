@@ -30,7 +30,7 @@ nav {
     padding: 0.5rem 0;
 }
 
-nav > img {
+nav img {
     width: 84px;
     height: 84px;
     border-radius: 100%;
@@ -100,6 +100,14 @@ nav a {
     font-weight: bold;
     text-align: center;
     color: white;
+}
+
+nav a img {
+    transition: transform 0.3s;
+}
+  
+nav a img:hover {
+    transform: scale(1.1); /* leve zoom no hover */
 }
 /* ========================================================= */
 /* === ADIÇÕES DE RESPONSIVIDADE E MENU HAMBURGUER ========= */

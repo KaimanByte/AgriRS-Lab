@@ -30,21 +30,25 @@
         </div>
     </div>
     <header>
-        <nav>
-            <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="vagas.html">Vagas</a></li>
-                <li><a href="membros.html">Membros</a></li>
-                <li><a href="projetos.html">Projetos</a></li>
-                <li><a href="noticias.html">Notícias</a></li>
-                <li><a href="publicacoes.html" class="ativo">Publicações</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
-            <img src="../imagens/Header/Inpe.png" id="Inpeheader">
-        </nav>
-    </header>
+    <nav>
+      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
+
+      <!-- 🔹 Botão do menu hambúrguer adicionado -->
+      <button id="menu-toggle" aria-label="Abrir menu">☰ Menu</button>
+
+      <ul id="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="vagas.html">Vagas</a></li>
+        <li><a href="membros.html">Membros</a></li>
+        <li><a href="projetos.html">Projetos</a></li>
+        <li><a href="noticias.html">Notícias</a></li>
+        <li><a href="publicacoes.html" class="ativo">Publicações</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <img src="../imagens/Header/Inpe.png" id="Inpeheader">
+    </nav>
+  </header>
 
     <div id="imagemFundo">Vagas</div>
     </header>
@@ -272,6 +276,130 @@
             </div>
         </block>
     </footer>
+    <script>
+    /* 🔹 SCRIPT DO MENU HAMBURGUER */
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    const navItems = document.querySelectorAll("#nav-links a");
+
+    toggle.addEventListener("click", () => {
+      navLinks.classList.toggle("ativo");
+    });
+
+    // Fecha o menu ao clicar em um link (melhor UX)
+    navItems.forEach(item => {
+      item.addEventListener("click", () => {
+        navLinks.classList.remove("ativo");
+      });
+    });
+  </script>
+  <script>
+  const API_URL = "http://localhost:3030/oportunidades";
+
+  // Função para criar o card de oportunidade
+  function criarCard(oportunidade) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    // Considera como "Parceria" se não houver requisitos nem processo de seleção
+    const isParceria = !oportunidade.requisitos && !oportunidade.processo_selecao;
+
+    let requisitosHTML = !isParceria && oportunidade.requisitos
+      ? `<h4>Requisitos:</h4><ul>${oportunidade.requisitos}</ul>`
+      : '';
+
+    let processoHTML = !isParceria && oportunidade.processo_selecao
+      ? `<h4>Processo de Seleção:</h4><ol>${oportunidade.processo_selecao}</ol>`
+      : '';
+
+    let prazoHTML = oportunidade.prazo
+      ? `<p><span class="prazo-verde">Prazo:</span> ${oportunidade.prazo}</p>`
+      : '';
+
+    card.innerHTML = `
+      <div class="card-header">
+        <h3>${oportunidade.titulo || "Sem título"}</h3>
+      </div>
+      <div class="card-body">
+        <p>${oportunidade.descricao || ""}</p>
+        ${requisitosHTML}
+        ${processoHTML}
+        ${prazoHTML}
+        <div class="centro">
+          <a href="mailto:${oportunidade.contato}" class="card-button">
+            Contato: ${oportunidade.contato || "Não informado"}
+          </a>
+        </div>
+      </div>
+    `;
+
+    return card;
+  }
+
+  // Função para carregar todas as oportunidades
+  async function carregarOportunidades() {
+    try {
+      console.log("Carregando oportunidades...");
+      const response = await fetch(API_URL);
+      const oportunidades = await response.json();
+      console.log("Oportunidades recebidas:", oportunidades);
+
+      const container = document.querySelector('.cards-container');
+      container.innerHTML = '';
+
+      oportunidades.forEach(oportunidade => {
+        oportunidade.requisitos = oportunidade.requisitos
+          ? oportunidade.requisitos.split(';').map(item => `<li>${item.trim()}</li>`).join('')
+          : '';
+        oportunidade.processo_selecao = oportunidade.processo_selecao
+          ? oportunidade.processo_selecao.split(';').map(item => `<li>${item.trim()}</li>`).join('')
+          : '';
+
+        const card = criarCard(oportunidade);
+        container.appendChild(card);
+      });
+    } catch (error) {
+      console.error("Erro ao carregar oportunidades:", error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', carregarOportunidades);
+</script>
+<script>
+  // Função para remover acentos
+  function removerAcentos(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
+
+  // Seleciona os elementos do seu HTML
+  const campoBusca = document.querySelector('input[placeholder="Pesquise"]');
+  const botaoBusca = document.querySelector('.search-btn');
+
+  // Função para filtrar os cards
+  function filtrarCards() {
+    const termo = removerAcentos(campoBusca.value.trim());
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+      const titulo = removerAcentos(card.querySelector(".card-header h3").textContent);
+      const descricao = removerAcentos(card.querySelector(".card-body p").textContent);
+
+      const corresponde = titulo.includes(termo) || descricao.includes(termo);
+      card.style.display = corresponde || termo === "" ? "block" : "none";
+    });
+  }
+
+  // Evento de clique na lupa
+  botaoBusca.addEventListener("click", filtrarCards);
+
+  // Evento de Enter no campo de busca
+  campoBusca.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      filtrarCards();
+    }
+  });
+</script>
     <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 </body>
 </html>
