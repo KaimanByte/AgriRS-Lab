@@ -31,7 +31,8 @@
       <div class="cinza">
 
       <form id="formAdd">
-        <input type="text" id="titulo" placeholder="TÍTULO / ANO" required/>
+        <input type="text" id="titulo" placeholder="TÍTULO" required/>
+        <input type="text" id="ano" placeholder="ANO" required/>
         <textarea type="text" id="descricao" placeholder="DESCRIÇÃO" required></textarea>
         <div style="display: flex; align-items: center; width: 100%;">
           <input type="text" id="imagem_url" placeholder="URL DA IMAGEM (imagem_url)" style="flex: 1;"/>
@@ -49,12 +50,7 @@
       
     </section>
     <ul id="lista"></ul>
-    <section class="lista-publicacoes">
-      <div id="publicacoes-container">
-        <!-- Cards serão inseridos aqui dinamicamente -->
-         </div>
-      </div>
-    </section>
+
   </main>
 
   <footer>
@@ -77,7 +73,7 @@ function renderLista() {
     li.innerHTML = `
       <img class="item-thumb" src="${pub.imagem_url || 'https://via.placeholder.com/50'}" alt="${pub.titulo || ''}" />
       <div class="item-text">
-        <b>${pub.titulo}</b> - <span class="descricao">${pub.descricao}</span>
+        <b>${pub.titulo} (${pub.ano})</b> - <span class="descricao">${pub.descricao}</span>
         <div class="item-links">
           ${pub.pdf_url ? `<a href="${pub.pdf_url}" target="_blank">PDF</a>` : ''}
           ${pub.citacao_url ? `<a href="${pub.citacao_url}" target="_blank">Citação</a>` : ''}
@@ -94,6 +90,8 @@ function renderLista() {
   });
 }
 
+
+
 function carregar() {
   fetch(API)
     .then(r => r.json())
@@ -106,7 +104,7 @@ function carregar() {
 
 document.getElementById("formAdd").addEventListener("submit", e => {
   e.preventDefault();
-  const dados = ["titulo", "descricao", "imagem_url", "pdf_url", "citacao_url", "doi_url"]
+  const dados = ["titulo", "ano", "descricao", "imagem_url", "pdf_url", "citacao_url", "doi_url"]
     .reduce((acc, id) => (acc[id] = document.getElementById(id).value, acc), {});
   fetch(API, {
     method: "POST",
@@ -121,7 +119,7 @@ document.getElementById("formAdd").addEventListener("submit", e => {
 function editar(id) {
   const pub = PUBLICACOES[id];
   if (!pub) return;
-  const campos = ["titulo", "descricao", "imagem_url", "pdf_url", "citacao_url", "doi_url"];
+  const campos = ["titulo", "ano", "descricao", "imagem_url", "pdf_url", "citacao_url", "doi_url"];
   const atualizados = {};
   for (let campo of campos) {
     const novo = prompt(`Novo ${campo}:`, pub[campo] || "");
@@ -143,6 +141,7 @@ function excluir(id) {
 
 function limparFormulario() {
   document.getElementById("titulo").value = "";
+  document.getElementById("ano").value = "";
   document.getElementById("descricao").value = "";
   document.getElementById("imagem_url").value = "";
   document.getElementById("pdf_url").value = "";
@@ -150,14 +149,37 @@ function limparFormulario() {
   document.getElementById("doi_url").value = "";
 }
 
-document.getElementById('imagem_file').addEventListener('change', function(event) {
+function compressImage(file, maxWidth = 800, quality = 0.7) {
+  return new Promise((resolve, reject) => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.onload = () => {
+      // Calcular nova altura mantendo proporção
+      const ratio = maxWidth / img.width;
+      canvas.width = maxWidth;
+      canvas.height = img.height * ratio;
+      // Desenhar imagem redimensionada
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      // Converter para base64 com compressão
+      const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+      resolve(compressedDataUrl);
+    };
+    img.onerror = reject;
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+document.getElementById('imagem_file').addEventListener('change', async function(event) {
   const file = event.target.files[0];
   if (file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      document.getElementById('imagem_url').value = e.target.result;
-    };
-    reader.readAsDataURL(file);
+    try {
+      const compressedBase64 = await compressImage(file);
+      document.getElementById('imagem_url').value = compressedBase64;
+    } catch (error) {
+      console.error('Erro ao comprimir imagem:', error);
+      alert('Erro ao processar a imagem. Tente novamente.');
+    }
   }
 });
 

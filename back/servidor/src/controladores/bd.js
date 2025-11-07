@@ -95,14 +95,15 @@ CREATE TABLE IF NOT EXISTS publicacoes (
 const sqlTbPublicacao = `
 CREATE TABLE IF NOT EXISTS tbpublicacao (
   idpublicacao SERIAL PRIMARY KEY,
-  titulo TEXT,
+  titulo VARCHAR(150) NOT NULL,
   descricao TEXT,
   imagem_url TEXT,
   pdf_url TEXT,
   citacao_url TEXT,
   doi_url TEXT,
+  ano VARCHAR(4),
   criado_em TIMESTAMP DEFAULT now(),
-  atualizado_em TIMESTAMP
+  atualizado_em TIMESTAMP DEFAULT now()
 ) `;
 
 // Executa criações em background (não bloqueia o start do servidor)
