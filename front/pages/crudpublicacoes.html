@@ -31,13 +31,20 @@
       <div class="cinza">
 
       <form id="formAdd">
-        <input type="text" id="titulo" placeholder="TÍTULO" required/>
+        <input type="text" id="titulo" placeholder="TÍTULO / ANO" required/>
         <textarea type="text" id="descricao" placeholder="DESCRIÇÃO" required></textarea>
-        <input type="text" id="imagem_url" placeholder="URL DA IMAGEM (imagem_url)"/>
+        <div style="display: flex; align-items: center; width: 100%;">
+          <input type="text" id="imagem_url" placeholder="URL DA IMAGEM (imagem_url)" style="flex: 1;"/>
+          <span onclick="document.getElementById('imagem_file').click()" style="cursor: pointer; margin-left: 10px; font-size: 20px;">📁</span>
+        </div>
+        <input type="file" id="imagem_file" accept="image/*" style="display: none;"/>
         <input type="text" id="pdf_url" placeholder="URL DO PDF (pdf_url)"/>
         <input type="text" id="citacao_url" placeholder="URL DA CITAÇÃO (citacao_url)"/>
         <input type="text" id="doi_url" placeholder="URL DOI (doi_url)"/>
-        <button type="submit" class="btn-adicionar">Adicionar</button>
+        <div class="button-group">
+          <button type="submit" class="btn-adicionar">Adicionar</button>
+          <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
+        </div>
       </form>
       
     </section>
@@ -133,6 +140,27 @@ function excluir(id) {
     fetch(`${API}/${id}`, { method: "DELETE" }).then(() => carregar());
   }
 }
+
+function limparFormulario() {
+  document.getElementById("titulo").value = "";
+  document.getElementById("descricao").value = "";
+  document.getElementById("imagem_url").value = "";
+  document.getElementById("pdf_url").value = "";
+  document.getElementById("citacao_url").value = "";
+  document.getElementById("doi_url").value = "";
+}
+
+document.getElementById('imagem_file').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById('imagem_url').value = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
   carregar();
 </script>
 </body>

@@ -203,7 +203,7 @@
         const img = n.imagem && n.imagem.trim() ? n.imagem : '../imagens/Noticias/headerNoticia.jpg';
         const data = n.data ? new Date(n.data).toLocaleDateString('pt-BR') : '';
         const url_leiamais = n.url_leiamais || '#'; // URL para o botão "Leia mais"
-        
+
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
@@ -213,7 +213,7 @@
             <p class="card-descricao">${n.descricao || ''}</p>
             <p><small class="text-muted">Data: ${data}</small></p>
             <div class="botoes">
-              <a href="${url_leiamais}" target="_blank" rel="noopener">Leia mais</a>
+              <a href="${url_leiamais}" target="_blank" rel="noopener noreferrer">Leia mais</a>
             </div>
           </div>
         `;

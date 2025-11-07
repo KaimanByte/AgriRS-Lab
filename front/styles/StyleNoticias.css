@@ -193,20 +193,32 @@
 /* ========================================================= */
 
 @media (max-width: 1024px) {
-  .lista-publicacoes {
+  .cards {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+  }
+
+  .card-content h2 {
+    font-size: 18px;
+  }
+
+  .card-content .card-descricao {
+    font-size: 16px;
+  }
+
+  .card-content p {
+    font-size: 16px;
   }
 }
 
 @media (max-width: 768px) {
-  .lista-publicacoes {
+  .cards {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 1rem;
   }
 
-  .pesquisa {
+  .titulo-academico {
     font-size: 28px;
   }
 
@@ -215,31 +227,66 @@
     height: 45px;
   }
 
+  .search-btn svg {
+    width: 50px;
+    height: 60px;
+  }
+
+  .card img {
+    height: 140px;
+  }
+
+  .card-content h2 {
+    font-size: 16px;
+  }
+
+  .card-content .card-descricao {
+    font-size: 14px;
+  }
+
+  .card-content p {
+    font-size: 14px;
+  }
+
   .botoes a {
     font-size: 14px;
+    padding: 8px 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .pesquisa {
+  .titulo-academico {
     font-size: 24px;
   }
 
-  .filtro-container {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .filtro-container select,
-  .filtro-container button {
-    width: 90%;
-  }
-
-  .publicacao h3 {
-    font-size: 18px;
-  }
-
-  .publicacao p {
+  .pesquisa2 input[type="text"] {
     font-size: 16px;
+    height: 40px;
+  }
+
+  .search-btn svg {
+    width: 40px;
+    height: 50px;
+  }
+
+  .card img {
+    height: 120px;
+  }
+
+  .card-content h2 {
+    font-size: 14px;
+  }
+
+  .card-content .card-descricao {
+    font-size: 12px;
+  }
+
+  .card-content p {
+    font-size: 12px;
+  }
+
+  .botoes a {
+    font-size: 12px;
+    padding: 6px 16px;
   }
 }

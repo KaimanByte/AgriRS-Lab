@@ -36,7 +36,7 @@
 
 .form-control {
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
     padding: 8px;
     width: 100%;
     box-sizing: border-box;
@@ -86,7 +86,7 @@ textarea.form-control {
     background-color: #006937;
     color: #fff;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     padding: 10px 24px;
     font-size: 1rem;
     font-weight: 500;
@@ -95,6 +95,22 @@ textarea.form-control {
 }
 .btn-adicionar:hover {
     background-color: #004925;
+}
+
+.btn-limpar {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-limpar:hover {
+    background-color: #36894E;
 }
 
 /* Tabela do CRUD */
