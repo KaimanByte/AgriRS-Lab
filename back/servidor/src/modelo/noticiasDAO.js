@@ -8,8 +8,8 @@ const noticiasDAO = {
         noticia.titulo,
         noticia.imagem || '', // imagem
         noticia.data,         // data/postagem
-        noticia.descricao,    // descrição completa 
-        noticia.imagem,       // url para leia mais (temporariamente usando campo imagem)
+        noticia.descricao,    // descrição completa
+        noticia.url_leiamais || '', // url para leia mais
         true
       ];
       const { rows } = await pool.query(sql, params);
@@ -20,7 +20,7 @@ const noticiasDAO = {
         descricao: r.descricao || '',
         data: r.postagem,
         imagem: r.link,
-        url_leiamais: r.link // url para o botão "leia mais"
+        url_leiamais: r.url_leiamais
       };
     } catch (err) {
       console.error('Erro ao inserir notícia:', err);
@@ -37,7 +37,7 @@ const noticiasDAO = {
       descricao: r.descricao || '', // usa campo descricao próprio
       data: r.postagem,
       imagem: r.link,
-      url_leiamais: r.link // url para o botão "leia mais"
+      url_leiamais: r.url_leiamais
     }));
   },
 
@@ -49,18 +49,21 @@ const noticiasDAO = {
     return {
       id: r.idnoticia,
       titulo: r.titulo,
-      descricao: r.link, // temporariamente usa 'link' como descrição
+      descricao: r.descricao || '',
       data: r.postagem,
-      imagem: r.link
+      imagem: r.link,
+      url_leiamais: r.url_leiamais
     };
   },
 
   atualizar: async (id, noticia) => {
-    const sql = 'UPDATE tbnoticias SET titulo=$1, link=$2, postagem=$3 WHERE idnoticia=$4 RETURNING *';
+    const sql = 'UPDATE tbnoticias SET titulo=$1, link=$2, postagem=$3, descricao=$4, url_leiamais=$5 WHERE idnoticia=$6 RETURNING *';
     const params = [
       noticia.titulo,
       noticia.imagem || '', // campo 'link' guarda a URL da imagem
       noticia.data,
+      noticia.descricao || '',
+      noticia.url_leiamais || '',
       id
     ];
     const { rows } = await pool.query(sql, params);
@@ -68,9 +71,10 @@ const noticiasDAO = {
     return {
       id: r.idnoticia,
       titulo: r.titulo,
-      descricao: noticia.descricao || '',
+      descricao: r.descricao || '',
       data: r.postagem,
-      imagem: r.link
+      imagem: r.link,
+      url_leiamais: r.url_leiamais
     };
   },
 

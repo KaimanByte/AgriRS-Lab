@@ -10,6 +10,7 @@ CREATE TABLE tbpublicacao (
   pdf_url TEXT,
   citacao_url TEXT,
   doi_url TEXT,
+  ano VARCHAR(4),
   criado_em TIMESTAMP DEFAULT now(),
   atualizado_em TIMESTAMP DEFAULT now()
 );

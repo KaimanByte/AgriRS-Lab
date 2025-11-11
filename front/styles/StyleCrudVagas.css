@@ -41,17 +41,17 @@
   .crud-form textarea {
     padding: 0.5em;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 1em;
   }
 
   .crud-form button {
     width: 120px;
     padding: 0.5em;
-    background: #36894E;
+    background: #006937;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     align-self: start; /* alinha à esquerda dentro do grid */
     transition: transform 0.08s ease, box-shadow 0.12s ease;
@@ -101,7 +101,7 @@
   .crud-card .crud-actions button {
     padding: 0.5em 1em;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     transition: transform 0.08s ease, box-shadow 0.12s ease;
   }
@@ -118,4 +118,49 @@
   .crud-delete-btn {
     background: #f44336;
     color: white;
+  }
+
+  .btn-adicionar {
+    background-color: #006937;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-adicionar:hover {
+    background-color: #004925;
+  }
+
+  .btn-limpar {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .btn-limpar:hover {
+    background-color: #36894E;
+  }
+
+  .crud-form .btn-limpar {
+    background-color: #4caf50;
+  }
+
+  .crud-form .btn-limpar:hover {
+    background-color: #36894E;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
   }

@@ -77,17 +77,12 @@
         <div id="footer-brasil"></div>
         <block>
             <div id="divOne">
-                <div id="apareceNoFooter">
-                  <a title="AgriRSlab" href="index.html"><img src="../imagens/Footer/AgriRSlab.png" id="AgriRSfooter" alt="AgriRSlab"/></a>
-                  <div class="titulo24" id="aparece">AgriRSlab</div>
-                </div>
+                <img src="../imagens/Footer/AgriRSlab.png" id="AgriRSfooter" alt="AgriRSlab">
                 <div id="textolado">
-                  <div class="titulo24" id="apaga">AgriRSlab</div>
-                  <div class="texto16">
-                    Laboratório de Sensoriamento Remoto Agrícola
-                  </div>
+                    <div class="titulo24">AgriRSlab</div>
+                    <div class="texto16">Laboratório de Sensoriamento Remoto Agrícola</div>
                 </div>
-              </div>
+            </div>
 
             <div id="divTwo">
                 <div>
@@ -124,10 +119,10 @@
             <div id="divThree">
                 <div class="titulo24">Sobre</div>
                 <ul class="texto16">
-                    <li><a target="_blank" href="Sobre.html">O AgriRSlab</a></li>
-                    <li><a target="_blank" href="membros.html">Nossa equipe</a></li>
-                    <li><a target="_blank" href="membros.html">Colaboradores</a></li>
-                    <li><a target="_blank" href="vagas.html">Oportunidades</a></li>
+                    <li><a href="#">O AgriRSlab</a></li>
+                    <li><a href="#">Nossa equipe</a></li>
+                    <li><a href="#">Colaboradores</a></li>
+                    <li><a href="#">Oportunidades</a></li>
                 </ul>
             </div>
         </block>
@@ -140,10 +135,10 @@
             <div id="divFour">
                 <div class="titulo24">Atuação</div>
                 <ul class="texto16">
-                    <li><a target="_blank" href="publicacoes.html">Área de Pesquisa</a></li>
-                    <li><a target="_blank" href="projetos.html">Projetos</a></li>
-                    <li><a target="_blank" href="contato.html">Serviços</a></li>
-                    <li><a target="_blank" href="Sobre.html">Parcerias</a></li>
+                    <li><a href="#">Área de Pesquisa</a></li>
+                    <li><a href="#">Projetos</a></li>
+                    <li><a href="#">Serviços</a></li>
+                    <li><a href="#">Parcerias</a></li>
                 </ul>
             </div>
         </block>
@@ -180,23 +175,6 @@
             </div>
         </block>
     </footer>
-    <script>
-        /* 🔹 SCRIPT DO MENU HAMBURGUER */
-        const toggle = document.getElementById("menu-toggle");
-        const navLinks = document.getElementById("nav-links");
-        const navItems = document.querySelectorAll("#nav-links a");
-
-        toggle.addEventListener("click", () => {
-            navLinks.classList.toggle("ativo");
-        });
-
-        // Fecha o menu ao clicar em um link (melhor UX)
-        navItems.forEach(item => {
-            item.addEventListener("click", () => {
-                navLinks.classList.remove("ativo");
-            });
-        });
-    </script>
     <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
     <script>
     const API = 'http://localhost:3030/noticias';
@@ -225,7 +203,7 @@
         const img = n.imagem && n.imagem.trim() ? n.imagem : '../imagens/Noticias/headerNoticia.jpg';
         const data = n.data ? new Date(n.data).toLocaleDateString('pt-BR') : '';
         const url_leiamais = n.url_leiamais || '#'; // URL para o botão "Leia mais"
-        
+
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
@@ -234,7 +212,9 @@
             <h2>${n.titulo || ''}</h2>
             <p class="card-descricao">${n.descricao || ''}</p>
             <p><small class="text-muted">Data: ${data}</small></p>
-            <a href="${url_leiamais}" target="_blank" class="btn-leiamais">Leia mais</a>
+            <div class="botoes">
+              <a href="${url_leiamais}" target="_blank" rel="noopener noreferrer">Leia mais</a>
+            </div>
           </div>
         `;
         container.appendChild(card);

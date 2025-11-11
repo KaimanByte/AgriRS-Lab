@@ -9,24 +9,38 @@
 </head>
 <body>
 
-<form class="form-login" action="login.html" method="post"> 
+<form class="form-login" id="loginForm">
     <div class="container">
         <div class="menu">
             <div class="menuSuperior">
                <img src="../imagens/Header/AgriRSlab.png" alt="">
              <h2 id="login"> LOGIN <h2>
                 </div>
-               <div class="botao">  
+               <div class="botao">
                     <label for="usuario">USUARIO</label>
                         <input type="text" id="usuario" name="usuario">
 
                     <label for="senha">SENHA</label>
                         <input type="password" id="senha" name="senha">
-                            <a href="crudSelecao.html"><button type="button">ENTRAR</button></a>
-                               
+                            <button type="submit">ENTRAR</button>
+
             </div>
         </div>
     </div>
+</form>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const usuario = document.getElementById('usuario').value;
+    const senha = document.getElementById('senha').value;
+    if (usuario === 'Admin' && senha === '123') {
+        window.location.href = 'crudSelecao.html';
+    } else {
+        alert('Usuário ou senha incorretos!');
+    }
+});
+</script>
 
 </body>
 </html>
