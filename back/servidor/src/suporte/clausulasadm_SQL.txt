@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS tb_adm;
+
+CREATE TABLE tb_adm (
+    id_adm INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    login VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(100) NOT NULL
+);
+
+-- Inserindo usuário Admin com senha 123
+INSERT INTO tb_adm (login, senha)
+VALUES ('Admin', '123');

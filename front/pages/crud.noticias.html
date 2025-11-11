@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Gerenciar Notícias</title>
+	<title>Crud Notícias</title>
 	<link rel="stylesheet" href="../styles/StyleCrudNoticias.css">
   <link rel="stylesheet" href="../styles/StyleHeader.css"/>
   <link rel="stylesheet" href="../styles/StyleFooterCrud.css"/>
@@ -40,10 +40,17 @@
 				  <input type="date" class="form-control" id="data" required>
 			  </div>
 			  <div class="form-group">
-				  <input type="text" class="form-control" id="imagem" placeholder="URL DA IMAGEM (imagem_url)">
+				  <div style="display: flex; align-items: center;">
+					  <input type="text" class="form-control" id="imagem" placeholder="URL DA IMAGEM">
+					  <span onclick="document.getElementById('imagem_file').click()" style="cursor: pointer; margin-left: 10px; font-size: 20px;">📁</span>
+				  </div>
+				  <input type="file" id="imagem_file" accept="image/*" style="display: none;"/>
 			  </div>
-			  <button type="submit" class="btn btn-primary">Salvar</button>
-			  <button type="button" class="btn btn-secondary" onclick="limparFormulario()">Novo</button>
+			  <div class="form-group">
+				  <input type="text" class="form-control" id="url_leiamais" placeholder="URL PARA NOTICIA INTEIRA">
+			  </div>
+			  <button type="submit" class="btn btn-primary btn-adicionar">Adicionar</button>
+			  <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
 		  </div>
   </form>
     
@@ -126,7 +133,8 @@
             titulo: n.titulo || '',
             descricao: n.descricao || '',
             data: n.data || null,
-            imagem: n.imagem || ''
+            imagem: n.imagem || '',
+            url_leiamais: n.url_leiamais || ''
           };
         });
         renderLista();
@@ -142,7 +150,8 @@
         titulo: document.getElementById('titulo').value,
         descricao: document.getElementById('descricao').value,
         data: document.getElementById('data').value,
-        imagem: document.getElementById('imagem').value
+        imagem: document.getElementById('imagem').value,
+        url_leiamais: document.getElementById('url_leiamais').value
       };
       const id = document.getElementById('id').value;
       try {
@@ -179,7 +188,19 @@
       document.getElementById('descricao').value = '';
       document.getElementById('data').value = '';
       document.getElementById('imagem').value = '';
+      document.getElementById('url_leiamais').value = '';
     }
+
+    document.getElementById('imagem_file').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('imagem').value = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
 
     function editar(id) {
       const n = NOTICIAS[id];
@@ -189,6 +210,7 @@
       document.getElementById('descricao').value = n.descricao;
       document.getElementById('data').value = n.data ? new Date(n.data).toISOString().slice(0,10) : '';
       document.getElementById('imagem').value = n.imagem || '';
+      document.getElementById('url_leiamais').value = n.url_leiamais || '';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 

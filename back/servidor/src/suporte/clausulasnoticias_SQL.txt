@@ -2,12 +2,12 @@ DROP TABLE IF EXISTS tbnoticias;
 
 CREATE TABLE tbnoticias (
     idnoticia INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    titulo VARCHAR(250) NOT NULL,
-    link VARCHAR(250) NOT NULL,
+    titulo TEXT NOT NULL,
+    link TEXT NOT NULL,
     postagem DATE NOT NULL,
     exibir BOOLEAN DEFAULT TRUE,
     descricao TEXT,
-    url_leiamais VARCHAR(500)
+    url_leiamais TEXT
 );
 
 -- Inserindo uma notícia padrão de exemplo

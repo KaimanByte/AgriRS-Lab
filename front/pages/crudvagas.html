@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Publicações - AgriRSlab</title>
+  <title>Crud Vagas - AgriRSlab</title>
   <link rel="stylesheet" href="../styles/StyleCrudVagas.css"/>
   <link rel="stylesheet" href="../styles/StyleHeader.css" />
   <link rel="stylesheet" href="../styles/StyleFooterCrud.css"/>
@@ -35,7 +35,10 @@
       <textarea name="requisitos" placeholder="REQUISITOS (separados por ;)"></textarea>
       <textarea name="processo_selecao" placeholder="PROCESSOS DE SELEÇÃO (separados por ;)"></textarea>
       <input type="text" name="contato" placeholder="CONTATO" />
-      <button type="submit">Adicionar</button>
+      <div class="button-group">
+        <button type="submit" class="btn-adicionar">Adicionar</button>
+        <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
+      </div>
   </div>
   </form>
   
@@ -123,6 +126,15 @@
       await fetch(`${API_URL}/${id}`, { method: "DELETE" });
       carregarCards();
     }
+  }
+
+  function limparFormulario() {
+    document.querySelector('input[name="titulo"]').value = "";
+    document.querySelector('input[name="prazo"]').value = "";
+    document.querySelector('textarea[name="descricao"]').value = "";
+    document.querySelector('textarea[name="requisitos"]').value = "";
+    document.querySelector('textarea[name="processo_selecao"]').value = "";
+    document.querySelector('input[name="contato"]').value = "";
   }
 
   carregarCards();

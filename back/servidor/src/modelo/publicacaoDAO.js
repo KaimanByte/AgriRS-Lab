@@ -15,10 +15,10 @@ class PublicacaoDAO {
 
   static async inserir(pub) {
     const sql = `
-      INSERT INTO tbpublicacao (titulo, descricao, imagem_url, pdf_url, citacao_url, doi_url)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO tbpublicacao (titulo, descricao, imagem_url, pdf_url, citacao_url, doi_url, ano)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *`;
-    const valores = [pub.titulo, pub.descricao, pub.imagem_url, pub.pdf_url, pub.citacao_url, pub.doi_url];
+    const valores = [pub.titulo, pub.descricao, pub.imagem_url, pub.pdf_url, pub.citacao_url, pub.doi_url, pub.ano];
     const { rows } = await pool.query(sql, valores);
     return rows[0];
   }
@@ -26,10 +26,10 @@ class PublicacaoDAO {
   static async atualizar(id, pub) {
     const sql = `
       UPDATE tbpublicacao
-      SET titulo=$1, descricao=$2, imagem_url=$3, pdf_url=$4, citacao_url=$5, doi_url=$6, atualizado_em=now()
-      WHERE idpublicacao=$7
+      SET titulo=$1, descricao=$2, imagem_url=$3, pdf_url=$4, citacao_url=$5, doi_url=$6, ano=$7, atualizado_em=now()
+      WHERE idpublicacao=$8
       RETURNING *`;
-    const valores = [pub.titulo, pub.descricao, pub.imagem_url, pub.pdf_url, pub.citacao_url, pub.doi_url, id];
+    const valores = [pub.titulo, pub.descricao, pub.imagem_url, pub.pdf_url, pub.citacao_url, pub.doi_url, pub.ano, id];
     const { rows } = await pool.query(sql, valores);
     return rows[0];
   }
