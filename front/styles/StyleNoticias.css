@@ -14,6 +14,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* Garante que o conteúdo e o botão fiquem separados */
+    height: 100%;
+    /* Defina uma altura mínima se necessário, ex: min-height: 350px; */
+    position: relative;
 }
 
 .card img {
@@ -26,16 +30,26 @@
 
 
 .card-content {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     padding: 16px;
     flex-grow: 1; /* Permite que o conteúdo cresça e preencha o espaço */
+    height: 100%;
+    /* Garante que o botão fique no final */
 }
 
 .card-content h2 {
     margin-bottom: 0.5rem;
     font-size: 20px;
     color: #36894E;
+}
+
+.card-content .card-descricao {
+    margin-bottom: 0.5rem;
+    font-size: 18px;
+    color: #000;
 }
 
 .card-content p {
@@ -58,6 +72,22 @@
 
 .card-content button:hover {
     background-color: #256428;
+}
+
+.btn-adicionar {
+    background-color: #006937;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-adicionar:hover {
+    background-color: #004925;
 }
 
 .pesquisa {
@@ -121,4 +151,142 @@
     width: 60px;
     height: 80px;
 
+}
+
+.botoes {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: 0;
+    /* Remove position absolute */
+}
+
+.botoes a {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    padding: 10px 24px;
+    background-color: #006937;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px; /* Aumentado para ficar mais arredondado */
+    text-align: center;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.botoes a:hover {
+    background-color: #004925;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Garante espaçamento entre data e botão */
+.card-content .text-muted {
+    margin-bottom: 16px;
+    display: block;
+}
+
+/* ========================================================= */
+/* === ADIÇÕES DE RESPONSIVIDADE ============================ */
+/* ========================================================= */
+
+@media (max-width: 1024px) {
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .card-content h2 {
+    font-size: 18px;
+  }
+
+  .card-content .card-descricao {
+    font-size: 16px;
+  }
+
+  .card-content p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .titulo-academico {
+    font-size: 28px;
+  }
+
+  .pesquisa2 input[type="text"] {
+    font-size: 18px;
+    height: 45px;
+  }
+
+  .search-btn svg {
+    width: 50px;
+    height: 60px;
+  }
+
+  .card img {
+    height: 140px;
+  }
+
+  .card-content h2 {
+    font-size: 16px;
+  }
+
+  .card-content .card-descricao {
+    font-size: 14px;
+  }
+
+  .card-content p {
+    font-size: 14px;
+  }
+
+  .botoes a {
+    font-size: 14px;
+    padding: 8px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo-academico {
+    font-size: 24px;
+  }
+
+  .pesquisa2 input[type="text"] {
+    font-size: 16px;
+    height: 40px;
+  }
+
+  .search-btn svg {
+    width: 40px;
+    height: 50px;
+  }
+
+  .card img {
+    height: 120px;
+  }
+
+  .card-content h2 {
+    font-size: 14px;
+  }
+
+  .card-content .card-descricao {
+    font-size: 12px;
+  }
+
+  .card-content p {
+    font-size: 12px;
+  }
+
+  .botoes a {
+    font-size: 12px;
+    padding: 6px 16px;
+  }
 }

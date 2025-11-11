@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Crud Notícias</title>
+	<link rel="stylesheet" href="../styles/StyleCrudNoticias.css">
+  <link rel="stylesheet" href="../styles/StyleHeader.css"/>
+  <link rel="stylesheet" href="../styles/StyleFooterCrud.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader" />
+      <ul id="nav-links">
+        <li><a href="crudvagas.html">Vagas</a></li>
+        <li><a href="crud.noticias.html">Notícias</a></li>
+        <li><a href="crudpublicacoes.html">Publicações</a></li>
+      </ul>
+      <img src="../imagens/Header/Inpe.png" id="Inpeheader" />
+    </nav>
+  </header>
+
+	<div class="container mt-4" id="crud-news">
+		<form id="formNoticias">
+      <h2>Notícias</h2>
+      <div id="cinza">
+			  <input type="hidden" id="id">
+			  <div class="form-group">
+				  <input type="text" class="form-control" id="titulo" placeholder="TÍTULO" required>
+			  </div>
+			  <div class="form-group">
+				  <textarea class="form-control" id="descricao" placeholder="DESCRIÇÃO" required></textarea>
+			  </div>
+			  <div class="form-group">
+				  <input type="date" class="form-control" id="data" required>
+			  </div>
+			  <div class="form-group">
+				  <div style="display: flex; align-items: center;">
+					  <input type="text" class="form-control" id="imagem" placeholder="URL DA IMAGEM">
+					  <span onclick="document.getElementById('imagem_file').click()" style="cursor: pointer; margin-left: 10px; font-size: 20px;">📁</span>
+				  </div>
+				  <input type="file" id="imagem_file" accept="image/*" style="display: none;"/>
+			  </div>
+			  <div class="form-group">
+				  <input type="text" class="form-control" id="url_leiamais" placeholder="URL PARA NOTICIA INTEIRA">
+			  </div>
+			  <button type="submit" class="btn btn-primary btn-adicionar">Adicionar</button>
+			  <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
+		  </div>
+  </form>
+    
+
+		<table class="table mt-4">
+			<thead>
+				<tr>
+					<th>Imagem</th>
+					<th>ID</th>
+					<th>Título</th>
+					<th>Data</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody id="tbodyNoticias"></tbody>
+		</table>
+	</div>
+  <footer>
+    <p>© 2025 AgriRSlab. Todos os direitos reservados.</p>
+  </footer>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script>
+    const API = 'http://localhost:3030/noticias';
+    let NOTICIAS = {};
+
+    function formatDate(v) {
+      if (!v) return '-';
+      const d = new Date(v);
+      return isNaN(d) ? v : d.toLocaleDateString('pt-BR');
+    }
+
+    function renderLista() {
+      const tbody = document.getElementById('tbodyNoticias');
+      tbody.innerHTML = '';
+      const items = Object.values(NOTICIAS);
+      if (!items.length) {
+        tbody.innerHTML = '<tr><td colspan="5">Nenhuma notícia cadastrada.</td></tr>';
+        return;
+      }
+      items.forEach(n => {
+        tbody.innerHTML += `
+          <tr>
+            <td>
+              <img class="item-thumb" 
+                   src="${n.imagem || '../imagens/Noticias/headerNoticia.jpg'}" 
+                   alt="${n.titulo || ''}"
+                   style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"
+              />
+            </td>
+            <td>${n.id}</td>
+            <td>
+              <div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis;">
+                <b>${n.titulo || ''}</b>
+                <div style="font-size: 0.9em; color: #666; white-space: nowrap;">${n.descricao || ''}</div>
+              </div>
+            </td>
+            <td>${formatDate(n.data)}</td>
+            <td>
+              <button class="btn btn-sm btn-info" onclick="editar(${n.id})">Editar</button>
+              <button class="btn btn-sm btn-danger" onclick="excluir(${n.id})">Excluir</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    async function carregar() {
+      try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        console.log('Dados carregados:', data); // debug
+        NOTICIAS = {};
+        (Array.isArray(data) ? data : []).forEach(n => {
+          const key = n.id;
+          if (key) NOTICIAS[key] = {
+            id: key,
+            titulo: n.titulo || '',
+            descricao: n.descricao || '',
+            data: n.data || null,
+            imagem: n.imagem || '',
+            url_leiamais: n.url_leiamais || ''
+          };
+        });
+        renderLista();
+      } catch (e) {
+        console.error('Erro ao carregar notícias:', e);
+        document.getElementById('tbodyNoticias').innerHTML = '<tr><td colspan="4">Erro ao carregar notícias.</td></tr>';
+      }
+    }
+
+    document.getElementById('formNoticias').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const obj = {
+        titulo: document.getElementById('titulo').value,
+        descricao: document.getElementById('descricao').value,
+        data: document.getElementById('data').value,
+        imagem: document.getElementById('imagem').value,
+        url_leiamais: document.getElementById('url_leiamais').value
+      };
+      const id = document.getElementById('id').value;
+      try {
+        if (id) {
+          const res = await fetch(`${API}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(obj)
+          });
+          if (!res.ok) throw new Error('Erro ao atualizar: ' + res.status);
+        } else {
+          const res = await fetch(API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(obj)
+          });
+          if (!res.ok) {
+            const txt = await res.text();
+            throw new Error('Erro ao inserir: ' + res.status + ' ' + txt);
+          }
+        }
+        limparFormulario();
+        await carregar();
+        alert('Operação realizada com sucesso');
+      } catch (err) {
+        console.error('Erro ao salvar notícia:', err);
+        alert('Erro ao salvar notícia: ' + (err.message || err));
+      }
+    });
+
+    function limparFormulario() {
+      document.getElementById('id').value = '';
+      document.getElementById('titulo').value = '';
+      document.getElementById('descricao').value = '';
+      document.getElementById('data').value = '';
+      document.getElementById('imagem').value = '';
+      document.getElementById('url_leiamais').value = '';
+    }
+
+    document.getElementById('imagem_file').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('imagem').value = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function editar(id) {
+      const n = NOTICIAS[id];
+      if (!n) return alert('Notícia não encontrada');
+      document.getElementById('id').value = n.id;
+      document.getElementById('titulo').value = n.titulo;
+      document.getElementById('descricao').value = n.descricao;
+      document.getElementById('data').value = n.data ? new Date(n.data).toISOString().slice(0,10) : '';
+      document.getElementById('imagem').value = n.imagem || '';
+      document.getElementById('url_leiamais').value = n.url_leiamais || '';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function excluir(id) {
+      if (!confirm('Confirma exclusão?')) return;
+      try {
+        const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error('Erro ao excluir: ' + res.status);
+        delete NOTICIAS[id];
+        renderLista();
+        alert('Excluído com sucesso');
+      } catch (e) {
+        console.error('Erro ao excluir:', e);
+        alert('Erro ao excluir: ' + (e.message || e));
+      }
+    }
+
+    // inicializa
+    carregar();
+    </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+/*Formulário administrador*/
+
+  
+  .crud-container {
+    max-width: 1000px;
+    margin-left: auto; /* espaçamento do topo */
+    margin-right: auto;
+    margin-top: 4rem;
+    border-radius: 8px;
+    font-family: sans-serif;
+    margin-bottom: 4rem;
+  }
+
+  .cinza {
+    background-color: #D9D9D9;
+    display: grid;
+    gap: 1em;
+    padding: 2em;
+    border-radius: 0 0 8px 8px;
+  }
+  .crud-form {
+    background-color: #36894E;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 1rem;
+    border-radius: 8px;
+  }
+
+  .crud-form-titulo {
+    font-size: 2.2em;
+    margin-bottom: 0.5em;
+    text-align: center;
+    color: white;
+  }
+
+  .crud-form input,
+  .crud-form textarea {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+  }
+
+  .crud-form button {
+    width: 120px;
+    padding: 0.5em;
+    background: #006937;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    align-self: start; /* alinha à esquerda dentro do grid */
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+  }
+  .crud-form button:hover {
+    color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  background-color: #2b5f3b;
+}
+
+  .crud-cards {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .crud-card {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 1em;
+  }
+  
+  .crud-card a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .crud-card h3 {
+    margin-top: 0;
+  }
+
+  .crud-card ul,
+  .crud-card ol {
+    margin: 0.5em 0;
+    padding-left: 1.2em;
+  }
+
+  .crud-card .crud-actions {
+    margin-top: 1em;
+    display: flex;
+    gap: 1em;
+  }
+
+  .crud-card .crud-actions button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+  }
+  .crud-card .crud-actions button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+  .crud-edit-btn {
+    background: #2196f3;
+    color: white;
+  }
+
+  .crud-delete-btn {
+    background: #f44336;
+    color: white;
+  }
+
+  .btn-adicionar {
+    background-color: #006937;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-adicionar:hover {
+    background-color: #004925;
+  }
+
+  .btn-limpar {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .btn-limpar:hover {
+    background-color: #36894E;
+  }
+
+  .crud-form .btn-limpar {
+    background-color: #4caf50;
+  }
+
+  .crud-form .btn-limpar:hover {
+    background-color: #36894E;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+  }

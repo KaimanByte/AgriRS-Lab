@@ -7,14 +7,11 @@
     <title>Notícias - AgriRSlab</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
-    <link rel="stylesheet" href="../styles/styleNoticias.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=SUSE+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link rel="stylesheet" href="../styles/StyleHeader.css">
     <link rel="stylesheet" href="../styles/StyleFooter.css">
+    <link rel="stylesheet" href="../styles/StyleNoticias.css">
 </head>
 
 <body>
@@ -37,28 +34,32 @@
             </div>
         </div>
         <header>
-        <nav>
-            <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="vagas.html">Vagas</a></li>
-                <li><a href="membros.html">Membros</a></li>
-                <li><a href="projetos.html">Projetos</a></li>
-                <li><a href="noticias.html">Notícias</a></li>
-                <li><a href="publicacoes.html" class="ativo">Publicações</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
-            <img src="../imagens/Header/Inpe.png" id="Inpeheader">
-        </nav>
-    </header>
+    <nav>
+      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
+
+      <!-- 🔹 Botão do menu hambúrguer adicionado -->
+      <button id="menu-toggle" aria-label="Abrir menu">☰ Menu</button>
+
+      <ul id="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="vagas.html">Vagas</a></li>
+        <li><a href="membros.html">Membros</a></li>
+        <li><a href="projetos.html">Projetos</a></li>
+        <li><a href="noticias.html">Notícias</a></li>
+        <li><a href="publicacoes.html" class="ativo">Publicações</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+      <img src="../imagens/Header/Inpe.png" id="Inpeheader">
+    </nav>
+  </header>
     <main>
         <div id="imagemFundo">Notícias</div>
 
         <section class="pesquisa">
             <h2 class="titulo-academico">Fique por dentro das últimas notícas!</h2>
             <div class="pesquisa2">
-                <input type="text" placeholder="Pesquise">
+                <input id="search-input" type="text" placeholder="Pesquise">
                 <button class="search-btn" aria-label="Pesquisar">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -69,56 +70,8 @@
             </div>
         </section>
 
-        <div class="cards">
-            <div class="card">
-                <img src="../imagens/Noticias/headerNoticia.jpg" alt="Notícia 1">
-                <div class="card-content">
-                    <h2>Título da Notícia 1</h2>
-                    <p>Resumo da notícia 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <button type="button">Leia mais</button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../imagens/Noticias/headerNoticia2.jpg" alt="Notícia 1">
-                <div class="card-content">
-                    <h2>Título da Notícia 2</h2>
-                    <p>Resumo da notícia 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <button type="button">Leia mais</button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../imagens/Noticias/headerNoticia3.jpg" alt="Notícia 1">
-                <div class="card-content">
-                    <h2>Título da Notícia 3</h2>
-                    <p>Resumo da notícia 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <button type="button">Leia mais</button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../imagens/Noticias/headerNoticia4.jpg" alt="Notícia 1">
-                <div class="card-content">
-                    <h2>Título da Notícia 4</h2>
-                    <p>Resumo da notícia 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <button type="button">Leia mais</button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../imagens/Noticias/headerNoticia5.jpg" alt="Notícia 1">
-                <div class="card-content">
-                    <h2>Título da Notícia 5</h2>
-                    <p>Resumo da notícia 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <button type="button">Leia mais</button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../imagens/Noticias/headerNoticia6.jpg" alt="Notícia 1">
-                <div class="card-content">
-                    <h2>Título da Notícia 6</h2>
-                    <p>Resumo da notícia 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <button type="button">Leia mais</button>
-                </div>
-            </div>
-        </div>
+        <!-- container dinâmico -->
+        <div class="cards" id="cardsNoticias"></div>
     </main>
     <footer>
         <div id="footer-brasil"></div>
@@ -223,7 +176,79 @@
         </block>
     </footer>
     <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+    <script>
+    const API = 'http://localhost:3030/noticias';
 
+    async function carregarNoticias() {
+      try {
+        const res = await fetch(API);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const noticias = await res.json();
+        console.log('Notícias carregadas:', noticias); // debug
+        renderNoticias(Array.isArray(noticias) ? noticias : []);
+      } catch (e) {
+        console.error('Erro ao carregar notícias:', e);
+        document.getElementById('cardsNoticias').innerHTML = '<p class="mensagem">Erro ao carregar notícias.</p>';
+      }
+    }
+
+    function renderNoticias(noticias) {
+      const container = document.getElementById('cardsNoticias');
+      container.innerHTML = '';
+      if (!Array.isArray(noticias) || noticias.length === 0) {
+        container.innerHTML = '<p class="mensagem">Nenhuma notícia disponível.</p>';
+        return;
+      }
+      noticias.forEach(n => {
+        const img = n.imagem && n.imagem.trim() ? n.imagem : '../imagens/Noticias/headerNoticia.jpg';
+        const data = n.data ? new Date(n.data).toLocaleDateString('pt-BR') : '';
+        const url_leiamais = n.url_leiamais || '#'; // URL para o botão "Leia mais"
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <img src="${img}" alt="${(n.titulo || '').replace(/"/g, '')}">
+          <div class="card-content">
+            <h2>${n.titulo || ''}</h2>
+            <p class="card-descricao">${n.descricao || ''}</p>
+            <p><small class="text-muted">Data: ${data}</small></p>
+            <div class="botoes">
+              <a href="${url_leiamais}" target="_blank" rel="noopener noreferrer">Leia mais</a>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById('search-input').addEventListener('input', function () {
+      const termo = this.value.toLowerCase().trim();
+      const cards = document.querySelectorAll('#cardsNoticias .card');
+      cards.forEach(card => {
+        const texto = card.textContent.toLowerCase();
+        card.style.display = termo === '' || texto.includes(termo) ? '' : 'none';
+      });
+    });
+
+    // carregar ao abrir
+    carregarNoticias();
+    </script>
+    <script>
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    const navItems = document.querySelectorAll("#nav-links a");
+
+      toggle.addEventListener("click", () => {
+        navLinks.classList.toggle("ativo");
+      });
+
+      // Fecha o menu ao clicar em um link (melhor UX)
+      navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          navLinks.classList.remove("ativo");
+        });
+      });
+    </script>
 </body>
 
 </html>

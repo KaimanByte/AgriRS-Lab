@@ -1,0 +1,206 @@
+/* ===== CRUD / Formulário / Tabela ===== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#formNoticias {
+    margin-top: 40px;
+    background-color: #36894E;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    text-align: center;
+}
+#formNoticias h2 {
+    font-size: 2.2rem;
+    padding: 20px;
+}
+
+#cinza {
+    background-color: #ddd;
+    padding: 20px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #34495e;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52,152,219,0.3);
+}
+
+textarea.form-control {
+    min-height: 100px;
+}
+
+.btn-primary {
+    background-color: #4caf50;
+    border: none;
+    margin-right: 10px;
+    color: #fff;
+    padding: 8px;
+    border-radius: 10px;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+.btn-primary:hover {
+    background-color: #36894E;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+    background-color: #3498db;
+    border: none;
+    color: #fff;
+    padding: 8px;
+    border-radius: 10px;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+.btn-secondary:hover {
+    background-color: #237dba;
+    cursor: pointer;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.btn-adicionar {
+    background-color: #006937;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.btn-adicionar:hover {
+    background-color: #004925;
+}
+
+.btn-limpar {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-limpar:hover {
+    background-color: #36894E;
+}
+
+/* Tabela do CRUD */
+.table {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+#crud-news {
+    margin-bottom: 4rem;
+}
+
+.table thead th {
+    background-color: #36894E;
+    color: white;
+    border: none;
+    padding: 12px;
+    text-align: left;
+}
+
+.table tbody td {
+    padding: 12px;
+    border-top: 1px solid #eee;
+}
+
+.table tbody tr:hover {
+    background-color: #f5f6fa;
+}
+
+.btn-info {
+    background-color: #1497ee;
+    border: none;
+    margin-right: 5px;
+    color: #fff;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+    color: #fff;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+}
+.btn-info:hover {
+  background-color: #0e6faf;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background-color: #a80000;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+/* ===== Miniaturas ===== */
+.item-thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+.item-thumb:hover { transform: scale(1.1); }
+
+.table td { vertical-align: middle; }
+.table td:first-child { width: 60px; padding: 4px; }
+
+
+
+/* ===== Responsivo ===== */
+@media (max-width: 768px) {
+    .table thead { display: none; }
+    .table tbody td { display: block; width: 100%; }
+    .table tbody tr { margin-bottom: 10px; display: block; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 10px; border-radius: 6px; }
+}
+
+/* pequenas melhorias visuais adicionais */
+.mensagem { text-align:center; color:#666; padding: 16px; }

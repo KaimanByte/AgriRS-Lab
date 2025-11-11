@@ -1,7 +1,7 @@
 /* Lista de publicações */
 .lista-publicacoes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 0.35fr));
     gap: 3rem;
     padding: 2rem;
 }
@@ -36,6 +36,10 @@
     margin-bottom: 1rem;
 }
 
+.publicacao.card p {
+    color: #000;
+}
+
 /* Botões */
 .botoes {
     display: flex;
@@ -45,13 +49,12 @@
 }
 
 .botoes a {
-    background: #36894E;
+    background-color: #006937;
     color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 18px;
     text-decoration: none;
-    font-size: 16px;
-    transition: background 0.3s;
+    padding: 10px 24px;
+    border-radius: 50px; /* Aumentado para ficar mais arredondado */
+    transition: all 0.3s ease;
 }
 
 .botoes a:hover {
@@ -161,6 +164,21 @@ margin-bottom: 8px;
 .search-btn svg {
   width: 40px;
   height: 40px;
+}
+
+.btn-adicionar {
+    background-color: #006937;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.btn-adicionar:hover {
+    background-color: #004925;
 }
 
 /* ========================================================= */

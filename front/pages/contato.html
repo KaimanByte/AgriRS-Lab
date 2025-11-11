@@ -11,7 +11,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="StyleFooter.css" />
 </head>
 
 <body>
@@ -32,10 +31,14 @@
     </div>
   </div>
   </div>
-  <header>
+ <header>
     <nav>
-      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader" />
-      <ul>
+      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
+
+      <!-- 🔹 Botão do menu hambúrguer adicionado -->
+      <button id="menu-toggle" aria-label="Abrir menu">☰ Menu</button>
+
+      <ul id="nav-links">
         <li><a href="index.html">Início</a></li>
         <li><a href="sobre.html">Sobre</a></li>
         <li><a href="vagas.html">Vagas</a></li>
@@ -45,7 +48,7 @@
         <li><a href="publicacoes.html" class="ativo">Publicações</a></li>
         <li><a href="contato.html">Contato</a></li>
       </ul>
-      <img src="../imagens/Header/Inpe.png" id="Inpeheader" />
+      <img src="../imagens/Header/Inpe.png" id="Inpeheader">
     </nav>
   </header>
 
@@ -75,13 +78,10 @@
       <div class="left">
         <h3>Localização</h3>
         <div class="map-container">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.9093169895343!2d-45.86326248502042!3d-23.20891738469117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cfa4ca9234b6b5%3A0x2a43c1e04a85e35f!2sInstituto%20Nacional%20de%20Pesquisas%20Espaciais%20(INPE)%20-%20S%C3%A3o%20Jos%C3%A9%20dos%20Campos!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
-            allowfullscreen="" loading="lazy">
-          </iframe>
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.996253200103!2d-45.86286773983603!3d-23.206807163811852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cc4b06accadc73%3A0xddb542b96e931e54!2sINPE!5e0!3m2!1spt-BR!2sbr!4v1759282156843!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <p class="endereco">
-          <span class="icon">📍</span> <strong>Endereço</strong><br />
+          <div class="icon">📍</span> <strong>Endereço</strong><br /></div>
           Instituto Nacional de Pesquisas Espaciais - INPE<br />
           Av. dos Astronautas, 1758 Jardim da Granja<br />
           São José dos Campos - SP<br />
@@ -126,10 +126,15 @@
     <div id="footer-brasil"></div>
     <block>
       <div id="divOne">
-        <img src="../imagens/Footer/AgriRSlab.png" id="AgriRSfooter" alt="AgriRSlab">
+        <div id="apareceNoFooter">
+          <a title="AgriRSlab" href="index.html"><img src="../imagens/Footer/AgriRSlab.png" id="AgriRSfooter" alt="AgriRSlab"/></a>
+          <div class="titulo24" id="aparece">AgriRSlab</div>
+        </div>
         <div id="textolado">
-          <div class="titulo24">AgriRSlab</div>
-          <div class="texto16">Laboratório de Sensoriamento Remoto Agrícola</div>
+          <div class="titulo24" id="apaga">AgriRSlab</div>
+          <div class="texto16">
+            Laboratório de Sensoriamento Remoto Agrícola
+          </div>
         </div>
       </div>
 
@@ -168,29 +173,29 @@
       <div id="divThree">
         <div class="titulo24">Sobre</div>
         <ul class="texto16">
-          <li><a href="#">O AgriRSlab</a></li>
-          <li><a href="#">Nossa equipe</a></li>
-          <li><a href="#">Colaboradores</a></li>
-          <li><a href="#">Oportunidades</a></li>
+            <li><a target="_blank" href="Sobre.html">O AgriRSlab</a></li>
+            <li><a target="_blank" href="membros.html">Nossa equipe</a></li>
+            <li><a target="_blank" href="membros.html">Colaboradores</a></li>
+            <li><a target="_blank" href="vagas.html">Oportunidades</a></li>
         </ul>
-      </div>
-    </block>
-
-    <div class="foraLinha">
-      <div class="linha"></div>
     </div>
+</block>
 
-    <block>
-      <div id="divFour">
+<div class="foraLinha">
+    <div class="linha"></div>
+</div>
+
+<block>
+    <div id="divFour">
         <div class="titulo24">Atuação</div>
         <ul class="texto16">
-          <li><a href="#">Área de Pesquisa</a></li>
-          <li><a href="#">Projetos</a></li>
-          <li><a href="#">Serviços</a></li>
-          <li><a href="#">Parcerias</a></li>
+            <li><a target="_blank" href="publicacoes.html">Área de Pesquisa</a></li>
+            <li><a target="_blank" href="projetos.html">Projetos</a></li>
+            <li><a target="_blank" href="contato.html">Serviços</a></li>
+            <li><a target="_blank" href="Sobre.html">Parcerias</a></li>
         </ul>
-      </div>
-    </block>
+    </div>
+</block>
 
     <div class="foraLinha">
       <div class="linha"></div>
@@ -224,8 +229,25 @@
       </div>
     </block>
   </footer>
+  <script>
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    const navItems = document.querySelectorAll("#nav-links a");
 
+      toggle.addEventListener("click", () => {
+        navLinks.classList.toggle("ativo");
+      });
+
+      // Fecha o menu ao clicar em um link (melhor UX)
+      navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          navLinks.classList.remove("ativo");
+        });
+      });
+    </script>
   <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+  
+  
 </body>
 
 </html>
