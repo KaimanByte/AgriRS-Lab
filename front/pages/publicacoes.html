@@ -239,7 +239,7 @@
       const art = document.createElement("article");
       art.className = "publicacao card";
       art.innerHTML = `
-        <img src="${pub.imagem_url ? '/uploads/' + pub.imagem_url : '/imagens/Publicacoes/pb01.png'}" alt="${(pub.titulo || '').replace(/"/g,'')}" />
+        <img src="${pub.imagem_url || '/imagens/Publicacoes/pb01.png'}" alt="${(pub.titulo || '').replace(/"/g,'')}" />
         <h3>${pub.titulo || ''}</h3>
         <p>${pub.descricao || ''}</p>
         <div class="botoes">

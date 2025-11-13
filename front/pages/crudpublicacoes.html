@@ -39,6 +39,7 @@
           <span onclick="document.getElementById('imagem_file').click()" style="cursor: pointer; margin-left: 10px; font-size: 20px;">📁</span>
         </div>
         <input type="file" id="imagem_file" accept="image/*" style="display: none;"/>
+        <img id="preview" src="" alt="Preview da imagem" style="max-width: 200px; max-height: 200px; display: none; margin-top: 10px;"/>
         <input type="text" id="pdf_url" placeholder="URL DO PDF (pdf_url)"/>
         <input type="text" id="citacao_url" placeholder="URL DA CITAÇÃO (citacao_url)"/>
         <input type="text" id="doi_url" placeholder="URL DOI (doi_url)"/>
@@ -71,7 +72,7 @@ function renderLista() {
   Object.values(PUBLICACOES).forEach(pub => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <img class="item-thumb" src="${pub.imagem_url ? '/uploads/' + pub.imagem_url : '/imagens/Publicacoes/pb01.png'}" alt="${pub.titulo || ''}" />
+      <img class="item-thumb" src="${pub.imagem_url || '/imagens/Publicacoes/pb01.png'}" alt="${pub.titulo || ''}" />
       <div class="item-text">
         <b>${pub.titulo} (${pub.ano})</b> - <span class="descricao">${pub.descricao}</span>
         <div class="item-links">
@@ -102,18 +103,56 @@ function carregar() {
     });
 }
 
-document.getElementById("formAdd").addEventListener("submit", e => {
+document.getElementById("formAdd").addEventListener("submit", async e => {
   e.preventDefault();
-  const dados = ["titulo", "ano", "descricao", "imagem_url", "pdf_url", "citacao_url", "doi_url"]
+  const dados = ["titulo", "ano", "descricao", "pdf_url", "citacao_url", "doi_url"]
     .reduce((acc, id) => (acc[id] = document.getElementById(id).value, acc), {});
-  fetch(API, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(dados)
-  }).then(() => {
-    e.target.reset();
-    carregar();
-  });
+
+  const fileInput = document.getElementById("imagem_file");
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    reader.onload = async () => {
+      dados.imagem_url = reader.result; // base64
+      try {
+        await fetch(API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dados)
+        });
+        e.target.reset();
+        // Resetar preview da imagem
+        const preview = document.getElementById("preview");
+        preview.src = "";
+        preview.style.display = "none";
+        // Resetar input file
+        document.getElementById("imagem_file").value = "";
+        carregar();
+      } catch (err) {
+        console.error("Erro ao adicionar publicação:", err);
+      }
+    };
+    reader.readAsDataURL(file);
+  } else {
+    dados.imagem_url = document.getElementById("imagem_url").value;
+    try {
+      await fetch(API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados)
+      });
+      e.target.reset();
+      // Resetar preview da imagem
+      const preview = document.getElementById("preview");
+      preview.src = "";
+      preview.style.display = "none";
+      // Resetar input file
+      document.getElementById("imagem_file").value = "";
+      carregar();
+    } catch (err) {
+      console.error("Erro ao adicionar publicação:", err);
+    }
+  }
 });
 
 function editar(id) {
@@ -147,9 +186,29 @@ function limparFormulario() {
   document.getElementById("pdf_url").value = "";
   document.getElementById("citacao_url").value = "";
   document.getElementById("doi_url").value = "";
+  // Resetar preview
+  const preview = document.getElementById("preview");
+  preview.src = "";
+  preview.style.display = "none";
+  // Resetar input file
+  document.getElementById("imagem_file").value = "";
 }
 
 
+
+  // Adicionar event listener para preview da imagem
+  document.getElementById("imagem_file").addEventListener("change", function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const preview = document.getElementById("preview");
+        preview.src = event.target.result;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 
   carregar();
 </script>

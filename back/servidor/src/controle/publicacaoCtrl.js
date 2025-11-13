@@ -1,7 +1,6 @@
 import PublicacaoDAO from "../modelo/publicacaoDAO.js";
 import fs from 'fs';
 import path from 'path';
-import multer from 'multer';
 
 class PublicacaoCtrl {
   static async listar(req, res) {
@@ -38,7 +37,7 @@ class PublicacaoCtrl {
         const filename = `imagem-${Date.now()}-${Math.round(Math.random() * 1E9)}.png`;
         const filepath = path.join(uploadDir, filename);
         fs.writeFileSync(filepath, buffer);
-        pub.imagem_url = `${filename}`;
+        pub.imagem_url = `http://localhost:3030/uploads/${filename}`;
       }
       const nova = await PublicacaoDAO.inserir(pub);
       res.status(201).json(nova);
