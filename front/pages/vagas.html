@@ -281,6 +281,115 @@
             </div>
         </block>
     </footer>
+
+    <script>
+// 🔄 Dicionário de traduções
+const traducoes = {
+  pt: {
+    vagas: "Vagas",
+    oportunidades: "Oportunidades Disponíveis",
+    pesquise: "Pesquise",
+    pesquisar: "Pesquisar",
+    menu: ["Início", "Sobre", "Vagas", "Membros", "Projetos", "Notícias", "Publicações", "Contato"],
+    footer: {
+      sobre: "Sobre",
+      sobreLinks: ["O AgriRSlab", "Nossa equipe", "Colaboradores", "Oportunidades"],
+      atuacao: "Atuação",
+      atuacaoLinks: ["Área de Pesquisa", "Projetos", "Serviços", "Parcerias"],
+      colaboradores: "Colaboradores",
+      descricao: "Laboratório de Sensoriamento Remoto Agrícola"
+    }
+  },
+  en: {
+    vagas: "Opportunities",
+    oportunidades: "Available Positions",
+    pesquise: "Search",
+    pesquisar: "Search",
+    menu: ["Home", "About", "Opportunities", "Members", "Projects", "News", "Publications", "Contact"],
+    footer: {
+      sobre: "About",
+      sobreLinks: ["AgriRSlab", "Our team", "Collaborators", "Opportunities"],
+      atuacao: "Activities",
+      atuacaoLinks: ["Research Area", "Projects", "Services", "Partnerships"],
+      colaboradores: "Collaborators",
+      descricao: "Agricultural Remote Sensing Laboratory"
+    }
+  }
+};
+
+// 🔁 Função para aplicar tradução
+function mudarIdioma(idioma) {
+  localStorage.setItem("idiomaSelecionado", idioma);
+  const t = traducoes[idioma];
+
+  // Página principal
+  const titulo = document.querySelector("#imagemFundo");
+  if (titulo) titulo.textContent = t.vagas;
+
+  const subtitulo = document.querySelector(".titulo-academico");
+  if (subtitulo) subtitulo.textContent = t.oportunidades;
+
+  const input = document.querySelector(".pesquisa2 input");
+  if (input) input.placeholder = t.pesquise;
+
+  const botao = document.querySelector(".search-btn");
+  if (botao) botao.title = t.pesquisar;
+
+  // Header - menu de navegação
+  const navItems = document.querySelectorAll("#nav-links li a");
+  navItems.forEach((item, i) => {
+    if (t.menu[i]) item.textContent = t.menu[i];
+  });
+
+  // Footer - títulos
+  const tituloSobre = document.querySelector("#divThree .titulo24");
+  if (tituloSobre) tituloSobre.textContent = t.footer.sobre;
+
+  const tituloAtuacao = document.querySelector("#divFour .titulo24");
+  if (tituloAtuacao) tituloAtuacao.textContent = t.footer.atuacao;
+
+  const tituloColaboradores = document.querySelector("#divFive .titulo24");
+  if (tituloColaboradores) tituloColaboradores.textContent = t.footer.colaboradores;
+
+  // Footer - links
+  const sobreLinks = document.querySelectorAll("#divThree ul li a");
+  sobreLinks.forEach((link, i) => {
+    if (t.footer.sobreLinks[i]) link.textContent = t.footer.sobreLinks[i];
+  });
+
+  const atuacaoLinks = document.querySelectorAll("#divFour ul li a");
+  atuacaoLinks.forEach((link, i) => {
+    if (t.footer.atuacaoLinks[i]) link.textContent = t.footer.atuacaoLinks[i];
+  });
+
+  // Footer - descrição institucional
+  const descricaoFooter = document.querySelector("#textolado .texto16");
+  if (descricaoFooter) descricaoFooter.textContent = t.footer.descricao;
+
+  // Recarrega cards no idioma selecionado (se estiver usando API dinâmica)
+  if (typeof carregarOportunidades === "function") {
+    carregarOportunidades();
+  }
+}
+
+// 🌐 Criação automática do seletor de idioma
+document.addEventListener("DOMContentLoaded", () => {
+  const seletor = document.createElement("select");
+  seletor.innerHTML = `
+    <option value="pt">🇧🇷 Português</option>
+    <option value="en">🇺🇸 English</option>
+  `;
+  seletor.style.cssText = "position:fixed;top:10px;right:15px;padding:4px;border-radius:6px;";
+  seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
+  seletor.addEventListener("change", e => mudarIdioma(e.target.value));
+  document.body.appendChild(seletor);
+
+  mudarIdioma(seletor.value);
+});
+</script>
+
+
+
     <script>
     /* 🔹 SCRIPT DO MENU HAMBURGUER */
     const toggle = document.getElementById("menu-toggle");
