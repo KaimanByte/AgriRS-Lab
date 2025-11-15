@@ -62,11 +62,11 @@
 
     <div class="card">
         <div class="cardMembro">
-            <h2> Marco Adami </h2>
+            <h2 class="nomeMembro1"> Marco Adami </h2>
             <img src="../imagens/Membros/Marcos_Adami.jpg" alt="Marco Adami">
             <div class="overlay-text">
-                <h1> Coordenador Geral</h1>
-                <p> Pesquisador titular do Instituto Nacional de Pesquisas Espaciais,graduado em Ciências Econômicas
+                <h1 class="cargoMembro1"> Coordenador Geral</h1>
+                <p class="carreiraMembro1"> Pesquisador titular do Instituto Nacional de Pesquisas Espaciais,graduado em Ciências Econômicas
                     pela Faculdade de Filosofia Ciências e Letras de Cornélio Procópio (1997), mestrado e doutorado em
                     Sensoriamento Remoto pelo Instituto Nacional de Pesquisas Espaciais (2003 e 2010). Possui
                     experiência em sistemas de informação geográfica e sensoriamento remoto com ênfase nos seguintes
@@ -145,7 +145,7 @@
         <div class="card">
             <div class="cardMembro">
                 <h2> João de Souza </h2>
-                <img src="../imagens/Membros/user.png" alt="João de Souza ">
+                <img src="../imagens/Membros/user.png" alt="João de Souza">
                 <div class="overlay-text">
                     <h1> </h1>
                     <p> </p>
@@ -283,7 +283,7 @@
         </div>
         <div class="card">
             <div class="cardMembro">
-                <h2>Baggio de Castro </h2>
+                <h2>Baggio de Castro</h2>
                 <img src="../imagens/Membros/user.png" alt="Baggio de Castro ">
                 <div class="overlay-text">
                     <h1> </h1>
@@ -295,7 +295,7 @@
 
         <div class="card">
             <div class="cardMembro">
-                <h2>Darlan Teles </h2>
+                <h2>Darlan Teles</h2>
                 <img src="../imagens/Membros/Darlan_Teles.jpeg" alt="Darlan_Teles ">
                 <div class="overlay-text">
                     <h1>Mestre em Meteorologia</h1>
@@ -330,7 +330,7 @@
                 <h2>Heithor Queiroz </h2>
                 <img src="../imagens/Membros/user.png" alt="Heithor Queiroz">
                 <div class="overlay-text">
-                    <h1>Mestre em Computação Aplicada</h1>
+                    <h1></h1>
                     <p></p>
                     <a href="" target="_blank"></a>
                 </div>
@@ -339,7 +339,7 @@
 
         <div class="card">
             <div class="cardMembro">
-                <h2>Luis Maurano </h2>
+                <h2>Luis Maurano</h2>
                 <img src="../imagens/Membros/user.png" alt="Luis Murano">
                 <div class="overlay-text">
                     <h1>Mestre em Sensoriamento Remoto</h1>
@@ -374,7 +374,7 @@
 
         <div class="card">
             <div class="cardMembro">
-                <h2>Nildson Silva </h2>
+                <h2>Nildson Silva</h2>
                 <img src="../imagens/Membros/user.png" alt="Nildson Silva">
                 <div class="overlay-text">
                     <h1>Engenheiro Agrônomo</h1>
@@ -387,10 +387,10 @@
         </div>
         <div class="card">
             <div class="cardMembro">
-                <h2>Priscilla Santos </h2>
+                <h2>Priscilla Santos</h2>
                 <img src="../imagens/Membros/Priscilla_Santos.jpg" alt="Priscilla Santos">
                 <div class="overlay-text">
-                    <h1> Mestra em Geociências</h1>
+                    <h1>Mestra em Geociências</h1>
                     <p>Engenheira Agrimensora e Cartógrafa, Mestra em Geociências e Especialista em Estatística Aplicada
                         pela Universidade Federal Rural do Rio de Janeiro (UFRRJ). Atualmente, Doutoranda em
                         Sensoriamento Remoto pelo Instituto Nacional de Pesquisas Espaciais (INPE). Possui experiência
@@ -455,7 +455,7 @@
 
         <div class="card">
             <div class="cardMembro">
-                <h2>Marina Galdez </h2>
+                <h2>Marina Galdez</h2>
                 <img src="../imagens/Membros/user.png" alt="Marina Galdez">
                 <div class="overlay-text">
                     <h1> Mestra em Geociências</h1>
@@ -577,7 +577,193 @@ const traducoes = {
       atuacaoLinks: ["Área de Pesquisa", "Projetos", "Serviços", "Parcerias"],
       colaboradores: "Colaboradores",
       descricao: "Laboratório de Sensoriamento Remoto Agrícola"
-    }
+    },
+    cards: [
+      {
+        nome: "Marco Adami",
+        cargo: "Coordenador Geral",
+        carreira: "Pesquisador titular do Instituto Nacional de Pesquisas Espaciais, graduado em Ciências Econômicas pela Faculdade de Filosofia Ciências e Letras de Cornélio Procópio (1997), mestrado e doutorado em Sensoriamento Remoto pelo INPE. Experiência em GIS e sensoriamento remoto com ênfase em séries temporais, mudança de uso da terra e estatísticas agrícolas.",
+        lattes: "http://lattes.cnpq.br/7484071887086439"
+      },
+      {
+        nome: "Cleverton Santana",
+        cargo: "Analista na CONAB",
+        carreira: "Engenheiro Agrônomo (UNEMAT), com mestrado em Agronomia e doutorado em Sensoriamento Remoto (INPE). Atualmente analista na Conab, desenvolvendo pesquisas em monitoramento agrícola.",
+        lattes: "https://lattes.cnpq.br/6403186357124271"
+      },
+      {
+        nome:"Victor Prudente",
+        cargo:"Pesquisador de pós-doutorado",
+        carreira:"Pesquisador de pós-doutorado na School for Environment and Sustainability (SEAS) na Universidade de Michigan. Tem experiência em Sensoriamento Remoto, atuando nas seguintes subáreas: sensoriamento remoto agrícola, sensoriamento remoto por micro-ondas (SAR), multisensor, mudanças de uso e cobertura da terra, e monitoramento de agricultura familiar. Doutor em Sensoriamento Remoto pelo INPE. Bacharel e Mestre em Engenharia Agrícola (Unioeste).",
+        lattes:"http://lattes.cnpq.br/6154929133513022"
+      },
+
+
+      {
+        nome:"Michel Eustáquio",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Lucas Oldoni",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Andrés Velástegui",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"João de Souz",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Felipe Petrone",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Nicole",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Andre Garcia",
+        cargo:"Doutor em Sensoriamento Remoto",
+        carreira:"Agrônomo (IFES) e Doutor em Sensoriamento Remoto (INPE), com ênfase na linha de pesquisa em sensoriamento remoto aplicado à agricultura. Membro do AgriRSLab com foco no desenvolvimento demetodologias e abordagens para mapeamento e caracterização de cultivos agrícolas. Atualmente é bolsista de projeto (CNPq) do AgriRS em parceria com a CONAB onde desenvolve trabalhos de mapeamento do uso e cobertura do solo por meio de imagens orbitais de satélites ópticos e demicro-ondas (SAR).",
+        lattes:""
+      },
+      {
+        nome:"Grazieli Rodigheri",
+        cargo:"Engenheira Ambiental",
+        carreira:"Engenheira Ambiental (UPF), mestre em Sensoriamento Remoto e Geoprocessamento (UFRGS) e doutora em Sensoriamento Remoto (INPE). Atualmente é bolsista de projeto (CNPq) do AgriRS em parceria com a CONAB.",
+        lattes:""
+      },
+      {
+        nome:"Kellin Kang",
+        cargo:"Cientista Ambiental",
+        carreira:"Cientista Ambiental (UNIFESP). Atualmente é bolsista de projeto (CNPq) do AgriRS (INPE) em parceria com a CONAB.",
+        lattes:""
+      },
+      {
+        nome:"Lorrany Colegnac",
+        cargo:"Bacharel em Geografia",
+        carreira:"Bacharel em Geografia (UNICENTRO). Atualmente é bolsista de projeto (CNPq) do AgriRS (INPE) em parceria com a CONAB ",
+        lattes:""
+      },
+      {
+        nome:"Mayrine Silva",
+        cargo:"Bióloga",
+        carreira:"Bióloga (UTP) e Engenheira Florestal (UFSC), mestre em Ciências pelo PPG em Ecossistemas Agrícolas e Naturais (UFSC). Atualmente é bolsista de projeto (CNPq) do AgriRS em parceria com a CONAB.",
+        lattes:""
+      },
+      {
+        nome:"Thaísa Fernades",
+        cargo:"Cientista Ambiental",
+        carreira:"Cientista Ambiental (UFG), mestre em Ciências Ambientais (UnB) e doutoranda em Ciências Ambientais (UFG). Atualmente é bolsista de projeto (CNPq) do AgriRS (INPE) em parceria com a CONAB.",
+        lattes:""
+      },
+      {
+        nome:"Ângela Pires",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Baggio de Castro",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Darlan Teles",
+        cargo:"Mestre em Metereologia",
+        carreira:"Doutorando em Sensoriamento Remoto no Instituto Nacional de Pesquisas Espaciais (INPE) com ênfase em indicadores remoto para qualidade de pastagens no Cerrado. Mestre em Meteorologia Aplicada na Universidade Federal de Viçosa (UFV). Engenheiro Agrícola formado pela Universidade Federal de Sergipe (UFS).",
+        lattes:""
+      },
+      {
+        nome:"Gabriel Sansigolo",
+        cargo:"Mestre em Computação Aplicada",
+        carreira:"Doutorando em Computação Aplicada pelo Instituto Nacional de Pesquisas Espaciais. Mestre em Computação Aplicada e Tecnólogo em Análise e Desenvolvimento de Sistemas. Tem experiência na área de Ciência da Computação, com ênfase em Geoinformática. Atualmente é pesquisador da undação para o Desenvolvimento Científico e Tecnológico em Saúde e desenvolvedor Full-stack nos Projetos Brazil Data Cube e HARMONIZE.",
+        lattes:""
+      },
+      {
+        nome:"Heithor Queiroz",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Luis Maurano",
+        cargo:"Mestre em Sensoriamento Remoto",
+        carreira:"Doutorando em Sensoriamento Remoto no Instituto Nacional de Pesquisas Espaciais (INPE 2024/2027). Mestre em Sensoriamento Remoto pelo Instituto Nacional de Pesquisas Espaciais (INPE 2016/2018). Possui graduação de Tecnólogo em Processamento de Dados pela Faculdade de Tecnologia da Universidade Presbiteriana Mackenzie (1988). Atualmente é Tecnologista Sênior III da Divisão de Processamento de Imagens (DPI) do Instituto Nacional de Pesquisas Espaciais (INPE) com atuação no Programa Biomas BR - PRODES, DETER e TERRACLASS. Concepção, modelagem e implantação do banco de dados geográficos para suporte ao programa de monitoramento de queimadas e desmatamento por satélite do INPE.",
+        lattes:""
+      },
+      {
+        nome:"Luiz Gabriel",
+        cargo:"Mestre em Engenharia Agronômica",
+        carreira:"Doutorando em Sensoriamento Remoto no Programa de Pós Graduação em Sensoriamento Remoto do Instituto Nacional de Pesquisas Espaciais. Possui graduação e mestrado em Engenharia Agronômica (UFSCar) e graduação em Ciências Moleculares (USP). Possui experiência em ciência de dados e tem interesse em processos de mudança de uso da terra e ordenamento territorial, meteorologia e ecologia.",
+        lattes:""
+      },
+      {
+        nome:"Nildson Silva",
+        cargo:"Engenheiro Agrônomo",
+        carreira:"Engenheiro Agrônomo (UFRPE) com graduação-sanduíche no curso de Engenharia Agrícola e do Meio Rural (USC/Espanha) e mestre em Sensoriamento Remoto (INPE). Atualmente doutorando em Sensoriamento Remoto (INPE) e Analista de Geoprocessamento na Serasa Experian.",
+        lattes:""
+      },
+      {
+        nome:"Priscilla Santos",
+        cargo:"Mestra em Geociências",
+        carreira:"Engenheira Agrimensora e Cartógrafa, Mestra em Geociências e Especialista em Estatística Aplicada pela Universidade Federal Rural do Rio de Janeiro (UFRRJ). Atualmente, Doutoranda em Sensoriamento Remoto pelo Instituto Nacional de Pesquisas Espaciais (INPE). Possui experiência na área de Geociências, com ênfase em Geomática.",
+        lattes:""
+      },
+      {
+        nome:"Tânia Beatriz Hoffmann",
+        cargo:"Geógrafa",
+        carreira:"Geógrafa pela Universidade Federal de Santa Catarina (UFSC), mestre e atualmente doutoranda em Sensoriamento Remoto pelo Instituto Nacional de Pesquisas Espaciais (INPE), com período sanduíche na Universidade de Maryland (UMD).",
+        lattes:""
+      },
+      {
+        nome:"Yan Azeredo da Silva",
+        cargo:"Geógrafo",
+        carreira:"Geógrafo pela Universidade Federal Fluminense (UFF) e mestre em Sensoriamento Remoto pelo Instituto Nacional de Pesquisas Espaciais (INPE). Atualmente, é doutorando pelo mesmo instituto, com foco em monitoramento da vegetação nativa no bioma Cerrado. Possui experiência em geoprocessamento, modelagem ambiental e processamento digital de imagens de satélite, com ênfase em estudos de cobertura e uso da terra, desastres naturais e conservação ambiental. ",
+        lattes:""
+      },
+      {
+        nome:"Ana Júlia Dias",
+        cargo:"Mestra em Geociências",
+        carreira:"Mestranda do Programa de Pós Graduação em Sensoriamento Remoto, no Instituto Nacional de Pesquisas espaciais (INPE). Formada em Bacharel em Geografia, com ênfase em análise ambiental e geoprocessamento, pela Universidade Estadual Paulista Júlio de Mesquita Filho - UNESP. Atualmente faz pesquisa com foco na identificação semi-automatizada de degradação na vegetação do Cerrado e atua no projeto Lethal Psi (Leeds- UK) na área de coleta e processamento de dados radiométricos da vegetação Amazônica. Tem experiência na área de Geografia, com ênfase em geoprocessamento e Sensoriamento Remoto, atuando principalmente nos seguintes temas: Vegetação, Cerrado, Radiometria,Temperatura e Saúde.",
+        lattes:""
+      },
+      {
+        nome:"Marina Galdez",
+        cargo:"Mestra em Geociências",
+        carreira:"Engenheira Agrícola e Ambiental formada pela Universidade Federal Fluminense (UFF). Atualmente, mestranda do Programa de Pós Graduação em Sensoriamento Remoto pelo Instituto Nacional de Pesquisas Espaciais (INPE). Desenvolve pesquisas voltadas ao monitoramento agrícola, com foco na estimativa da cobertura do solo por resíduos culturais.",
+        lattes:""
+      },
+      {
+        nome:"",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      
+      // Continue adicionando todos os membros na mesma ordem do HTML
+    ]
   },
   en: {
     imagemFundo: "Members",
@@ -595,10 +781,189 @@ const traducoes = {
       atuacaoLinks: ["Research Area", "Projects", "Services", "Partnerships"],
       colaboradores: "Collaborators",
       descricao: "Agricultural Remote Sensing Laboratory"
-    }
+    },
+    cards: [
+      {
+        nome: "Marco Adami",
+        cargo: "General Coordinator",
+        carreira: "Senior researcher at the National Institute for Space Research, graduated in Economics. Master's and PhD in Remote Sensing. Experienced in GIS and remote sensing focusing on time series analysis, land use change, and agricultural statistics.",
+        lattes: "http://lattes.cnpq.br/7484071887086439"
+      },
+      {
+        nome: "Cleverton Santana",
+        cargo: "Analyst at CONAB",
+        carreira: "Agronomist with Master's in Agronomy and PhD in Remote Sensing. Currently analyst at Conab, developing research on agricultural monitoring.",
+        lattes: "https://lattes.cnpq.br/6403186357124271"
+      },
+      {
+        nome:"Victor Prudente",
+        cargo:"PhD Researcher",
+        carreira:"Postdoctoral Researcher at the School for Environment and Sustainability (SEAS), University of Michigan. Experienced in Remote Sensing, with research focused on the following areas: agricultural remote sensing, microwave remote sensing (SAR), multi-sensor analysis, land use and land cover change, and family farming monitoring. Holds a PhD in Remote Sensing from INPE, and Bachelor’s and Master’s degrees in Agricultural Engineering from Unioeste.",
+        lattes:"http://lattes.cnpq.br/6154929133513022"
+      },
+      {
+        nome:"Michel Eustáquio",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Lucas Oldoni",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Andrés Velástegui",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"João de Souza",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Felipe Petrone",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Nicole",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Andre Garcia",
+        cargo:"Doctorate in Remote Sensor",
+        carreira:"Agronomist (IFES) and Ph.D. in Remote Sensing (INPE), with an emphasis on research in remote sensing applied to agriculture. Member of the AgriRSLab, focusing on the development of methodologies and approaches for mapping and characterizing agricultural crops. Currently a project fellow (CNPq) at AgriRS in partnership with CONAB, where he develops work on land use and land cover mapping using orbital imagery from optical and microwave (SAR) satellites.",
+        lattes:""
+      },
+      {
+        nome:"Grazieli Rodigheri",
+        cargo:"Environmental Engineer",
+        carreira:"Environmental Engineer (UPF), with a Master's degree in Remote Sensing and Geoprocessing (UFRGS) and a Ph.D. in Remote Sensing (INPE). She is currently a project fellow (CNPq) at AgriRS in partnership with CONAB.",
+        lattes:""
+      },
+      {
+        nome:"Kellin Kang",
+        cargo:"Environmental Scientist",
+        carreira:"Environmental Scientist (UNIFESP). She is currently a project fellow (CNPq) at AgriRS (INPE) in partnership with CONAB.",
+        lattes:"Bachelor in Geography (UNICENTRO). He is currently a project fellow (CNPq) at AgriRS (INPE) in partnership with CONAB."
+      },
+      
+      {
+        nome:"Lorrany Colegnac",
+        cargo:"Geography Bachelor",
+        carreira:"Bachelor in Geography (UNICENTRO). He is currently a project fellow (CNPq) at AgriRS (INPE) in partnership with CONAB.",
+        lattes:""
+      },
+      
+      {
+        nome:"Mayrine Silva",
+        cargo:"Biologist",
+        carreira:"Biologist (UTP) and Forest Engineer (UFSC), with a Master’s degree in Sciences from the Graduate Program in Agricultural and Natural Ecosystems (UFSC). She is currently a project fellow (CNPq) at AgriRS in partnership with CONAB.",
+        lattes:""
+      },
+      
+      {
+        nome:"Thaísa Fernades",
+        cargo:"enviromnmental Scientist",
+        carreira:"Environmental Scientist (UFG), with a Master’s degree in Environmental Sciences (UnB) and currently a Ph.D. candidate in Environmental Sciences (UFG). She is currently a project fellow (CNPq) at AgriRS (INPE) in partnership with CONAB.",
+        lattes:""
+      },
+      
+      {
+        nome:"Ângela Pires",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      
+      {
+        nome:"Baggio de Castro",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      
+      {
+        nome:"Darlan Teles",
+        cargo:"Master in Metereology",
+        carreira:"Ph.D. candidate in Remote Sensing at the National Institute for Space Research (INPE), with an emphasis on remote indicators for pasture quality in the Cerrado. Holds a Master’s degree in Applied Meteorology from the Federal University of Viçosa (UFV) and a Bachelor’s degree in Agricultural Engineering from the Federal University of Sergipe (UFS).",
+        lattes:""
+      },
+      {
+        nome:"Gabriel Sansigolo",
+        cargo:"Master’s degree in Applied Computing",
+        carreira:"Ph.D. candidate in Applied Computing at the National Institute for Space Research (INPE). Holds a Master’s degree in Applied Computing and a Technology degree in Systems Analysis and Development. He has experience in Computer Science, with an emphasis on Geoinformatics. He is currently a researcher at the Foundation for Scientific and Technological Development in Health and a full-stack developer on the Brazil Data Cube and HARMONIZE projects.",
+        lattes:""
+      },
+      {
+        nome:"Heithor Queiroz",
+        cargo:"",
+        carreira:"",
+        lattes:""
+      },
+      {
+        nome:"Luis Maurano",
+        cargo:"Master’s degree in Remote Sensing",
+        carreira:"Ph.D. candidate in Remote Sensing at the National Institute for Space Research (INPE, 2024–2027). Holds a Master’s degree in Remote Sensing from the National Institute for Space Research (INPE, 2016–2018). Graduated with a Technology degree in Data Processing from the Mackenzie Presbyterian University’s Faculty of Technology (1988). Currently a Senior Technologist III at the Image Processing Division (DPI) of the National Institute for Space Research (INPE), working in the Biomes BR Program – PRODES, DETER, and TERRACLASS. Responsible for the design, modeling, and implementation of the geographic database supporting INPE’s satellite-based fire and deforestation monitoring program.",
+        lattes:""
+      },
+      {
+        nome:"Luiz Gabriel",
+        cargo:"Master’s degree in Agronomic Engineering",
+        carreira:"Ph.D. candidate in Remote Sensing in the Graduate Program in Remote Sensing at the National Institute for Space Research (INPE). He holds a Bachelor’s and a Master’s degree in Agronomic Engineering (UFSCar) and a Bachelor’s degree in Molecular Sciences (USP). He has experience in data science and is interested in land-use change processes and land-use planning, meteorology, and ecology.",
+        lattes:""
+      },
+      {
+        nome:"Nildson Silva",
+        cargo:"Agricultural Engineer",
+        carreira:"Agronomist (UFRPE), with a sandwich undergraduate program in Agricultural and Rural Environmental Engineering (USC/Spain), and a Master’s degree in Remote Sensing (INPE). Currently a Ph.D. candidate in Remote Sensing (INPE) and a Geoprocessing Analyst at Serasa Experian.",
+        lattes:""
+      },
+      {
+        nome:"Priscilla Santos",
+        cargo:"Master’s degree in Geosciences",
+        carreira:"Engenheira Agrimensora e Cartógrafa, Mestra em Geociências e Especialista em Estatística Aplicada pela Universidade Federal Rural do Rio de Janeiro (UFRRJ). Atualmente, Doutoranda em Sensoriamento Remoto pelo Instituto Nacional de Pesquisas Espaciais (INPE). Possui experiência na área de Geociências, com ênfase em Geomática.",
+        lattes:""
+      },
+      {
+        nome:"Tânia Beatriz Hoffmann",
+        cargo:"Geographer",
+        carreira:"Geographer from the Federal University of Santa Catarina (UFSC), with a Master’s degree and currently a Ph.D. candidate in Remote Sensing at the National Institute for Space Research (INPE), including a sandwich period at the University of Maryland (UMD).",
+        lattes:""
+      },
+      {
+        nome:"Yan Azeredo da Silva",
+        cargo:"Geographer",
+        carreira:"Geographer from the Fluminense Federal University (UFF) and Master in Remote Sensing from the National Institute for Space Research (INPE). He is currently a Ph.D. candidate at the same institute, focusing on monitoring native vegetation in the Cerrado biome. He has experience in geoprocessing, environmental modeling, and digital processing of satellite imagery, with an emphasis on land-cover and land-use studies, natural disasters, and environmental conservation.",
+        lattes:""
+      },
+      {
+        nome:"Ana Júlia Dias",
+        cargo:"Master in Geosciences",
+        carreira:"Master’s student in the Graduate Program in Remote Sensing at the National Institute for Space Research (INPE). Holds a Bachelor’s degree in Geography, with an emphasis on environmental analysis and geoprocessing, from São Paulo State University (UNESP). She is currently conducting research focused on the semi-automated identification of vegetation degradation in the Cerrado and works in the Lethal Psi project (Leeds, UK) in the area of radiometric data collection and processing of Amazonian vegetation. She has experience in Geography, with an emphasis on geoprocessing and Remote Sensing, working mainly with the following topics: Vegetation, Cerrado, Radiometry, Temperature, and Health.",
+        lattes:""
+      },
+      {
+        nome:"Marina Galdez",
+        cargo:"Master in Geosciences",
+        carreira:"Agricultural and Environmental Engineer graduated from the Fluminense Federal University (UFF). She is currently a Master’s student in the Graduate Program in Remote Sensing at the National Institute for Space Research (INPE). She conducts research focused on agricultural monitoring, with an emphasis on estimating soil cover by crop residues.",
+        lattes:""
+      },
+      
+      // Continue todos os membros
+    ]
   }
 };
 
+// Atualiza os textos fixos da página (título, menu, fitas, footer)
 function mudarIdioma(idioma) {
   localStorage.setItem("idiomaSelecionado", idioma);
   const t = traducoes[idioma];
@@ -623,8 +988,8 @@ function mudarIdioma(idioma) {
     if (el) el.textContent = f.texto;
   });
 
-  // Menu
-  const navItems = document.querySelectorAll("#nav-links li a");
+  // Header - menu de navegação
+ const navItems = document.querySelectorAll("#nav-links li a");
   navItems.forEach((item, i) => {
     if (t.menu[i]) item.textContent = t.menu[i];
   });
@@ -651,25 +1016,41 @@ function mudarIdioma(idioma) {
 
   const descricaoFooter = document.querySelector("#textolado .texto16");
   if (descricaoFooter) descricaoFooter.textContent = t.footer.descricao;
+
+  // Atualiza cards
+  atualizarCards(idioma);
 }
 
-// Seletor de idioma
+// Atualiza os cards com base na ordem do HTML
+function atualizarCards(idioma) {
+  const t = traducoes[idioma];
+  const cards = document.querySelectorAll(".cardMembro");
+
+  cards.forEach((card, index) => {
+    const dados = t.cards[index];
+    if (!dados) return;
+
+    const nomeEl = card.querySelector("h2");
+    const cargoEl = card.querySelector("h1");
+    const carreiraEl = card.querySelector("p");
+    const lattesEl = card.querySelector("a");
+
+    if (nomeEl) nomeEl.textContent = dados.nome;
+    if (cargoEl) cargoEl.textContent = dados.cargo;
+    if (carreiraEl) carreiraEl.textContent = dados.carreira;
+    if (lattesEl && dados.lattes) lattesEl.href = dados.lattes;
+  });
+}
+
+// Cria o seletor de idioma
+// 🌐 Criação automática do seletor de idioma
 document.addEventListener("DOMContentLoaded", () => {
   const seletor = document.createElement("select");
   seletor.innerHTML = `
     <option value="pt">🇧🇷 Português</option>
     <option value="en">🇺🇸 English</option>
   `;
-  seletor.style.cssText = `
-    position: fixed;
-    top: 10px;
-    right: 15px;
-    padding: 4px;
-    border-radius: 6px;
-    z-index: 9999;
-    background: white;
-    border: 1px solid #ccc;
-  `;
+  seletor.style.cssText = "position:fixed;top:10px;right:15px;padding:4px;border-radius:6px;";
   seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
   seletor.addEventListener("change", e => mudarIdioma(e.target.value));
   document.body.appendChild(seletor);
@@ -679,24 +1060,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-
-
-    <script>
-    const toggle = document.getElementById("menu-toggle");
-    const navLinks = document.getElementById("nav-links");
-    const navItems = document.querySelectorAll("#nav-links a");
-
-      toggle.addEventListener("click", () => {
-        navLinks.classList.toggle("ativo");
-      });
-
-      // Fecha o menu ao clicar em um link (melhor UX)
-      navItems.forEach((item) => {
-        item.addEventListener("click", () => {
-          navLinks.classList.remove("ativo");
-        });
-      });
-    </script>
     <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
     <script>
     const toggle = document.getElementById("menu-toggle");
