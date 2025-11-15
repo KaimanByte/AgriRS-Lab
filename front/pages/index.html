@@ -206,6 +206,125 @@
             </div>
         </block>
     </footer>
+   <script>
+// 🌍 Dicionário de traduções
+const traducoes = {
+  pt: {
+    logoSubtitulo: "Instituto nacional de pesquisas espaciais - INPE",
+    exploreTitulo: "Explore Nosso Trabalho",
+    exploreTexto: "Descubra nossas pesquisas, projetos e descobertas mais recentes em sensoriamento remoto aplicado à agricultura.",
+    cards: [
+      { titulo: "Notícias", texto: "Acompanhe as últimas novidades e descobertas do laboratório.", botao: "Saiba Mais" },
+      { titulo: "Projetos", texto: "Explore nossos projetos de pesquisa em andamento e concluídos.", botao: "Saiba Mais" },
+      { titulo: "Publicações", texto: "Acesse nossa biblioteca de artigos científicos e pesquisas.", botao: "Saiba Mais" }
+    ],
+    menu: ["Início", "Sobre", "Vagas", "Membros", "Projetos", "Notícias", "Publicações", "Contato"],
+    footer: {
+      sobre: "Sobre",
+      sobreLinks: ["O AgriRSlab", "Nossa equipe", "Colaboradores", "Oportunidades"],
+      atuacao: "Atuação",
+      atuacaoLinks: ["Área de Pesquisa", "Projetos", "Serviços", "Parcerias"],
+      colaboradores: "Colaboradores",
+      descricao: "Laboratório de Sensoriamento Remoto Agrícola"
+    }
+  },
+  en: {
+    logoSubtitulo: "National Institute for Space Research - INPE",
+    exploreTitulo: "Explore Our Work",
+    exploreTexto: "Discover our latest research, projects, and findings in agricultural remote sensing.",
+    cards: [
+      { titulo: "News", texto: "Follow the lab’s latest updates and discoveries.", botao: "Learn More" },
+      { titulo: "Projects", texto: "Explore our ongoing and completed research projects.", botao: "Learn More" },
+      { titulo: "Publications", texto: "Access our library of scientific papers and research.", botao: "Learn More" }
+    ],
+    menu: ["Home", "About", "Opportunities", "Members", "Projects", "News", "Publications", "Contact"],
+    footer: {
+      sobre: "About",
+      sobreLinks: ["AgriRSlab", "Our Team", "Collaborators", "Opportunities"],
+      atuacao: "Activities",
+      atuacaoLinks: ["Research Area", "Projects", "Services", "Partnerships"],
+      colaboradores: "Collaborators",
+      descricao: "Agricultural Remote Sensing Laboratory"
+    }
+  }
+};
+
+// 🔁 Função principal para aplicar a tradução
+function mudarIdioma(idioma) {
+  localStorage.setItem("idiomaSelecionado", idioma);
+  const t = traducoes[idioma];
+
+  // Logo subtítulo
+  const subtitulo = document.querySelector(".subtitulo");
+  if (subtitulo) subtitulo.textContent = t.logoSubtitulo;
+
+  // Texto principal
+  const tituloPrincipal = document.querySelector("#inicioCard h2");
+  if (tituloPrincipal) tituloPrincipal.textContent = t.exploreTitulo;
+
+  const textoPrincipal = document.querySelector("#inicioCard p");
+  if (textoPrincipal) textoPrincipal.textContent = t.exploreTexto;
+
+  // Cards (Notícias, Projetos, Publicações)
+  const cards = document.querySelectorAll(".publicacao");
+  cards.forEach((card, i) => {
+    if (!t.cards[i]) return;
+    const h3 = card.querySelector("h3");
+    const p = card.querySelector("p");
+    const a = card.querySelector("a");
+    if (h3) h3.textContent = t.cards[i].titulo;
+    if (p) p.textContent = t.cards[i].texto;
+    if (a) a.textContent = t.cards[i].botao;
+  });
+
+  // Menu de navegação
+  const navItems = document.querySelectorAll("#nav-links li a");
+  navItems.forEach((item, i) => {
+    if (t.menu[i]) item.textContent = t.menu[i];
+  });
+
+  // Footer
+  const tituloSobre = document.querySelector("#divThree .titulo24");
+  if (tituloSobre) tituloSobre.textContent = t.footer.sobre;
+
+  const tituloAtuacao = document.querySelector("#divFour .titulo24");
+  if (tituloAtuacao) tituloAtuacao.textContent = t.footer.atuacao;
+
+  const tituloColaboradores = document.querySelector("#divFive .titulo24");
+  if (tituloColaboradores) tituloColaboradores.textContent = t.footer.colaboradores;
+
+  // Links do footer
+  const sobreLinks = document.querySelectorAll("#divThree ul li a");
+  sobreLinks.forEach((link, i) => {
+    if (t.footer.sobreLinks[i]) link.textContent = t.footer.sobreLinks[i];
+  });
+
+  const atuacaoLinks = document.querySelectorAll("#divFour ul li a");
+  atuacaoLinks.forEach((link, i) => {
+    if (t.footer.atuacaoLinks[i]) link.textContent = t.footer.atuacaoLinks[i];
+  });
+
+  // Descrição do footer
+  const descricaoFooter = document.querySelector("#textolado .texto16");
+  if (descricaoFooter) descricaoFooter.textContent = t.footer.descricao;
+}
+
+// 🌐 Criação automática do seletor de idioma
+document.addEventListener("DOMContentLoaded", () => {
+  const seletor = document.createElement("select");
+  seletor.innerHTML = `
+    <option value="pt">🇧🇷 Português</option>
+    <option value="en">🇺🇸 English</option>
+  `;
+  seletor.style.cssText = "position:fixed;top:10px;right:15px;padding:4px;border-radius:6px;";
+  seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
+  seletor.addEventListener("change", e => mudarIdioma(e.target.value));
+  document.body.appendChild(seletor);
+
+  mudarIdioma(seletor.value);
+});
+</script>
+
     <script>
     const toggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");
