@@ -58,7 +58,7 @@
 <h2 class="subtexto"> Conheça nossos integrantes! </h2>
 
 
-    <div class="fita"> Coordenadores</div>
+    <div id="fitaCoordenadores" class="fita"> Coordenadores</div>
 
     <div class="card">
         <div class="cardMembro">
@@ -76,7 +76,7 @@
             </div>
         </div>
     </div>
-    <div class="fita"> Pesquisadores Associados </div>
+    <div id="fitaAssociados" class="fita"> Pesquisadores Associados </div>
 
     <div class="pesquisadores">
         <div class="card">
@@ -176,7 +176,7 @@
             </div>
         </div>
     </div>
-    <div class="fita"> Bolsistas </div>
+    <div id="fitaBolsistas" class="fita"> Bolsistas </div>
 
 
     <div class="bolsistas">
@@ -266,7 +266,7 @@
     </div>
 
 
-    <div class="fita"> Doutorandos </div>
+    <div id="fitaDoutorandos" class="fita"> Doutorandos </div>
 
     <div class="doutorandos">
 
@@ -429,7 +429,7 @@
         </div>
     </div>
 
-    <div class="fita"> Mestrandos </div>
+    <div id="fitaMestrandos" class="fita"> Mestrandos </div>
 
     <div class="mestrandos">
 
@@ -558,6 +558,129 @@
             </div>
         </block>
     </footer>
+
+   <script>
+const traducoes = {
+  pt: {
+    imagemFundo: "Membros",
+    subtexto: "Conheça nossos integrantes!",
+    fita: "Coordenadores",
+    fitaAssociados: "Pesquisadores Associados",
+    fitaBolsistas: "Bolsistas",
+    fitaDoutorandos: "Doutorandos",
+    fitaMestrandos: "Mestrandos",
+    menu: ["Início", "Sobre", "Vagas", "Membros", "Projetos", "Notícias", "Publicações", "Contato"],
+    footer: {
+      sobre: "Sobre",
+      sobreLinks: ["O AgriRSlab", "Nossa equipe", "Colaboradores", "Oportunidades"],
+      atuacao: "Atuação",
+      atuacaoLinks: ["Área de Pesquisa", "Projetos", "Serviços", "Parcerias"],
+      colaboradores: "Colaboradores",
+      descricao: "Laboratório de Sensoriamento Remoto Agrícola"
+    }
+  },
+  en: {
+    imagemFundo: "Members",
+    subtexto: "Meet our team!",
+    fita: "Coordinators",
+    fitaAssociados: "Associated Researchers",
+    fitaBolsistas: "Research Fellows",
+    fitaDoutorandos: "PhD Candidates",
+    fitaMestrandos: "Master's Students",
+    menu: ["Home", "About", "Opportunities", "Members", "Projects", "News", "Publications", "Contact"],
+    footer: {
+      sobre: "About",
+      sobreLinks: ["AgriRSlab", "Our team", "Collaborators", "Opportunities"],
+      atuacao: "Activities",
+      atuacaoLinks: ["Research Area", "Projects", "Services", "Partnerships"],
+      colaboradores: "Collaborators",
+      descricao: "Agricultural Remote Sensing Laboratory"
+    }
+  }
+};
+
+function mudarIdioma(idioma) {
+  localStorage.setItem("idiomaSelecionado", idioma);
+  const t = traducoes[idioma];
+
+  // Título e subtítulo
+  const titulo = document.querySelector("#imagemFundo");
+  if (titulo) titulo.textContent = t.imagemFundo;
+
+  const subtitulo = document.querySelector(".subtexto");
+  if (subtitulo) subtitulo.textContent = t.subtexto;
+
+  // Fitas
+  const fitas = [
+    {id: "fitaCoordenadores", texto: t.fita},
+    {id: "fitaAssociados", texto: t.fitaAssociados},
+    {id: "fitaBolsistas", texto: t.fitaBolsistas},
+    {id: "fitaDoutorandos", texto: t.fitaDoutorandos},
+    {id: "fitaMestrandos", texto: t.fitaMestrandos}
+  ];
+  fitas.forEach(f => {
+    const el = document.querySelector(`#${f.id}`);
+    if (el) el.textContent = f.texto;
+  });
+
+  // Menu
+  const navItems = document.querySelectorAll("#nav-links li a");
+  navItems.forEach((item, i) => {
+    if (t.menu[i]) item.textContent = t.menu[i];
+  });
+
+  // Footer
+  const tituloSobre = document.querySelector("#divThree .titulo24");
+  if (tituloSobre) tituloSobre.textContent = t.footer.sobre;
+
+  const tituloAtuacao = document.querySelector("#divFour .titulo24");
+  if (tituloAtuacao) tituloAtuacao.textContent = t.footer.atuacao;
+
+  const tituloColaboradores = document.querySelector("#divFive .titulo24");
+  if (tituloColaboradores) tituloColaboradores.textContent = t.footer.colaboradores;
+
+  const sobreLinks = document.querySelectorAll("#divThree ul li a");
+  sobreLinks.forEach((link, i) => {
+    if (t.footer.sobreLinks[i]) link.textContent = t.footer.sobreLinks[i];
+  });
+
+  const atuacaoLinks = document.querySelectorAll("#divFour ul li a");
+  atuacaoLinks.forEach((link, i) => {
+    if (t.footer.atuacaoLinks[i]) link.textContent = t.footer.atuacaoLinks[i];
+  });
+
+  const descricaoFooter = document.querySelector("#textolado .texto16");
+  if (descricaoFooter) descricaoFooter.textContent = t.footer.descricao;
+}
+
+// Seletor de idioma
+document.addEventListener("DOMContentLoaded", () => {
+  const seletor = document.createElement("select");
+  seletor.innerHTML = `
+    <option value="pt">🇧🇷 Português</option>
+    <option value="en">🇺🇸 English</option>
+  `;
+  seletor.style.cssText = `
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    padding: 4px;
+    border-radius: 6px;
+    z-index: 9999;
+    background: white;
+    border: 1px solid #ccc;
+  `;
+  seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
+  seletor.addEventListener("change", e => mudarIdioma(e.target.value));
+  document.body.appendChild(seletor);
+
+  mudarIdioma(seletor.value);
+});
+</script>
+
+
+
+
     <script>
     const toggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");

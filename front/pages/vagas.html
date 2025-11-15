@@ -69,110 +69,9 @@
         </div>
     </section>
 
-    <div id="align-cards-container">
-   <section class="cards-container">
-  <div class="card">
-    <div class="card-header"><h3>Estágio</h3></div>
-    <div class="card-body">
-      <p>Oportunidades para estudantes de graduação adquirirem experiência prática em pesquisa ambiental</p>
-      <h4>Requisitos:</h4>
-      <ul>
-        <li>Cursando graduação em áreas relacionadas...</li>
-        <li>Conhecimento básico em programação...</li>
-        <li>Interesse em pesquisa ambiental e tecnologias espaciais</li>
-        <li>Disponibilidade de 20h semanais</li>
-      </ul>
-      <h4>Processo de Seleção:</h4>
-      <ol>
-        <li>Enviar currículo e carta de motivação</li>
-        <li>Histórico acadêmico atualizado</li>
-        <li>Carta de recomendação de um professor</li>
-        <li>Entrevista com a equipe de pesquisa</li>
-      </ol>
-          <p><span class="prazo-verde">Prazo:</span> A ser definido</p>
-
-      <div class="centro">
-      <a href="mailto:agrirslab@gmail.com" class="card-button">Contato: agrirslab@gmail.com</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header"><h3>Iniciação Científica</h3></div>
-    <div class="card-body">
-      <p>Programa de bolsas para estudantes desenvolverem projetos de pesquisa</p>
-      <h4>Requisitos:</h4>
-      <ul>
-        <li>Estudante de graduação a partir do 3º semestre</li>
-        <li>Coeficiente de rendimento mínimo de 7,0</li>
-        <li>Dedicação de 20h semanais ao projeto</li>
-        <li>Participação em eventos científicos</li>
-      </ul>
-      <h4>Processo de Seleção:</h4>
-      <ol>
-        <li>Submissão de proposta de projeto</li>
-        <li>Currículo Lattes atualizado</li>
-        <li>Carta de aceite de um orientador</li>
-        <li>Avaliação pela comissão científica</li>
-      </ol>
-          <p><span class="prazo-verde">Prazo:</span> A ser definido</p>
-
-      <div class="centro">
-      <a href="mailto:agrirslab@gmail.com" class="card-button">Contato: agrirslab@gmail.com</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header"><h3>Pós-graduação</h3></div>
-    <div class="card-body">
-      <p>Mestrado e doutorado em colaboração com universidades parceiras</p>
-      <h4>Requisitos:</h4>
-      <ul>
-        <li>Graduação completa em área relacionadas</li>
-        <li>Proficiência em inglês</li>
-        <li>Proposta de pesquisa alinhada com as linhas do laboratório</li>
-        <li>Aprovação no processo seletivo na universidade parceira </li>
-      </ul>
-      <h4>Processo de Seleção:</h4>
-      <ol>
-        <li>Inscrição no programa de pós-graduação da universidade</li>
-        <li>Definição do orientador do laboratório</li>
-        <li>Apresentação da proposta de pesquisa</li>
-        <li>Entrevista e prova específica</li>
-      </ol>
-          <p><span class="prazo-verde">Prazo:</span> A ser definido</p>
-
-      <div class="centro">
-      <a href="mailto:agrirslab@gmail.com" class="card-button">Contato: agrirslab@gmail.com</a>
-      </div>
-    </div>
-  </div>
-
-  
-  <div class="card">
-    <div class="card-header"><h3>Parcerias</h3></div>
-    <div class="card-body">
-        <p>
-        Parcerias fortalecem a integração entre academia, empresas e instituições, criando
-        oportunidade de crescimento profissional e científico. Através disso, é possível
-        promover estágios, projetos e eventos que ampliam o desenvolvimento de todos os envolvidos.
-      </p>
-
-      <p>
-        Estamos abertos a novas parcerias com empresas, órgãos públicos e instituições de
-        ensino. Se você tem interesse em colaborar, entre em contato conosco.      
-      </p>
-      
-       <div class="centro">
-        <a href="mailto:agrirslab@gmail.com" class="card-button">
-          Contato: agrirslab@gmail.com
-        </a>
-      </div>
-      
+    <section class="cards-container">
+  <!-- Cards serão adicionados aqui pelo JS -->
 </section>
-</div>
-    </main>
 
     <footer>
         <div id="footer-brasil"></div>
@@ -281,8 +180,10 @@
             </div>
         </block>
     </footer>
-
-    <script>
+<!-- ========================================= -->
+<!-- 🔄 SCRIPT 1 — TRADUÇÃO (INTERNACIONALIZAÇÃO) -->
+<!-- ========================================= -->
+<script>
 // 🔄 Dicionário de traduções
 const traducoes = {
   pt: {
@@ -335,44 +236,33 @@ function mudarIdioma(idioma) {
   const botao = document.querySelector(".search-btn");
   if (botao) botao.title = t.pesquisar;
 
-  // Header - menu de navegação
+  // Header
   const navItems = document.querySelectorAll("#nav-links li a");
   navItems.forEach((item, i) => {
     if (t.menu[i]) item.textContent = t.menu[i];
   });
 
-  // Footer - títulos
-  const tituloSobre = document.querySelector("#divThree .titulo24");
-  if (tituloSobre) tituloSobre.textContent = t.footer.sobre;
+  // Footer
+  document.querySelector("#divThree .titulo24").textContent = t.footer.sobre;
+  document.querySelector("#divFour .titulo24").textContent = t.footer.atuacao;
+  document.querySelector("#divFive .titulo24").textContent = t.footer.colaboradores;
 
-  const tituloAtuacao = document.querySelector("#divFour .titulo24");
-  if (tituloAtuacao) tituloAtuacao.textContent = t.footer.atuacao;
-
-  const tituloColaboradores = document.querySelector("#divFive .titulo24");
-  if (tituloColaboradores) tituloColaboradores.textContent = t.footer.colaboradores;
-
-  // Footer - links
-  const sobreLinks = document.querySelectorAll("#divThree ul li a");
-  sobreLinks.forEach((link, i) => {
+  document.querySelectorAll("#divThree ul li a").forEach((link, i) => {
     if (t.footer.sobreLinks[i]) link.textContent = t.footer.sobreLinks[i];
   });
 
-  const atuacaoLinks = document.querySelectorAll("#divFour ul li a");
-  atuacaoLinks.forEach((link, i) => {
+  document.querySelectorAll("#divFour ul li a").forEach((link, i) => {
     if (t.footer.atuacaoLinks[i]) link.textContent = t.footer.atuacaoLinks[i];
   });
 
-  // Footer - descrição institucional
   const descricaoFooter = document.querySelector("#textolado .texto16");
   if (descricaoFooter) descricaoFooter.textContent = t.footer.descricao;
 
-  // Recarrega cards no idioma selecionado (se estiver usando API dinâmica)
-  if (typeof carregarOportunidades === "function") {
-    carregarOportunidades();
-  }
+  // Recarregar cards no idioma selecionado
+  if (typeof carregarOportunidades === "function") carregarOportunidades();
 }
 
-// 🌐 Criação automática do seletor de idioma
+// 🌐 Criar seletor de idioma automaticamente
 document.addEventListener("DOMContentLoaded", () => {
   const seletor = document.createElement("select");
   seletor.innerHTML = `
@@ -388,132 +278,132 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-
-
-    <script>
-    /* 🔹 SCRIPT DO MENU HAMBURGUER */
-    const toggle = document.getElementById("menu-toggle");
-    const navLinks = document.getElementById("nav-links");
-    const navItems = document.querySelectorAll("#nav-links a");
-
-    toggle.addEventListener("click", () => {
-      navLinks.classList.toggle("ativo");
-    });
-
-    // Fecha o menu ao clicar em um link (melhor UX)
-    navItems.forEach(item => {
-      item.addEventListener("click", () => {
-        navLinks.classList.remove("ativo");
-      });
-    });
-  </script>
-  <script>
-  const API_URL = "http://localhost:3030/oportunidades";
-
-  // Função para criar o card de oportunidade
-  function criarCard(oportunidade) {
-    const card = document.createElement('div');
-    card.classList.add('card');
-
-    // Considera como "Parceria" se não houver requisitos nem processo de seleção
-    const isParceria = !oportunidade.requisitos && !oportunidade.processo_selecao;
-
-    let requisitosHTML = !isParceria && oportunidade.requisitos
-      ? `<h4>Requisitos:</h4><ul>${oportunidade.requisitos}</ul>`
-      : '';
-
-    let processoHTML = !isParceria && oportunidade.processo_selecao
-      ? `<h4>Processo de Seleção:</h4><ol>${oportunidade.processo_selecao}</ol>`
-      : '';
-
-    let prazoHTML = oportunidade.prazo
-      ? `<p><span class="prazo-verde">Prazo:</span> ${oportunidade.prazo}</p>`
-      : '';
-
-    card.innerHTML = `
-      <div class="card-header">
-        <h3>${oportunidade.titulo || "Sem título"}</h3>
-      </div>
-      <div class="card-body">
-        <p>${oportunidade.descricao || ""}</p>
-        ${requisitosHTML}
-        ${processoHTML}
-        ${prazoHTML}
-        <div class="centro">
-          <a href="mailto:${oportunidade.contato}" class="card-button">
-            Contato: ${oportunidade.contato || "Não informado"}
-          </a>
-        </div>
-      </div>
-    `;
-
-    return card;
-  }
-
-  // Função para carregar todas as oportunidades
-  async function carregarOportunidades() {
-    try {
-      console.log("Carregando oportunidades...");
-      const response = await fetch(API_URL);
-      const oportunidades = await response.json();
-      console.log("Oportunidades recebidas:", oportunidades);
-
-      const container = document.querySelector('.cards-container');
-      container.innerHTML = '';
-
-      oportunidades.forEach(oportunidade => {
-        oportunidade.requisitos = oportunidade.requisitos
-          ? oportunidade.requisitos.split(';').map(item => `<li>${item.trim()}</li>`).join('')
-          : '';
-        oportunidade.processo_selecao = oportunidade.processo_selecao
-          ? oportunidade.processo_selecao.split(';').map(item => `<li>${item.trim()}</li>`).join('')
-          : '';
-
-        const card = criarCard(oportunidade);
-        container.appendChild(card);
-      });
-    } catch (error) {
-      console.error("Erro ao carregar oportunidades:", error);
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', carregarOportunidades);
-</script>
+<!-- ============================== -->
+<!-- 🍔 SCRIPT 2 — MENU HAMBÚRGUER -->
+<!-- ============================== -->
 <script>
-  // Função para remover acentos
-  function removerAcentos(texto) {
-    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  }
+const toggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+const navItems = document.querySelectorAll("#nav-links a");
 
-  // Seleciona os elementos do seu HTML
-  const campoBusca = document.querySelector('input[placeholder="Pesquise"]');
-  const botaoBusca = document.querySelector('.search-btn');
+toggle.addEventListener("click", () => {
+  navLinks.classList.toggle("ativo");
+});
 
-  // Função para filtrar os cards
-  function filtrarCards() {
-    const termo = removerAcentos(campoBusca.value.trim());
-    const cards = document.querySelectorAll(".card");
-
-    cards.forEach(card => {
-      const titulo = removerAcentos(card.querySelector(".card-header h3").textContent);
-      const descricao = removerAcentos(card.querySelector(".card-body p").textContent);
-
-      const corresponde = titulo.includes(termo) || descricao.includes(termo);
-      card.style.display = corresponde || termo === "" ? "block" : "none";
-    });
-  }
-
-  // Evento de clique na lupa
-  botaoBusca.addEventListener("click", filtrarCards);
-
-  // Evento de Enter no campo de busca
-  campoBusca.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      filtrarCards();
-    }
+navItems.forEach(item => {
+  item.addEventListener("click", () => {
+    navLinks.classList.remove("ativo");
   });
+});
 </script>
+
+<!-- =============================== -->
+<!-- 📌 SCRIPT 3 — CARREGAR CARDS    -->
+<!-- =============================== -->
+<script>
+const API_URL = "http://localhost:3030/oportunidades";
+
+function criarCard(o) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  const requisitosHTML = o.requisitos
+    ? `<h4>Requisitos:</h4><ul>${o.requisitos}</ul>`
+    : "";
+
+  const processoHTML = o.processo_selecao
+    ? `<h4>Processo de Seleção:</h4><ol>${o.processo_selecao}</ol>`
+    : "";
+
+  const prazoHTML = o.prazo
+    ? `<p><span class="prazo-verde">Prazo:</span> ${o.prazo}</p>`
+    : "";
+
+  card.innerHTML = `
+    <div class="card-header">
+      <h3>${o.titulo || "Sem título"}</h3>
+    </div>
+    <div class="card-body">
+      <p>${o.descricao || ""}</p>
+      ${requisitosHTML}
+      ${processoHTML}
+      ${prazoHTML}
+      <div class="centro">
+        <a href="mailto:${o.contato}" class="card-button">
+          Contato: ${o.contato || "Não informado"}
+        </a>
+      </div>
+    </div>
+  `;
+
+  return card;
+}
+
+async function carregarOportunidades() {
+  try {
+    const response = await fetch(API_URL);
+    const oportunidades = await response.json();
+
+    const container = document.querySelector('.cards-container');
+    container.innerHTML = '';
+
+    oportunidades.forEach(o => {
+      // Transformar listas em <li>
+      o.requisitos = o.requisitos
+        ? o.requisitos.split(';').map(i => `<li>${i.trim()}</li>`).join('')
+        : "";
+
+      o.processo_selecao = o.processo_selecao
+        ? o.processo_selecao.split(';').map(i => `<li>${i.trim()}</li>`).join('')
+        : "";
+
+      const card = criarCard(o);
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Erro ao carregar oportunidades:", error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", carregarOportunidades);
+</script>
+
+<!-- ================================ -->
+<!-- 🔍 SCRIPT 4 — FILTRO DE BUSCA   -->
+<!-- ================================ -->
+<script>
+function removerAcentos(txt) {
+  return txt.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+const campoBusca = document.querySelector('input[placeholder="Pesquise"]');
+const botaoBusca = document.querySelector(".search-btn");
+
+function filtrarCards() {
+  const termo = removerAcentos(campoBusca.value.trim());
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+    const titulo = removerAcentos(card.querySelector("h3").textContent);
+    const descricao = removerAcentos(card.querySelector("p").textContent);
+
+    const match = titulo.includes(termo) || descricao.includes(termo);
+    card.style.display = match || termo === "" ? "block" : "none";
+  });
+}
+
+botaoBusca.addEventListener("click", filtrarCards);
+
+campoBusca.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    filtrarCards();
+  }
+});
+</script>
+
+    
+
     <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 </body>
 </html>
