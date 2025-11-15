@@ -240,7 +240,7 @@
       art.className = "publicacao card";
       art.innerHTML = `
         <img src="${pub.imagem_url || '/imagens/Publicacoes/pb01.png'}" alt="${(pub.titulo || '').replace(/"/g,'')}" />
-        <h3>${pub.titulo || ''}</h3>
+        <h3>${pub.titulo || ''} (${pub.ano || ''})</h3>
         <p>${pub.descricao || ''}</p>
         <div class="botoes">
           ${pub.pdf_url ? `<a href="${pub.pdf_url}" target="_blank" rel="noopener">PDF</a>` : ''}

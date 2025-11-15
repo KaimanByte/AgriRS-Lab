@@ -32,7 +32,7 @@
 
       <form id="formAdd">
         <input type="text" id="titulo" placeholder="TÍTULO" required/>
-        <input type="text" id="ano" placeholder="ANO" required/>
+        <input type="date" id="ano" placeholder="ANO" required/>
         <textarea type="text" id="descricao" placeholder="DESCRIÇÃO" required></textarea>
         <div style="display: flex; align-items: center; width: 100%;">
           <input type="text" id="imagem_url" placeholder="URL DA IMAGEM (imagem_url)" style="flex: 1;"/>
@@ -44,7 +44,7 @@
         <input type="text" id="citacao_url" placeholder="URL DA CITAÇÃO (citacao_url)"/>
         <input type="text" id="doi_url" placeholder="URL DOI (doi_url)"/>
         <div class="button-group">
-          <button type="submit" class="btn-adicionar">Adicionar</button>
+          <button type="submit" class="btn-adicionar" id="btnSubmit">Adicionar</button>
           <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
         </div>
       </form>
@@ -60,6 +60,7 @@
   <script>
 const API = "http://localhost:3030/publicacao";
 let PUBLICACOES = {};
+let editandoId = null;
 
 function formatDate(v) {
   const d = new Date(v);
@@ -107,6 +108,7 @@ document.getElementById("formAdd").addEventListener("submit", async e => {
   e.preventDefault();
   const dados = ["titulo", "ano", "descricao", "pdf_url", "citacao_url", "doi_url"]
     .reduce((acc, id) => (acc[id] = document.getElementById(id).value, acc), {});
+  dados.ano = new Date(dados.ano).getFullYear();
 
   const fileInput = document.getElementById("imagem_file");
   if (fileInput.files.length > 0) {
@@ -115,42 +117,40 @@ document.getElementById("formAdd").addEventListener("submit", async e => {
     reader.onload = async () => {
       dados.imagem_url = reader.result; // base64
       try {
-        await fetch(API, {
-          method: "POST",
+        const method = editandoId ? "PUT" : "POST";
+        const url = editandoId ? `${API}/${editandoId}` : API;
+        await fetch(url, {
+          method: method,
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dados)
         });
-        e.target.reset();
-        // Resetar preview da imagem
-        const preview = document.getElementById("preview");
-        preview.src = "";
-        preview.style.display = "none";
-        // Resetar input file
-        document.getElementById("imagem_file").value = "";
+        alert(editandoId ? "Publicação atualizada com sucesso" : "Publicação adicionada com sucesso");
+        limparFormulario();
+        editandoId = null;
+        document.getElementById("btnSubmit").textContent = "Adicionar";
         carregar();
       } catch (err) {
-        console.error("Erro ao adicionar publicação:", err);
+        alert("Erro ao salvar publicação: " + err.message);
       }
     };
     reader.readAsDataURL(file);
   } else {
     dados.imagem_url = document.getElementById("imagem_url").value;
     try {
-      await fetch(API, {
-        method: "POST",
+      const method = editandoId ? "PUT" : "POST";
+      const url = editandoId ? `${API}/${editandoId}` : API;
+      await fetch(url, {
+        method: method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados)
       });
-      e.target.reset();
-      // Resetar preview da imagem
-      const preview = document.getElementById("preview");
-      preview.src = "";
-      preview.style.display = "none";
-      // Resetar input file
-      document.getElementById("imagem_file").value = "";
+      alert(editandoId ? "Publicação atualizada com sucesso" : "Publicação adicionada com sucesso");
+      limparFormulario();
+      editandoId = null;
+      document.getElementById("btnSubmit").textContent = "Adicionar";
       carregar();
     } catch (err) {
-      console.error("Erro ao adicionar publicação:", err);
+      alert("Erro ao salvar publicação: " + err.message);
     }
   }
 });
@@ -158,23 +158,34 @@ document.getElementById("formAdd").addEventListener("submit", async e => {
 function editar(id) {
   const pub = PUBLICACOES[id];
   if (!pub) return;
-  const campos = ["titulo", "ano", "descricao", "imagem_url", "pdf_url", "citacao_url", "doi_url"];
-  const atualizados = {};
-  for (let campo of campos) {
-    const novo = prompt(`Novo ${campo}:`, pub[campo] || "");
-    if (novo === null) return;
-    atualizados[campo] = novo;
+  if (confirm("Deseja editar esta publicação?")) {
+    editandoId = id;
+    document.getElementById("titulo").value = pub.titulo;
+    document.getElementById("ano").value = pub.ano + "-01-01";
+    document.getElementById("descricao").value = pub.descricao;
+    document.getElementById("imagem_url").value = pub.imagem_url;
+    document.getElementById("pdf_url").value = pub.pdf_url;
+    document.getElementById("citacao_url").value = pub.citacao_url;
+    document.getElementById("doi_url").value = pub.doi_url;
+    document.getElementById("btnSubmit").textContent = "Atualizar";
+    // Mostrar preview se houver imagem
+    if (pub.imagem_url) {
+      const preview = document.getElementById("preview");
+      preview.src = pub.imagem_url;
+      preview.style.display = "block";
+    }
+    document.getElementById("formAdd").scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
-  fetch(`${API}/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(atualizados)
-  }).then(() => carregar());
 }
 
 function excluir(id) {
   if (confirm("Confirma exclusão?")) {
-    fetch(`${API}/${id}`, { method: "DELETE" }).then(() => carregar());
+    fetch(`${API}/${id}`, { method: "DELETE" })
+      .then(() => {
+        alert("Publicação excluída com sucesso");
+        carregar();
+      })
+      .catch(err => alert("Erro ao excluir publicação: " + err.message));
   }
 }
 
@@ -192,6 +203,9 @@ function limparFormulario() {
   preview.style.display = "none";
   // Resetar input file
   document.getElementById("imagem_file").value = "";
+  // Resetar estado de edição
+  editandoId = null;
+  document.getElementById("btnSubmit").textContent = "Adicionar";
 }
 
 

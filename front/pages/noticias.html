@@ -209,9 +209,8 @@
         card.innerHTML = `
           <img src="${img}" alt="${(n.titulo || '').replace(/"/g, '')}">
           <div class="card-content">
-            <h2>${n.titulo || ''}</h2>
+            <h2>${n.titulo || ''} (${data})</h2>
             <p class="card-descricao">${n.descricao || ''}</p>
-            <p><small class="text-muted">Data: ${data}</small></p>
             <div class="botoes">
               <a href="${url_leiamais}" target="_blank" rel="noopener noreferrer">Leia mais</a>
             </div>
