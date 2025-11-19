@@ -175,6 +175,101 @@
             </div>
         </block>
     </footer>
+<script>
+const traducoes = {
+  pt: {
+    noticias: "Notícias",
+    titulo: "Fique por dentro das últimas notícias!",
+    pesquise: "Pesquise",
+    pesquisar: "Pesquisar",
+    menu: ["Início", "Sobre", "Vagas", "Membros", "Projetos", "Notícias", "Publicações", "Contato"],
+    footer: {
+      sobre: "Sobre",
+      sobreLinks: ["O AgriRSlab", "Nossa equipe", "Colaboradores", "Oportunidades"],
+      atuacao: "Atuação",
+      atuacaoLinks: ["Área de Pesquisa", "Projetos", "Serviços", "Parcerias"],
+      colaboradores: "Colaboradores",
+      descricao: "Laboratório de Sensoriamento Remoto Agrícola"
+    }
+  },
+  en: {
+    noticias: "News",
+    titulo: "Stay up to date with the latest news!",
+    pesquise: "Search",
+    pesquisar: "Search",
+    menu: ["Home", "About", "Opportunities", "Members", "Projects", "News", "Publications", "Contact"],
+    footer: {
+      sobre: "About",
+      sobreLinks: ["AgriRSlab", "Our team", "Collaborators", "Opportunities"],
+      atuacao: "Activities",
+      atuacaoLinks: ["Research Area", "Projects", "Services", "Partnerships"],
+      colaboradores: "Collaborators",
+      descricao: "Agricultural Remote Sensing Laboratory"
+    }
+  }
+};
+
+function mudarIdioma(idioma) {
+  localStorage.setItem("idiomaSelecionado", idioma);
+  const t = traducoes[idioma];
+
+  // Conteúdo principal
+  const titulo = document.querySelector("#imagemFundo");
+  if (titulo) titulo.textContent = t.noticias;
+
+  const subtitulo = document.querySelector(".titulo-academico");
+  if (subtitulo) subtitulo.textContent = t.titulo;
+
+  const input = document.querySelector("#search-input");
+  if (input) input.placeholder = t.pesquise;
+
+  const botao = document.querySelector(".search-btn");
+  if (botao) botao.title = t.pesquisar;
+
+  // Header
+  const navItems = document.querySelectorAll("#nav-links li a");
+  navItems.forEach((item, i) => {
+    if (t.menu[i]) item.textContent = t.menu[i];
+  });
+
+  // Footer
+  document.querySelector("#divThree .titulo24").textContent = t.footer.sobre;
+  document.querySelector("#divFour .titulo24").textContent = t.footer.atuacao;
+  document.querySelector("#divFive .titulo24").textContent = t.footer.colaboradores;
+
+  document.querySelectorAll("#divThree ul li a").forEach((link, i) => {
+    if (t.footer.sobreLinks[i]) link.textContent = t.footer.sobreLinks[i];
+  });
+
+  document.querySelectorAll("#divFour ul li a").forEach((link, i) => {
+    if (t.footer.atuacaoLinks[i]) link.textContent = t.footer.atuacaoLinks[i];
+  });
+
+  const descricaoFooter = document.querySelector("#textolado .texto16");
+  if (descricaoFooter) descricaoFooter.textContent = t.footer.descricao;
+
+  // Recarregar notícias no idioma selecionado (se necessário)
+  if (typeof carregarNoticias === "function") carregarNoticias();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const seletor = document.createElement("select");
+  seletor.innerHTML = `
+    <option value="pt">🇧🇷 Português</option>
+    <option value="en">🇺🇸 English</option>
+  `;
+  seletor.style.cssText = "position:fixed;top:10px;right:15px;padding:4px;border-radius:6px;z-index:999;";
+  seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
+  seletor.addEventListener("change", e => mudarIdioma(e.target.value));
+  document.body.appendChild(seletor);
+
+  mudarIdioma(seletor.value);
+});
+</script>
+
+
+
+
     <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
     <script>
     const API = 'http://localhost:3030/noticias';
@@ -209,8 +304,9 @@
         card.innerHTML = `
           <img src="${img}" alt="${(n.titulo || '').replace(/"/g, '')}">
           <div class="card-content">
-            <h2>${n.titulo || ''} (${data})</h2>
+            <h2>${n.titulo || ''}</h2>
             <p class="card-descricao">${n.descricao || ''}</p>
+            <p><small class="text-muted">Data: ${data}</small></p>
             <div class="botoes">
               <a href="${url_leiamais}" target="_blank" rel="noopener noreferrer">Leia mais</a>
             </div>

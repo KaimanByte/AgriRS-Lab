@@ -54,7 +54,7 @@
   <section class="pesquisa">
     <h2 class="titulo-academico">Acompanhe nossos trabalhos acadêmicos</h2>
     <div class="pesquisa2">
-      <input type="text" placeholder="Pesquise">
+      <input id="search-input" type="text" placeholder="Pesquise">
       <button class="search-btn" aria-label="Pesquisar">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-linecap="round"
           stroke-linejoin="round">
@@ -299,6 +299,98 @@
 
     carregar();
   });
+</script>
+
+<script>
+const traducoes = {
+  pt: {
+    publicacoes: "Publicações",
+    titulo: "Acompanhe nossos trabalhos acadêmicos",
+    pesquise: "Pesquise",
+    pesquisar: "Pesquisar",
+    menu: ["Início", "Sobre", "Vagas", "Membros", "Projetos", "Notícias", "Publicações", "Contato"],
+    footer: {
+      sobre: "Sobre",
+      sobreLinks: ["O AgriRSlab", "Nossa equipe", "Colaboradores", "Oportunidades"],
+      atuacao: "Atuação",
+      atuacaoLinks: ["Área de Pesquisa", "Projetos", "Serviços", "Parcerias"],
+      colaboradores: "Colaboradores",
+      descricao: "Laboratório de Sensoriamento Remoto Agrícola"
+    }
+  },
+  en: {
+    publications: "Publications",
+    titulo: "Follow our academic works!",
+    pesquise: "Search",
+    pesquisar: "Search",
+    menu: ["Home", "About", "Opportunities", "Members", "Projects", "News", "Publications", "Contact"],
+    footer: {
+      sobre: "About",
+      sobreLinks: ["AgriRSlab", "Our team", "Collaborators", "Opportunities"],
+      atuacao: "Activities",
+      atuacaoLinks: ["Research Area", "Projects", "Services", "Partnerships"],
+      colaboradores: "Collaborators",
+      descricao: "Agricultural Remote Sensing Laboratory"
+    }
+  }
+};
+
+function mudarIdioma(idioma) {
+  localStorage.setItem("idiomaSelecionado", idioma);
+  const t = traducoes[idioma];
+
+  // Conteúdo principal
+  const titulo = document.querySelector("#imagemFundo");
+  if (titulo) titulo.textContent = t.publicacoes || t.publications;
+
+  const subtitulo = document.querySelector(".titulo-academico");
+  if (subtitulo) subtitulo.textContent = t.titulo;
+
+  const input = document.querySelector("#search-input");
+  if (input) input.placeholder = t.pesquise;
+
+  const botao = document.querySelector(".search-btn");
+  if (botao) botao.title = t.pesquisar;
+
+  // Header
+  const navItems = document.querySelectorAll("#nav-links li a");
+  navItems.forEach((item, i) => {
+    if (t.menu[i]) item.textContent = t.menu[i];
+  });
+
+  // Footer
+  document.querySelector("#divThree .titulo24").textContent = t.footer.sobre;
+  document.querySelector("#divFour .titulo24").textContent = t.footer.atuacao;
+  document.querySelector("#divFive .titulo24").textContent = t.footer.colaboradores;
+
+  document.querySelectorAll("#divThree ul li a").forEach((link, i) => {
+    if (t.footer.sobreLinks[i]) link.textContent = t.footer.sobreLinks[i];
+  });
+
+  document.querySelectorAll("#divFour ul li a").forEach((link, i) => {
+    if (t.footer.atuacaoLinks[i]) link.textContent = t.footer.atuacaoLinks[i];
+  });
+
+  const descricaoFooter = document.querySelector("#textolado .texto16");
+  if (descricaoFooter) descricaoFooter.textContent = t.footer.descricao;
+
+  // Recarregar publicações no idioma selecionado (se necessário)
+  if (typeof carregar === "function") carregar();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const seletor = document.createElement("select");
+  seletor.innerHTML = `
+    <option value="pt">🇧🇷 Português</option>
+    <option value="en">🇺🇸 English</option>
+  `;
+  seletor.style.cssText = "position:fixed;top:10px;right:15px;padding:4px;border-radius:6px;z-index:999;";
+  seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
+  seletor.addEventListener("change", e => mudarIdioma(e.target.value));
+  document.body.appendChild(seletor);
+
+  mudarIdioma(seletor.value);
+});
 </script>
 
   <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
