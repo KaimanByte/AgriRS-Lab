@@ -45,11 +45,12 @@
 					  <span onclick="document.getElementById('imagem_file').click()" style="cursor: pointer; margin-left: 10px; font-size: 20px;">📁</span>
 				  </div>
 				  <input type="file" id="imagem_file" accept="image/*" style="display: none;"/>
+				  <img id="preview" src="" alt="Preview da imagem" style="max-width: 200px; max-height: 200px; display: none; margin-top: 10px;"/>
 			  </div>
 			  <div class="form-group">
 				  <input type="text" class="form-control" id="url_leiamais" placeholder="URL PARA NOTICIA INTEIRA">
 			  </div>
-			  <button type="submit" class="btn btn-primary btn-adicionar">Adicionar</button>
+			  <button type="submit" class="btn btn-primary btn-adicionar" id="btnSubmit">Adicionar</button>
 			  <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
 		  </div>
   </form>
@@ -77,6 +78,7 @@
 	<script>
     const API = 'http://localhost:3030/noticias';
     let NOTICIAS = {};
+    let editandoId = null;
 
     function formatDate(v) {
       if (!v) return '-';
@@ -105,7 +107,7 @@
             <td>${n.id}</td>
             <td>
               <div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis;">
-                <b>${n.titulo || ''}</b>
+                <b>${n.titulo || ''} (${formatDate(n.data)})</b>
                 <div style="font-size: 0.9em; color: #666; white-space: nowrap;">${n.descricao || ''}</div>
               </div>
             </td>
@@ -146,39 +148,77 @@
 
     document.getElementById('formNoticias').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const obj = {
+      const dados = {
         titulo: document.getElementById('titulo').value,
         descricao: document.getElementById('descricao').value,
         data: document.getElementById('data').value,
-        imagem: document.getElementById('imagem').value,
         url_leiamais: document.getElementById('url_leiamais').value
       };
-      const id = document.getElementById('id').value;
-      try {
-        if (id) {
-          const res = await fetch(`${API}/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(obj)
-          });
-          if (!res.ok) throw new Error('Erro ao atualizar: ' + res.status);
-        } else {
-          const res = await fetch(API, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(obj)
-          });
-          if (!res.ok) {
-            const txt = await res.text();
-            throw new Error('Erro ao inserir: ' + res.status + ' ' + txt);
+
+      const fileInput = document.getElementById('imagem_file');
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        reader.onload = async () => {
+          dados.imagem = reader.result; // base64
+          try {
+            const id = document.getElementById('id').value;
+            if (id) {
+              const res = await fetch(`${API}/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados)
+              });
+              if (!res.ok) throw new Error('Erro ao atualizar: ' + res.status);
+            } else {
+              const res = await fetch(API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dados)
+              });
+              if (!res.ok) {
+                const txt = await res.text();
+                throw new Error('Erro ao inserir: ' + res.status + ' ' + txt);
+              }
+            }
+            limparFormulario();
+            await carregar();
+            alert(editandoId ? 'Notícia atualizada com sucesso' : 'Notícia adicionada com sucesso');
+          } catch (err) {
+            console.error('Erro ao salvar notícia:', err);
+            alert('Erro ao salvar notícia: ' + (err.message || err));
           }
+        };
+        reader.readAsDataURL(file);
+      } else {
+        dados.imagem = document.getElementById('imagem').value;
+        try {
+          const id = document.getElementById('id').value;
+          if (id) {
+            const res = await fetch(`${API}/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(dados)
+            });
+            if (!res.ok) throw new Error('Erro ao atualizar: ' + res.status);
+          } else {
+            const res = await fetch(API, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(dados)
+            });
+            if (!res.ok) {
+              const txt = await res.text();
+              throw new Error('Erro ao inserir: ' + res.status + ' ' + txt);
+            }
+          }
+          limparFormulario();
+          await carregar();
+          alert(editandoId ? 'Notícia atualizada com sucesso' : 'Notícia adicionada com sucesso');
+        } catch (err) {
+          console.error('Erro ao salvar notícia:', err);
+          alert('Erro ao salvar notícia: ' + (err.message || err));
         }
-        limparFormulario();
-        await carregar();
-        alert('Operação realizada com sucesso');
-      } catch (err) {
-        console.error('Erro ao salvar notícia:', err);
-        alert('Erro ao salvar notícia: ' + (err.message || err));
       }
     });
 
@@ -189,14 +229,27 @@
       document.getElementById('data').value = '';
       document.getElementById('imagem').value = '';
       document.getElementById('url_leiamais').value = '';
+      // Resetar preview da imagem
+      const preview = document.getElementById('preview');
+      preview.src = '';
+      preview.style.display = 'none';
+      // Resetar input file
+      document.getElementById('imagem_file').value = '';
+      // Resetar estado de edição
+      editandoId = null;
+      document.getElementById('btnSubmit').textContent = 'Adicionar';
     }
 
+    // Adicionar event listener para preview da imagem
     document.getElementById('imagem_file').addEventListener('change', function(event) {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-          document.getElementById('imagem').value = e.target.result;
+          // Mostrar preview
+          const preview = document.getElementById('preview');
+          preview.src = e.target.result;
+          preview.style.display = 'block';
         };
         reader.readAsDataURL(file);
       }
@@ -205,13 +258,23 @@
     function editar(id) {
       const n = NOTICIAS[id];
       if (!n) return alert('Notícia não encontrada');
-      document.getElementById('id').value = n.id;
-      document.getElementById('titulo').value = n.titulo;
-      document.getElementById('descricao').value = n.descricao;
-      document.getElementById('data').value = n.data ? new Date(n.data).toISOString().slice(0,10) : '';
-      document.getElementById('imagem').value = n.imagem || '';
-      document.getElementById('url_leiamais').value = n.url_leiamais || '';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (confirm("Deseja editar esta notícia?")) {
+        editandoId = id;
+        document.getElementById('id').value = n.id;
+        document.getElementById('titulo').value = n.titulo;
+        document.getElementById('descricao').value = n.descricao;
+        document.getElementById('data').value = n.data ? new Date(n.data).toISOString().slice(0,10) : '';
+        document.getElementById('imagem').value = n.imagem || '';
+        document.getElementById('url_leiamais').value = n.url_leiamais || '';
+        document.getElementById('btnSubmit').textContent = 'Atualizar';
+        // Mostrar preview se houver imagem
+        if (n.imagem) {
+          const preview = document.getElementById('preview');
+          preview.src = n.imagem;
+          preview.style.display = 'block';
+        }
+        document.getElementById("formNoticias").scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
 
     async function excluir(id) {
@@ -221,7 +284,7 @@
         if (!res.ok) throw new Error('Erro ao excluir: ' + res.status);
         delete NOTICIAS[id];
         renderLista();
-        alert('Excluído com sucesso');
+        alert('Notícia Excluída com sucesso');
       } catch (e) {
         console.error('Erro ao excluir:', e);
         alert('Erro ao excluir: ' + (e.message || e));

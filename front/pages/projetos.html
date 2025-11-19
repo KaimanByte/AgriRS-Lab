@@ -100,6 +100,156 @@
         </div>
     </main>
 
+    <!-- ========================================= -->
+<!-- 🔄 SCRIPT — INTERNACIONALIZAÇÃO (PROJETOS) -->
+<!-- ========================================= -->
+<script>
+// 🔄 Dicionário de traduções
+const traducoes = {
+  pt: {
+    tituloPagina: "Projetos",
+    botoes: ["Todos", "Ativos", "Finalizados"],
+
+    projetos: [
+      {
+        titulo: "Monitoramento e Mapeamento Agrícola",
+        desc: "O AgriRS realiza o monitoramento e o mapeamento das principais culturas agrícolas cultivadas no Brasil utilizando dados de sensoriamento remoto..."
+      },
+      {
+        titulo: "Estimativas de Produtividade e Análise de Quebras de Safras",
+        desc: "Com base em séries temporais de imagens de satélite e dados meteorológicos, o AgriRS desenvolve metodologias para estimar a produtividade..."
+      },
+      {
+        titulo: "Fenologia das culturas agrícolas",
+        desc: "No AgriRS, o acompanhamento da fenologia das culturas é realizado por meio de séries temporais de índices espectrais derivados..."
+      },
+      {
+        titulo: "Análise de Impactos Ambientais e Detecção de Desmatamento",
+        desc: "O AgriRS aplica técnicas de sensoriamento remoto para detectar alterações no uso da terra, como desmatamentos, expansão agrícola..."
+      }
+    ],
+
+    menu: ["Início", "Sobre", "Vagas", "Membros", "Projetos", "Notícias", "Publicações", "Contato"],
+
+    footer: {
+      sobre: "Sobre",
+      sobreLinks: ["O AgriRSlab", "Nossa equipe", "Colaboradores", "Oportunidades"],
+      atuacao: "Atuação",
+      atuacaoLinks: ["Área de Pesquisa", "Projetos", "Serviços", "Parcerias"],
+      colaboradores: "Colaboradores",
+      descricao: "Laboratório de Sensoriamento Remoto Agrícola"
+    }
+  },
+
+  en: {
+    tituloPagina: "Projects",
+    botoes: ["All", "Active", "Completed"],
+
+    projetos: [
+      {
+        titulo: "Agricultural Monitoring and Mapping",
+        desc: "AgriRS performs monitoring and mapping of major agricultural crops grown in Brazil using remote sensing data..."
+      },
+      {
+        titulo: "Productivity Estimates and Crop Failure Analysis",
+        desc: "Based on satellite image time series and meteorological data, AgriRS develops methodologies to estimate crop productivity..."
+      },
+      {
+        titulo: "Crop Phenology",
+        desc: "At AgriRS, crop phenology is monitored through time series of spectral indices derived from satellite images..."
+      },
+      {
+        titulo: "Environmental Impact Analysis and Deforestation Detection",
+        desc: "AgriRS applies remote sensing techniques to detect land-use changes such as deforestation, agricultural expansion..."
+      }
+    ],
+
+    menu: ["Home", "About", "Opportunities", "Members", "Projects", "News", "Publications", "Contact"],
+
+    footer: {
+      sobre: "About",
+      sobreLinks: ["AgriRSlab", "Our team", "Collaborators", "Opportunities"],
+      atuacao: "Activities",
+      atuacaoLinks: ["Research Area", "Projects", "Services", "Partnerships"],
+      colaboradores: "Collaborators",
+      descricao: "Agricultural Remote Sensing Laboratory"
+    }
+  }
+};
+
+// 🔁 Aplicar tradução
+function mudarIdioma(idioma) {
+  localStorage.setItem("idiomaSelecionado", idioma);
+  const t = traducoes[idioma];
+
+  // 🔹 Título grande (imagemFundo)
+  const tituloPg = document.querySelector("#imagemFundo");
+  if (tituloPg) tituloPg.textContent = t.tituloPagina;
+
+  // 🔹 Botões (Todos / Ativos / Finalizados)
+  const botoes = document.querySelectorAll("#botoes .botao");
+  botoes.forEach((btn, i) => {
+    if (t.botoes[i]) btn.textContent = t.botoes[i];
+  });
+
+  // 🔹 Títulos dos projetos
+  const titulosProj = document.querySelectorAll(".tituloProjeto");
+  titulosProj.forEach((el, i) => {
+    if (t.projetos[i]) el.textContent = t.projetos[i].titulo;
+  });
+
+  // 🔹 Descrições dos projetos
+  const descricoes = document.querySelectorAll(".descricaoProjeto");
+  descricoes.forEach((el, i) => {
+    if (t.projetos[i]) el.textContent = t.projetos[i].desc;
+  });
+
+  // 🔹 MENU
+  document.querySelectorAll("#nav-links li a").forEach((item, i) => {
+    if (t.menu[i]) item.textContent = t.menu[i];
+  });
+
+  // 🔹 FOOTER
+  document.querySelector("#divThree .titulo24").textContent = t.footer.sobre;
+  document.querySelector("#divFour .titulo24").textContent = t.footer.atuacao;
+  document.querySelector("#divFive .titulo24").textContent = t.footer.colaboradores;
+
+  document.querySelectorAll("#divThree ul li a").forEach((link, i) => {
+    if (t.footer.sobreLinks[i]) link.textContent = t.footer.sobreLinks[i];
+  });
+
+  document.querySelectorAll("#divFour ul li a").forEach((link, i) => {
+    if (t.footer.atuacaoLinks[i]) link.textContent = t.footer.atuacaoLinks[i];
+  });
+
+  const descricaoFooter = document.querySelector("#textolado .texto16");
+  if (descricaoFooter) descricaoFooter.textContent = t.footer.descricao;
+}
+
+// 🌍 Criar seletor de idioma
+document.addEventListener("DOMContentLoaded", () => {
+  const seletor = document.createElement("select");
+  seletor.innerHTML = `
+    <option value="pt">🇧🇷 Português</option>
+    <option value="en">🇺🇸 English</option>
+  `;
+  seletor.style.cssText = `
+    position: fixed;
+    top: 10px;
+    right: 15px;
+    padding: 4px;
+    border-radius: 6px;
+    z-index: 1;
+  `;
+
+  seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
+  seletor.addEventListener("change", e => mudarIdioma(e.target.value));
+
+  document.body.appendChild(seletor);
+  mudarIdioma(seletor.value);
+});
+</script>
+
     <footer>
         <div id="footer-brasil"></div>
         <block>

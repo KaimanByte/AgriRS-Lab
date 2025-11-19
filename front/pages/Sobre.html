@@ -196,6 +196,166 @@
           </div>
       </block>
   </footer>
+<!-- ========================================= -->
+<!-- 🔄 SCRIPT — INTERNACIONALIZAÇÃO DA PÁGINA SOBRE -->
+<!-- ========================================= -->
+<script>
+// 🔄 Dicionário de traduções
+const traducoes = {
+  pt: {
+    tituloFundo: "Sobre",
+    quemSomos: "Quem Somos?",
+    textoQuemSomos: `O AgriRS Lab é um laboratório vinculado à Divisão de Observação da Terra
+    e Geoinformática (DIOTG) do Instituto Nacional de Pesquisas Espaciais (INPE).
+    Somos um laboratório de sensoriamento remoto com foco na agricultura,
+    estudando e monitorando cultivos agrícolas com o apoio de imagens de satélite
+    e dados geoespaciais. Também desenvolvemos pesquisas em áreas ambientais e sociais,
+    como detecção do desmatamento e mudanças no uso e cobertura da terra.
+    Buscamos conectar tecnologia, ciência e responsabilidade socioambiental
+    para gerar conhecimento e apoiar a tomada de decisões.`,
+
+    areasAtuacao: "Áreas de Atuação",
+    lista1: [
+      "Estimativas de Produtividade",
+      "Monitoramento e Mapeamento Agrícola",
+      "Fenologia das Culturas Agrícolas"
+    ],
+    lista2: [
+      "Análise de Impactos Ambientais",
+      "Detecção de Desmatamento",
+      "Análise de Quebras de Safras"
+    ],
+
+    menu: ["Início", "Sobre", "Vagas", "Membros", "Projetos", "Notícias", "Publicações", "Contato"],
+
+    footer: {
+      descricao: "Laboratório de Sensoriamento Remoto Agrícola",
+      sobre: "Sobre",
+      sobreLinks: ["O AgriRSlab", "Nossa equipe", "Colaboradores", "Oportunidades"],
+
+      atuacao: "Atuação",
+      atuacaoLinks: ["Área de Pesquisa", "Projetos", "Serviços", "Parcerias"],
+
+      colaboradores: "Colaboradores"
+    }
+  },
+
+  en: {
+    tituloFundo: "About",
+    quemSomos: "Who We Are",
+    textoQuemSomos: `AgriRS Lab is a laboratory linked to the Division of Earth Observation
+    and Geoinformatics (DIOTG) of the National Institute for Space Research (INPE).
+    We are a remote sensing laboratory focused on agriculture, studying and monitoring crops
+    with satellite imagery and geospatial data. We also develop research in environmental
+    and social areas, such as deforestation detection and land use and land cover change.
+    We seek to connect technology, science, and socio-environmental responsibility
+    to generate knowledge and support decision-making.`,
+
+    areasAtuacao: "Areas of Expertise",
+    lista1: [
+      "Productivity Estimates",
+      "Agricultural Monitoring and Mapping",
+      "Crop Phenology"
+    ],
+    lista2: [
+      "Environmental Impact Analysis",
+      "Deforestation Detection",
+      "Crop Failure Analysis"
+    ],
+
+    menu: ["Home", "About", "Opportunities", "Members", "Projects", "News", "Publications", "Contact"],
+
+    footer: {
+      descricao: "Agricultural Remote Sensing Laboratory",
+      sobre: "About",
+      sobreLinks: ["AgriRSlab", "Our team", "Collaborators", "Opportunities"],
+
+      atuacao: "Activities",
+      atuacaoLinks: ["Research Area", "Projects", "Services", "Partnerships"],
+
+      colaboradores: "Collaborators"
+    }
+  }
+};
+
+
+// 🔁 Função para aplicar tradução
+function mudarIdioma(idioma) {
+  localStorage.setItem("idiomaSelecionado", idioma);
+  const t = traducoes[idioma];
+
+  // Fundo
+  const titulo = document.querySelector("#imagemFundo");
+  if (titulo) titulo.textContent = t.tituloFundo;
+
+  // Card principal
+  const quemSomos = document.querySelector(".titulo36");
+  if (quemSomos) quemSomos.textContent = t.quemSomos;
+
+  const texto = document.querySelector("#textoCard");
+  if (texto) texto.textContent = t.textoQuemSomos;
+
+  // Áreas de Atuação
+  const area = document.querySelector("#areasAtuacao");
+  if (area) area.textContent = t.areasAtuacao;
+
+  // Listas
+  const listaItems = document.querySelectorAll(".listaMain ul li");
+  if (listaItems.length >= 6) {
+    listaItems[0].textContent = t.lista1[0];
+    listaItems[1].textContent = t.lista1[1];
+    listaItems[2].textContent = t.lista1[2];
+
+    listaItems[3].textContent = t.lista2[0];
+    listaItems[4].textContent = t.lista2[1];
+    listaItems[5].textContent = t.lista2[2];
+  }
+
+  // Header
+  const navItems = document.querySelectorAll("#nav-links li a");
+  navItems.forEach((item, i) => {
+    if (t.menu[i]) item.textContent = t.menu[i];
+  });
+
+  // Footer
+  document.querySelector("#divThree .titulo24").textContent = t.footer.sobre;
+  document.querySelector("#divFour .titulo24").textContent = t.footer.atuacao;
+  document.querySelector("#divFive .titulo24").textContent = t.footer.colaboradores;
+
+  document.querySelectorAll("#divThree ul li a").forEach((link, i) => {
+    if (t.footer.sobreLinks[i]) link.textContent = t.footer.sobreLinks[i];
+  });
+
+  document.querySelectorAll("#divFour ul li a").forEach((link, i) => {
+    if (t.footer.atuacaoLinks[i]) link.textContent = t.footer.atuacaoLinks[i];
+  });
+
+  const descricaoFooter = document.querySelector("#textolado .texto16");
+  if (descricaoFooter) descricaoFooter.textContent = t.footer.descricao;
+}
+
+
+// 🌐 Criar seletor de idioma automaticamente
+document.addEventListener("DOMContentLoaded", () => {
+  const seletor = document.createElement("select");
+  seletor.innerHTML = `
+    <option value="pt">🇧🇷 Português</option>
+    <option value="en">🇺🇸 English</option>
+  `;
+
+  seletor.style.cssText =
+    "position:fixed;top:10px;right:15px;padding:4px;border-radius:6px;z-index:1;";
+
+  seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
+  seletor.addEventListener("change", e => mudarIdioma(e.target.value));
+
+  document.body.appendChild(seletor);
+
+  mudarIdioma(seletor.value);
+});
+</script>
+
+
   <script>
     const toggle = document.getElementById("menu-toggle");
     const navLinks = document.getElementById("nav-links");

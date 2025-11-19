@@ -79,10 +79,9 @@ const noticiasDAO = {
   },
 
   deletar: async (id) => {
-    // soft delete: apenas marca como não exibível
-    const sql = 'UPDATE tbnoticias SET exibir=false WHERE idnoticia=$1 RETURNING *';
-    const { rows } = await pool.query(sql, [id]);
-    return rows[0];
+    const sql = 'DELETE FROM tbnoticias WHERE idnoticia=$1';
+    const { rowCount } = await pool.query(sql, [id]);
+    return rowCount > 0;
   }
 };
 
