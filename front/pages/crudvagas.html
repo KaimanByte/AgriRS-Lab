@@ -15,13 +15,13 @@
 
   <header>
     <nav>
-      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader" />
+      <a target="_blank" title="AgriRSlab" href="index.html"><img src="../imagens/Header/AgriRSlab.png" id="Agriheader"></a>
       <ul id="nav-links">
         <li><a href="crudvagas.html">Vagas</a></li>
         <li><a href="crud.noticias.html">Notícias</a></li>
         <li><a href="crudpublicacoes.html">Publicações</a></li>
       </ul>
-      <img src="../imagens/Header/Inpe.png" id="Inpeheader" />
+      <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="../imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
 
@@ -36,7 +36,7 @@
       <textarea name="processo_selecao" placeholder="PROCESSOS DE SELEÇÃO (separados por ;)"></textarea>
       <input type="text" name="contato" placeholder="CONTATO" />
       <div class="button-group">
-        <button type="submit" class="btn-adicionar">Adicionar</button>
+        <button type="submit" class="btn-adicionar" id="btnSubmit">Adicionar</button>
         <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
       </div>
   </div>
@@ -57,33 +57,44 @@
   let editandoId = null;
 
   async function carregarCards() {
-    const res = await fetch(API_URL);
-    const oportunidades = await res.json();
-    cardsContainer.innerHTML = "";
+    try {
+      const res = await fetch(API_URL);
+      const oportunidades = await res.json();
+      cardsContainer.innerHTML = "";
 
-    oportunidades.forEach(o => {
-      const card = document.createElement("div");
-      card.classList.add("crud-card");
+      oportunidades.forEach(o => {
+        const card = document.createElement("div");
+        card.classList.add("crud-card");
 
-      card.innerHTML = `
-        <h3>${o.titulo}</h3>
-        <p>${o.descricao}</p>
-        ${o.requisitos ? `<h4>Requisitos:</h4><ul>${o.requisitos.split(";").map(r => `<li>${r.trim()}</li>`).join("")}</ul>` : ""}
-        ${o.processo_selecao ? `<h4>Processo de Seleção:</h4><ol>${o.processo_selecao.split(";").map(p => `<li>${p.trim()}</li>`).join("")}</ol>` : ""}
-        ${o.prazo ? `<p><strong>Prazo:</strong> ${o.prazo}</p>` : ""}
-        <p><strong>Contato:</strong> ${o.contato}</p>
-        <div class="crud-actions">
-          <button class="crud-edit-btn" onclick="editarCard(${o.id})"><a href="#"">Editar</a></button>
-          <button class="crud-delete-btn" onclick="excluirCard(${o.id})">Excluir</button>
-        </div>
-      `;
-      cardsContainer.appendChild(card);
-    });
+        card.innerHTML = `
+          <h3>${o.titulo}</h3>
+          <p>${o.descricao}</p>
+          ${o.requisitos ? `<h4>Requisitos:</h4><ul>${o.requisitos.split(";").map(r => `<li>${r.trim()}</li>`).join("")}</ul>` : ""}
+          ${o.processo_selecao ? `<h4>Processo de Seleção:</h4><ol>${o.processo_selecao.split(";").map(p => `<li>${p.trim()}</li>`).join("")}</ol>` : ""}
+          ${o.prazo ? `<p><strong>Prazo:</strong> ${o.prazo}</p>` : ""}
+          <p><strong>Contato:</strong> ${o.contato}</p>
+          <div class="crud-actions">
+            <button class="crud-edit-btn" onclick="editarCard(${o.id})">Editar</button>
+            <button class="crud-delete-btn" onclick="excluirCard(${o.id})">Excluir</button>
+          </div>
+        `;
+        cardsContainer.appendChild(card);
+      });
+
+      if (oportunidades.length === 0) {
+        cardsContainer.innerHTML = "<p>Nenhuma Vaga disponível.</p>";
+      }
+    } catch (error) {
+      cardsContainer.innerHTML = "<p>Erro ao carregar vagas.</p>";
+    }
   }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const dados = Object.fromEntries(new FormData(form));
+    const isEdit = !!editandoId;
+
+    console.log(isEdit ? "Atualizando vaga:" : "Adicionando nova vaga:", dados);
 
     try {
       if (editandoId) {
@@ -101,30 +112,40 @@
         });
       }
 
+      alert(isEdit ? "Vaga atualizada com sucesso" : "Vaga adicionada com sucesso");
       form.reset();
       carregarCards();
     } catch (err) {
-      console.error("Erro ao salvar:", err);
+      alert("Erro ao salvar vaga: " + err.message);
     }
   });
 
   async function editarCard(id) {
-    const res = await fetch(`${API_URL}/${id}`);
-    const dados = await res.json();
+    if (confirm("Deseja editar essa vaga?")) {
+      const res = await fetch(`${API_URL}/${id}`);
+      const dados = await res.json();
 
-    for (const campo in dados) {
-      if (form.elements[campo]) {
-        form.elements[campo].value = dados[campo];
+      for (const campo in dados) {
+        if (form.elements[campo]) {
+          form.elements[campo].value = dados[campo];
+        }
       }
-    }
 
-    editandoId = id;
+      editandoId = id;
+      document.getElementById("btnSubmit").textContent = "Atualizar";
+      document.getElementById("crud-form").scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   async function excluirCard(id) {
-    if (confirm("Tem certeza que deseja excluir esta oportunidade?")) {
-      await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-      carregarCards();
+    if (confirm("Deseja excluir essa vaga?")) {
+      try {
+        await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+        alert("Vaga excluída com sucesso");
+        carregarCards();
+      } catch (err) {
+        alert("Erro ao excluir vaga: " + err.message);
+      }
     }
   }
 
@@ -135,6 +156,8 @@
     document.querySelector('textarea[name="requisitos"]').value = "";
     document.querySelector('textarea[name="processo_selecao"]').value = "";
     document.querySelector('input[name="contato"]').value = "";
+    editandoId = null;
+    document.getElementById("btnSubmit").textContent = "Adicionar";
   }
 
   carregarCards();

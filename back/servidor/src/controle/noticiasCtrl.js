@@ -1,4 +1,4 @@
-import noticiasDAO from '../modelo/noticiasDAO.js';
+import noticiaDAO from '../modelo/noticiasDAO.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -20,7 +20,7 @@ const noticiasCtrl = {
                 fs.writeFileSync(filepath, buffer);
                 noticia.imagem = `http://localhost:3030/uploads/${filename}`;
             }
-            const noticiaCriada = await noticiasDAO.inserir(noticia);
+            const noticiaCriada = await noticiaDAO.inserir(noticia);
             // retorna o objeto criado (status 201)
             res.status(201).json(noticiaCriada);
         } catch (erro) {
@@ -31,18 +31,18 @@ const noticiasCtrl = {
 
     async listar(req, res) {
         try {
-            const noticias = await noticiasDAO.listar();
+            const noticias = await noticiaDAO.listar();
             res.json(noticias);
         } catch (erro) {
             console.error('Erro listar notícias:', erro);
-            res.status(500).json({ status: false, mensagem: erro.message });
+            res.json([]);
         }
     },
 
     async buscarPorId(req, res) {
         try {
             const id = req.params.id;
-            const noticia = await noticiasDAO.buscarPorId(id);
+            const noticia = await noticiaDAO.buscarPorId(id);
             if (!noticia) return res.status(404).json({ status: false, mensagem: 'Notícia não encontrada' });
             res.json(noticia);
         } catch (erro) {
@@ -69,7 +69,7 @@ const noticiasCtrl = {
                 fs.writeFileSync(filepath, buffer);
                 noticia.imagem = `http://localhost:3030/uploads/${filename}`;
             }
-            const noticiaAtualizada = await noticiasDAO.atualizar(id, noticia);
+            const noticiaAtualizada = await noticiaDAO.atualizar(id, noticia);
             res.json(noticiaAtualizada);
         } catch (erro) {
             console.error('Erro atualizar notícia:', erro);
@@ -82,7 +82,7 @@ const noticiasCtrl = {
             const id = req.params.id;
             console.log('DELETE /noticias/:id', id);
             // Buscar a notícia para obter a URL da imagem
-            const noticia = await noticiasDAO.buscarPorId(id);
+            const noticia = await noticiaDAO.buscarPorId(id);
             if (noticia && noticia.imagem && noticia.imagem.startsWith('http://localhost:3030/uploads/')) {
                 const filename = path.basename(noticia.imagem);
                 const filepath = path.join(process.cwd(), '..', 'uploads', filename);
@@ -91,7 +91,7 @@ const noticiasCtrl = {
                     console.log('Imagem deletada:', filepath);
                 }
             }
-            const excluida = await noticiasDAO.deletar(id);
+            const excluida = await noticiaDAO.deletar(id);
             res.json({ status: true, mensagem: excluida ? 'Notícia removida com sucesso' : 'Nenhum registro removido', excluida });
         } catch (erro) {
             console.error('Erro deletar notícia:', erro);

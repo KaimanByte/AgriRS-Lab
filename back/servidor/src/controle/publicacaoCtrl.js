@@ -5,6 +5,7 @@ import PublicacaoDAO from "../modelo/publicacaoDAO.js";
 class PublicacaoCtrl {
   static async listar(req, res) {
     try {
+      console.log(`Request received: ${req.method} ${req.path}`);
       const dados = await PublicacaoDAO.listar();
       res.json(dados);
     } catch (e) {
@@ -14,6 +15,7 @@ class PublicacaoCtrl {
 
   static async buscar(req, res) {
     try {
+      console.log(`Request received: ${req.method} ${req.path}`, req.params);
       const id = req.params.id;
       const dado = await PublicacaoDAO.buscarPorId(id);
       if (!dado) return res.status(404).json({ erro: "Publicação não encontrada" });
@@ -25,6 +27,7 @@ class PublicacaoCtrl {
 
   static async criar(req, res) {
     try {
+      console.log(`Request received: ${req.method} ${req.path}`, req.body);
       const pub = req.body;
       // Verificar se imagem_url é base64 e salvar como arquivo
       if (pub.imagem_url && pub.imagem_url.startsWith('data:image')) {
@@ -48,6 +51,7 @@ class PublicacaoCtrl {
 
   static async atualizar(req, res) {
     try {
+      console.log(`Request received: ${req.method} ${req.path}`, req.body);
       const id = req.params.id;
       const pub = req.body;
       // Verificar se imagem_url é base64 e salvar como arquivo
@@ -72,6 +76,7 @@ class PublicacaoCtrl {
 
   static async excluir(req, res) {
     try {
+      console.log(`Request received: ${req.method} ${req.path}`, req.params);
       const id = req.params.id;
       // Buscar a publicação para obter a imagem_url
       const pub = await PublicacaoDAO.buscarPorId(id);

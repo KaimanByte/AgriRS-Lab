@@ -24,6 +24,7 @@ class VagasCtrl {
   static async criar(req, res) {
     try {
       const vaga = req.body;
+      console.log("Criando nova vaga:", vaga);
       const nova = await VagasDAO.inserir(vaga);
       res.status(201).json(nova);
     } catch (e) {
@@ -35,6 +36,7 @@ class VagasCtrl {
     try {
       const id = req.params.id;
       const vaga = req.body;
+      console.log("Atualizando vaga ID:", id, "com dados:", vaga);
       const atualizada = await VagasDAO.atualizar(id, vaga);
       res.json(atualizada);
     } catch (e) {
@@ -45,6 +47,7 @@ class VagasCtrl {
   static async excluir(req, res) {
     try {
       const id = req.params.id;
+      console.log("Excluindo vaga ID:", id);
       const excluida = await VagasDAO.excluir(id);
       if (!excluida) return res.status(404).json({ erro: "Oportunidade não encontrada" });
       res.json({ msg: "Oportunidade excluída com sucesso" });

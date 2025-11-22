@@ -106,12 +106,23 @@ CREATE TABLE IF NOT EXISTS tbpublicacao (
   atualizado_em TIMESTAMP DEFAULT now()
 ) `;
 
+const sqlTbNoticias = `
+CREATE TABLE IF NOT EXISTS tbnoticias (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    data DATE,
+    imagem VARCHAR(500),
+    url_leiamais VARCHAR(500)
+)`;
+
 // Executa criações em background (não bloqueia o start do servidor)
 (async () => {
 	await execCreate(sqlNoticias);
 	await execCreate(sqlVagas);
 	await execCreate(sqlPublicacoes);
 	await execCreate(sqlTbPublicacao);
+	await execCreate(sqlTbNoticias);
 })();
 
 // Exporta pool (default e named) para compatibilidade com importações do projeto

@@ -15,13 +15,13 @@
 
   <header>
     <nav>
-      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader" />
+      <a target="_blank" title="AgriRSlab" href="index.html"><img src="../imagens/Header/AgriRSlab.png" id="Agriheader"></a>
       <ul id="nav-links">
         <li><a href="crudvagas.html">Vagas</a></li>
         <li><a href="crud.noticias.html">Notícias</a></li>
         <li><a href="crudpublicacoes.html">Publicações</a></li>
       </ul>
-      <img src="../imagens/Header/Inpe.png" id="Inpeheader" />
+      <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="../imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
 
@@ -48,7 +48,7 @@
           <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
         </div>
       </form>
-      
+
     </section>
     <ul id="lista"></ul>
 
@@ -70,7 +70,12 @@ function formatDate(v) {
 function renderLista() {
   const lista = document.getElementById("lista");
   lista.innerHTML = "";
-  Object.values(PUBLICACOES).forEach(pub => {
+  const pubs = Object.values(PUBLICACOES);
+  if (pubs.length === 0) {
+    lista.innerHTML = '<li class="mensagem">Nenhuma publicação cadastrada.</li>';
+    return;
+  }
+  pubs.forEach(pub => {
     const li = document.createElement("li");
     li.innerHTML = `
       <img class="item-thumb" src="${pub.imagem_url || '/imagens/Publicacoes/pb01.png'}" alt="${pub.titulo || ''}" />
@@ -101,6 +106,10 @@ function carregar() {
       PUBLICACOES = {};
       data.forEach(pub => PUBLICACOES[pub.idpublicacao] = pub);
       renderLista();
+    })
+    .catch(err => {
+      console.error('Erro ao carregar publicações:', err);
+      document.getElementById("lista").innerHTML = '<li class="mensagem">Erro ao carregar publicações.</li>';
     });
 }
 

@@ -13,32 +13,161 @@
     <div class="container">
         <div class="menu">
             <div class="menuSuperior">
-               <img src="../imagens/Header/AgriRSlab.png" alt="">
-             <h2 id="login"> LOGIN <h2>
-                </div>
-               <div class="botao">
-                    <label for="usuario">USUARIO</label>
-                        <input type="text" id="usuario" name="usuario">
+               <img src="../imagens/Header/AgriRSlab.png" alt="AgriRS Lab">
+               <h2 id="login">LOGIN</h2>
+            </div>
+            <div class="botao">
+                <label for="usuario">USUÁRIO</label>
+                <input 
+                    type="text" 
+                    id="usuario" 
+                    name="usuario" 
+                    required 
+                    minlength="3"
+                    autocomplete="username"
+                >
 
-                    <label for="senha">SENHA</label>
-                        <input type="password" id="senha" name="senha">
-                            <button type="submit">ENTRAR</button>
-
+                <label for="senha">SENHA</label>
+                <input 
+                    type="password" 
+                    id="senha" 
+                    name="senha" 
+                    required 
+                    minlength="6"
+                    autocomplete="current-password"
+                >
+                
+                <button type="submit" id="btnEntrar">ENTRAR</button>
+                
+                <div id="mensagemErro" style="display: none; color: #ff4444; margin-top: 10px; text-align: center;"></div>
             </div>
         </div>
     </div>
 </form>
 
 <script>
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const usuario = document.getElementById('usuario').value;
-    const senha = document.getElementById('senha').value;
-    if (usuario === 'Admin' && senha === '123') {
-        window.location.href = 'crudSelecao.html';
+const API_URL = 'http://localhost:3030';
+
+// Função para mostrar mensagem de erro
+function mostrarErro(mensagem) {
+    const msgErro = document.getElementById('mensagemErro');
+    msgErro.textContent = mensagem;
+    msgErro.style.display = 'block';
+    
+    setTimeout(() => {
+        msgErro.style.display = 'none';
+    }, 5000);
+}
+
+// Função para desabilitar/habilitar botão
+function setBotaoCarregando(carregando) {
+    const btn = document.getElementById('btnEntrar');
+    const usuario = document.getElementById('usuario');
+    const senha = document.getElementById('senha');
+    
+    if (carregando) {
+        btn.disabled = true;
+        btn.textContent = 'ENTRANDO...';
+        usuario.disabled = true;
+        senha.disabled = true;
     } else {
-        alert('Usuário ou senha incorretos!');
+        btn.disabled = false;
+        btn.textContent = 'ENTRAR';
+        usuario.disabled = false;
+        senha.disabled = false;
     }
+}
+
+// Verificar se já está logado
+function verificarSessao() {
+    const token = localStorage.getItem('token');
+    if (token) {
+        // Verifica se token ainda é válido
+        fetch(`${API_URL}/auth/verificar`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.valido) {
+                window.location.href = 'crudSelecao.html';
+            } else {
+                localStorage.removeItem('token');
+            }
+        })
+        .catch(() => {
+            localStorage.removeItem('token');
+        });
+    }
+}
+
+// Executar ao carregar página
+verificarSessao();
+
+// Handler do formulário
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const usuario = document.getElementById('usuario').value.trim();
+    const senha = document.getElementById('senha').value;
+
+    // Validação básica no cliente
+    if (usuario.length < 3) {
+        mostrarErro('Usuário deve ter no mínimo 3 caracteres');
+        return;
+    }
+
+    if (senha.length < 6) {
+        mostrarErro('Senha deve ter no mínimo 6 caracteres');
+        return;
+    }
+
+    setBotaoCarregando(true);
+
+    try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                login: usuario, 
+                senha: senha 
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Salva token no localStorage
+            localStorage.setItem('token', data.token);
+            
+            // Salva informações do usuário (opcional)
+            if (data.login) {
+                localStorage.setItem('usuario', data.login);
+            }
+            
+            // Redireciona
+            window.location.href = 'crudSelecao.html';
+        } else {
+            mostrarErro(data.message || 'Usuário ou senha incorretos!');
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        mostrarErro('Erro ao conectar com o servidor. Tente novamente.');
+    } finally {
+        setBotaoCarregando(false);
+    }
+});
+
+// Limpar mensagem de erro ao digitar
+document.getElementById('usuario').addEventListener('input', () => {
+    document.getElementById('mensagemErro').style.display = 'none';
+});
+
+document.getElementById('senha').addEventListener('input', () => {
+    document.getElementById('mensagemErro').style.display = 'none';
 });
 </script>
 

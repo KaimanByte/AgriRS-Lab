@@ -34,7 +34,7 @@
     </div>
     <header>
     <nav>
-      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
+      <a title="AgriRSlab" href="index.html"><img src="../imagens/Header/AgriRSlab.png" id="Agriheader"></a>
 
       <!-- 🔹 Botão do menu hambúrguer adicionado -->
       <button id="menu-toggle" aria-label="Abrir menu">☰ Menu</button>
@@ -49,7 +49,7 @@
         <li><a href="publicacoes.html" class="ativo">Publicações</a></li>
         <li><a href="contato.html">Contato</a></li>
       </ul>
-      <img src="../imagens/Header/Inpe.png" id="Inpeheader">
+      <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="../imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
 
@@ -499,7 +499,7 @@
                 <a target="_blank" title="GitHub" href="https://github.com/agrirslab"><img
                         src="../imagens/footer/githubIcone.png" alt="GitHub"></a>
                 <a target="_blank" title="ResearchGate"
-                    href="https://www.researchgate.net/lab/AgriRS-Lab-Ieda-Sanches"><img
+                    href="https://www.researchgate.net/lab/AgriRS-Lab-Marcos-Adami"><img
                         src="../imagens/footer/researchGateIcone.png" alt="ResearchGate"></a>
             </div>
         </block>
@@ -1047,10 +1047,9 @@ function atualizarCards(idioma) {
 document.addEventListener("DOMContentLoaded", () => {
   const seletor = document.createElement("select");
   seletor.innerHTML = `
-    <option value="pt">🇧🇷 Português</option>
-    <option value="en">🇺🇸 English</option>
+    <option value="pt">🇧🇷</option>
+    <option value="en">🇺🇸</option>
   `;
-  seletor.style.cssText = "position:fixed;top:10px;right:15px;padding:4px;border-radius:6px;";
   seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
   seletor.addEventListener("change", e => mudarIdioma(e.target.value));
   document.body.appendChild(seletor);

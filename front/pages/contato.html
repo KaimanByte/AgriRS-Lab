@@ -33,7 +33,7 @@
   </div>
  <header>
     <nav>
-      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader">
+      <a title="AgriRSlab" href="index.html"><img src="../imagens/Header/AgriRSlab.png" id="Agriheader"></a>
 
       <!-- 🔹 Botão do menu hambúrguer adicionado -->
       <button id="menu-toggle" aria-label="Abrir menu">☰ Menu</button>
@@ -48,12 +48,12 @@
         <li><a href="publicacoes.html" class="ativo">Publicações</a></li>
         <li><a href="contato.html">Contato</a></li>
       </ul>
-      <img src="../imagens/Header/Inpe.png" id="Inpeheader">
+      <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="../imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
 
   <div id="imagemFundo">Contato</div>
-  <div class="fundolesbico">
+  <div class="fundoles">
     <div class="form-container">
       <h2>Envie sua Mensagem</h2>
       <form>
@@ -81,7 +81,7 @@
            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.996253200103!2d-45.86286773983603!3d-23.206807163811852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cc4b06accadc73%3A0xddb542b96e931e54!2sINPE!5e0!3m2!1spt-BR!2sbr!4v1759282156843!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <p class="endereco">
-          <div class="icon">📍</span> <strong>Endereço</strong><br /></div>
+          <span class="icon">📍</span> <strong>Endereço</strong><br />
           Instituto Nacional de Pesquisas Espaciais - INPE<br />
           Av. dos Astronautas, 1758 Jardim da Granja<br />
           São José dos Campos - SP<br />
@@ -115,7 +115,7 @@
               src="../imagens/Footer/linkedinIcone.png" /></a>
           <a href="https://github.com/agrirslab" class="social github" target="_blank"><img
               src="../imagens/Footer/githubIcone.png" /></a>
-          <a href="https://www.researchgate.net/lab/AgriRS-Lab-Ieda-Sanches" class="social rg" target="_blank"><img
+          <a href="https://www.researchgate.net/lab/AgriRS-Lab-Marcos-Adami" class="social rg" target="_blank"><img
               src="../imagens/Footer/researchGateIcone.png" /></a>
         </div>
       </div>
@@ -154,7 +154,7 @@
                 <a target="_blank" title="GitHub" href="https://github.com/agrirslab">
                     <img src="../imagens/Footer/githubIcone.png" alt="GitHub">
                 </a>
-                <a target="_blank" title="ResearchGate" href="https://www.researchgate.net/lab/AgriRS-Lab-Ieda-Sanches">
+                <a target="_blank" title="ResearchGate" href="https://www.researchgate.net/lab/AgriRS-Lab-Marcos-Adami">
                     <img src="../imagens/Footer/researchGateIcone.png" alt="ResearchGate">
                 </a>
             </div>
@@ -425,10 +425,9 @@ function mudarIdioma(idioma) {
 document.addEventListener("DOMContentLoaded", () => {
   const seletor = document.createElement("select");
   seletor.innerHTML = `
-    <option value="pt">🇧🇷 Português</option>
-    <option value="en">🇺🇸 English</option>
+    <option value="pt">🇧🇷</option>
+    <option value="en">🇺🇸</option>
   `;
-  seletor.style.cssText = "position:fixed;top:10px;right:15px;padding:4px;border-radius:6px;";
   seletor.value = localStorage.getItem("idiomaSelecionado") || "pt";
   seletor.addEventListener("change", e => mudarIdioma(e.target.value));
   document.body.appendChild(seletor);
