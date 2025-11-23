@@ -1,88 +1,46 @@
 import pool from '../controladores/bd.js';
 
 const noticiasDAO = {
-  inserir: async (noticia) => {
-    try {
-      const sql = 'INSERT INTO tbnoticias (titulo, link, postagem, descricao, url_leiamais, exibir) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
-      const params = [
-        noticia.titulo,
-        noticia.imagem || '', // imagem
-        noticia.data,         // data/postagem
-        noticia.descricao,    // descrição completa
-        noticia.url_leiamais || '', // url para leia mais
-        true
-      ];
-      const { rows } = await pool.query(sql, params);
-      const r = rows[0];
-      return {
-        id: r.idnoticia,
-        titulo: r.titulo,
-        descricao: r.descricao || '',
-        data: r.postagem,
-        imagem: r.link,
-        url_leiamais: r.url_leiamais
-      };
-    } catch (err) {
-      console.error('Erro ao inserir notícia:', err);
-      throw err;
+    async inserir(noticia) {
+        const query = `
+            INSERT INTO tbnoticias (titulo, descricao, data, imagem, url_leiamais)
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING idnoticia as id, titulo, descricao, data, imagem, url_leiamais
+        `;
+        const values = [noticia.titulo, noticia.descricao, noticia.data, noticia.imagem, noticia.url_leiamais];
+        const result = await pool.query(query, values);
+        return result.rows[0];
+    },
+
+    async listar() {
+        const query = 'SELECT idnoticia as id, titulo, descricao, data, imagem, url_leiamais FROM tbnoticias ORDER BY idnoticia DESC';
+        const result = await pool.query(query);
+        return result.rows;
+    },
+
+    async buscarPorId(id) {
+        const query = 'SELECT idnoticia as id, titulo, descricao, data, imagem, url_leiamais FROM tbnoticias WHERE idnoticia = $1';
+        const result = await pool.query(query, [id]);
+        return result.rows[0] || null;
+    },
+
+    async atualizar(id, noticia) {
+        const query = `
+            UPDATE tbnoticias
+            SET titulo = $1, descricao = $2, data = $3, imagem = $4, url_leiamais = $5
+            WHERE idnoticia = $6
+            RETURNING idnoticia as id, titulo, descricao, data, imagem, url_leiamais
+        `;
+        const values = [noticia.titulo, noticia.descricao, noticia.data, noticia.imagem, noticia.url_leiamais, id];
+        const result = await pool.query(query, values);
+        return result.rows[0] || null;
+    },
+
+    async deletar(id) {
+        const query = 'DELETE FROM tbnoticias WHERE idnoticia = $1 RETURNING idnoticia as id';
+        const result = await pool.query(query, [id]);
+        return result.rows[0] || null;
     }
-  },
-
-  listar: async () => {
-    const sql = 'SELECT * FROM tbnoticias WHERE exibir = true ORDER BY postagem DESC';
-    const { rows } = await pool.query(sql);
-    return rows.map(r => ({
-      id: r.idnoticia,
-      titulo: r.titulo,
-      descricao: r.descricao || '', // usa campo descricao próprio
-      data: r.postagem,
-      imagem: r.link,
-      url_leiamais: r.url_leiamais
-    }));
-  },
-
-  buscarPorId: async (id) => {
-    const sql = 'SELECT * FROM tbnoticias WHERE idnoticia = $1';
-    const { rows } = await pool.query(sql, [id]);
-    if (!rows.length) return null;
-    const r = rows[0];
-    return {
-      id: r.idnoticia,
-      titulo: r.titulo,
-      descricao: r.descricao || '',
-      data: r.postagem,
-      imagem: r.link,
-      url_leiamais: r.url_leiamais
-    };
-  },
-
-  atualizar: async (id, noticia) => {
-    const sql = 'UPDATE tbnoticias SET titulo=$1, link=$2, postagem=$3, descricao=$4, url_leiamais=$5 WHERE idnoticia=$6 RETURNING *';
-    const params = [
-      noticia.titulo,
-      noticia.imagem || '', // campo 'link' guarda a URL da imagem
-      noticia.data,
-      noticia.descricao || '',
-      noticia.url_leiamais || '',
-      id
-    ];
-    const { rows } = await pool.query(sql, params);
-    const r = rows[0];
-    return {
-      id: r.idnoticia,
-      titulo: r.titulo,
-      descricao: r.descricao || '',
-      data: r.postagem,
-      imagem: r.link,
-      url_leiamais: r.url_leiamais
-    };
-  },
-
-  deletar: async (id) => {
-    const sql = 'DELETE FROM tbnoticias WHERE idnoticia=$1';
-    const { rowCount } = await pool.query(sql, [id]);
-    return rowCount > 0;
-  }
 };
 
 export default noticiasDAO;

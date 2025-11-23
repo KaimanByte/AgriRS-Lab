@@ -152,6 +152,61 @@ footer a img:hover {
 /* === ADIÇÕES DE RESPONSIVIDADE ============================ */
 /* ========================================================= */
 
+@media (max-width: 1786px) {
+  .foraLinha {
+    margin-left: 12%;
+    margin-right: 2.9%;
+}
+}
+
+@media (max-width: 1660px) {
+  .foraLinha {
+    margin-left: 10%;
+    margin-right: 2.5%;
+}
+}
+
+@media (max-width: 1469px) {
+  .foraLinha {
+    margin-left: 8%;
+    margin-right: 2%;
+}
+}
+
+@media (max-width: 1313px) {
+  .foraLinha {
+    margin-left: 6%;
+    margin-right: 1.7%;
+}
+}
+
+@media (max-width: 1194px) {
+  .foraLinha {
+    margin-left: 3%;
+    margin-right: 1%;
+}
+}
+
+@media (max-width: 1043px) {
+  .foraLinha {
+    margin-left: 2%;
+    margin-right: 1%;
+}
+  .linha {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  footer {
+    padding-top: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 1024px) {
   footer {
     flex-wrap: wrap;

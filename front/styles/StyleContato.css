@@ -60,6 +60,10 @@ h2 {
   margin-bottom: 1.25rem; /* 20px */
 }
 
+.endereco {
+  margin-top: 10px;
+}
+
 /* Box de contato */
 .contact-box {
   display: flex;
@@ -99,6 +103,10 @@ p {
 
 .icon {
   margin-right: 0.375rem; /* 6px */
+}
+
+#margin-top {
+  margin-top: 15px;
 }
 
 a {

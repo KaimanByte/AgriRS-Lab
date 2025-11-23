@@ -15,13 +15,13 @@
 
   <header>
     <nav>
-      <img src="../imagens/Header/AgriRSlab.png" id="Agriheader" />
+      <a target="_blank" title="AgriRSlab" href="index.html"><img src="../imagens/Header/AgriRSlab.png" id="Agriheader"></a>
       <ul id="nav-links">
         <li><a href="crudvagas.html">Vagas</a></li>
         <li><a href="crud.noticias.html">Notícias</a></li>
         <li><a href="crudpublicacoes.html">Publicações</a></li>
       </ul>
-      <img src="../imagens/Header/Inpe.png" id="Inpeheader" />
+      <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="../imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
 
@@ -56,25 +56,25 @@
   </form>
     
 
-		<table class="table mt-4">
-			<thead>
-				<tr>
-					<th>Imagem</th>
-					<th>ID</th>
-					<th>Título</th>
-					<th>Data</th>
-					<th>Ações</th>
-				</tr>
-			</thead>
-			<tbody id="tbodyNoticias"></tbody>
-		</table>
+		<div id="table-container">
+			<table class="table mt-4">
+				<thead>
+					<tr>
+						<th>Imagem</th>
+						<th>ID</th>
+						<th>Título</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				<tbody id="tbodyNoticias"></tbody>
+			</table>
+		</div>
+		<div id="error-message" style="display: none; color: red; font-weight: bold;"></div>
 	</div>
   <footer>
     <p>© 2025 AgriRSlab. Todos os direitos reservados.</p>
   </footer>
 
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
 	<script>
     const API = 'http://localhost:3030/noticias';
     let NOTICIAS = {};
@@ -90,35 +90,34 @@
       const tbody = document.getElementById('tbodyNoticias');
       tbody.innerHTML = '';
       const items = Object.values(NOTICIAS);
-      if (!items.length) {
-        tbody.innerHTML = '<tr><td colspan="5">Nenhuma notícia cadastrada.</td></tr>';
-        return;
+      if (items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">Nenhuma notícia disponível.</td></tr>';
+      } else {
+        items.forEach(n => {
+          tbody.innerHTML += `
+            <tr>
+              <td>
+                <img class="item-thumb"
+                     src="${n.imagem || '../imagens/Noticias/headerNoticia.jpg'}"
+                     alt="${n.titulo || ''}"
+                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"
+                />
+              </td>
+              <td>${n.id}</td>
+              <td>
+                <div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis;">
+                  <b>${n.titulo || ''} (${formatDate(n.data)})</b>
+                  <div style="font-size: 0.9em; color: #666; white-space: nowrap;">${n.descricao || ''}</div>
+                </div>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-info" onclick="editar(${n.id})">Editar</button>
+                <button class="btn btn-sm btn-danger" onclick="excluir(${n.id})">Excluir</button>
+              </td>
+            </tr>
+          `;
+        });
       }
-      items.forEach(n => {
-        tbody.innerHTML += `
-          <tr>
-            <td>
-              <img class="item-thumb" 
-                   src="${n.imagem || '../imagens/Noticias/headerNoticia.jpg'}" 
-                   alt="${n.titulo || ''}"
-                   style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"
-              />
-            </td>
-            <td>${n.id}</td>
-            <td>
-              <div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis;">
-                <b>${n.titulo || ''} (${formatDate(n.data)})</b>
-                <div style="font-size: 0.9em; color: #666; white-space: nowrap;">${n.descricao || ''}</div>
-              </div>
-            </td>
-            <td>${formatDate(n.data)}</td>
-            <td>
-              <button class="btn btn-sm btn-info" onclick="editar(${n.id})">Editar</button>
-              <button class="btn btn-sm btn-danger" onclick="excluir(${n.id})">Excluir</button>
-            </td>
-          </tr>
-        `;
-      });
     }
 
     async function carregar() {
@@ -142,7 +141,7 @@
         renderLista();
       } catch (e) {
         console.error('Erro ao carregar notícias:', e);
-        document.getElementById('tbodyNoticias').innerHTML = '<tr><td colspan="4">Erro ao carregar notícias.</td></tr>';
+        document.getElementById('tbodyNoticias').innerHTML = 'Erro ao carregar notícias.';
       }
     }
 
@@ -166,16 +165,16 @@
             if (id) {
               const res = await fetch(`${API}/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
                 body: JSON.stringify(dados)
               });
               if (!res.ok) throw new Error('Erro ao atualizar: ' + res.status);
-            } else {
-              const res = await fetch(API, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(dados)
-              });
+          } else {
+            const res = await fetch(API, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
+              body: JSON.stringify(dados)
+            });
               if (!res.ok) {
                 const txt = await res.text();
                 throw new Error('Erro ao inserir: ' + res.status + ' ' + txt);
@@ -197,14 +196,14 @@
           if (id) {
             const res = await fetch(`${API}/${id}`, {
               method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
               body: JSON.stringify(dados)
             });
             if (!res.ok) throw new Error('Erro ao atualizar: ' + res.status);
           } else {
             const res = await fetch(API, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
               body: JSON.stringify(dados)
             });
             if (!res.ok) {
@@ -280,7 +279,10 @@
     async function excluir(id) {
       if (!confirm('Confirma exclusão?')) return;
       try {
-        const res = await fetch(`${API}/${id}`, { method: 'DELETE' });
+        const res = await fetch(`${API}/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+        });
         if (!res.ok) throw new Error('Erro ao excluir: ' + res.status);
         delete NOTICIAS[id];
         renderLista();

@@ -1,0 +1,84 @@
+DROP TABLE IF EXISTS tb_adm, tbnoticias, tbpublicacao, tboportunidades;
+
+CREATE TABLE tb_adm (
+    id_adm INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    login VARCHAR(50) NOT NULL UNIQUE,
+    senha VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE tbnoticias (
+    idnoticia INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    titulo TEXT NOT NULL,
+    link TEXT,
+    data DATE NOT NULL,
+    exibir BOOLEAN DEFAULT TRUE,
+    descricao TEXT,
+    url_leiamais TEXT,
+    imagem TEXT
+);
+
+CREATE TABLE tbpublicacao (
+  idpublicacao SERIAL PRIMARY KEY,
+  titulo VARCHAR(150) NOT NULL,
+  descricao TEXT,
+  imagem_url TEXT,
+  pdf_url TEXT,
+  citacao_url TEXT,
+  doi_url TEXT,
+  ano VARCHAR(4),
+  criado_em TIMESTAMP DEFAULT now(),
+  atualizado_em TIMESTAMP DEFAULT now()
+);
+
+CREATE TABLE tboportunidades (
+  id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  titulo TEXT NOT NULL,
+  descricao TEXT,
+  requisitos TEXT,
+  processo_selecao TEXT,
+  prazo TEXT,
+  contato TEXT,
+  data_criacao DATE DEFAULT CURRENT_DATE
+);
+
+-- Inserindo usuário Admin com senha 123456
+INSERT INTO tb_adm (login, senha)
+VALUES ('Admin', '123456');
+
+-- Inserindo uma notícia padrão de exemplo
+INSERT INTO tbnoticias (titulo, link, data, exibir, descricao, url_leiamais)
+VALUES (
+    'Lançamento do novo portal de notícias',
+    'http://exemplo.com/noticia1',
+    CURRENT_DATE,
+    TRUE,
+    'O portal de notícias foi lançado com o objetivo de fornecer informações atualizadas e confiáveis.',
+    'http://exemplo.com/noticia1-completa'
+);
+
+-- Insere registros de teste
+INSERT INTO tbpublicacao (titulo, descricao, imagem_url, pdf_url, citacao_url, doi_url)
+VALUES
+('Modelo de Publicação', 'Publicação exemplo criada para teste da API.', 
+ '../imagens/Publicacoes/pb01.png', 'pb01.pdf', 'pb01_citacao.txt', 'https://doi.org/xxxx/pb01');
+
+ INSERT INTO tboportunidades (
+  titulo,
+  descricao,
+  requisitos,
+  processo_selecao,
+  prazo,
+  contato
+) VALUES (
+  'Iniciação Científica',
+  'Programa de bolsas para estudantes desenvolverem projetos de pesquisa',
+  'Estudante de graduação a partir do 3º semestre; Coeficiente de rendimento mínimo de 7,0; Dedicação de 20h semanais ao projeto; Participação em eventos científicos',
+  'Submissão de proposta de projeto; Currículo Lattes atualizado; Carta de aceite de um orientador; Avaliação pela comissão científica',
+  'A ser definido',
+  'agrirslab@gmail.com'
+);
+
+
+
+
+Necessário rodar o script "node src/suporte/migrar-senhas.js" no console caso suba uma senha sem criptografia para o banco

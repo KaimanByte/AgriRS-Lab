@@ -59,6 +59,7 @@ nav li:hover {
 
 nav li:hover a {
     color: white;
+    text-decoration: none;
 }
 
 nav a {
@@ -130,8 +131,17 @@ nav a img:hover {
     color: #fff;
 }
 
+select {
+    border: none;
+    position: fixed;
+    top: 10px;
+    right: 0.9rem;
+    padding: 4px;
+    border-radius: 6px;
+}
+
 /* Tablets */
-@media (max-width: 1024px) {
+@media (max-width: 1154px) {
     nav {
         font-size: 18px;
     }
@@ -144,26 +154,32 @@ nav a img:hover {
         width: 70px;
         height: 70px;
     }
+    select {
+        margin-right:auto;
+        left: 47%;
+        right: auto;
+        top: 34px;
+  }
 }
 
 /* MOBILE (menu clicável funcional) */
-@media (max-width: 768px) {
-    nav {
-        justify-content: space-between;
-        padding: 10px 20px;
-        position: relative;
-    }
-
+@media (max-width: 940px) {
     #menu-toggle {
         display: block;
         z-index: 1100;
+    }
+
+    nav ul.ativo {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
     }
 
     nav ul {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 10px;
+        gap: 20px;
         position: absolute;
         top: 100%;
         left: 0;
@@ -177,6 +193,14 @@ nav a img:hover {
         pointer-events: none;
         transition: all 0.3s ease;
         z-index: 1000;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        justify-content: space-between;
+        padding: 10px 20px;
+        position: relative;
     }
 
     /* Quando ativo (botão clicado) */
@@ -219,4 +243,16 @@ nav a img:hover {
     nav li a {
         font-size: 16px;
     }
+}
+
+@media (max-width: 400px) {
+select {
+        left: 40%;
+  }
+}
+
+@media (max-width: 350px) {
+select {
+        display:none;
+  }
 }
