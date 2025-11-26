@@ -3,28 +3,95 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Crud Notícias</title>
-	<link rel="stylesheet" href="../styles/StyleCrudNoticias.css">
-  <link rel="stylesheet" href="../styles/StyleHeader.css"/>
-  <link rel="stylesheet" href="../styles/StyleFooterCrud.css"/>
+	<title>Crud Notícias - AgriRSlab</title>
+	<link rel="stylesheet" href="/styles/StyleCrudNoticias.css">
+  <link rel="stylesheet" href="/styles/StyleHeader.css"/>
+  <link rel="stylesheet" href="/styles/StyleFooterCrud.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
+  <script>
+// PROTEÇÃO IMEDIATA - Coloque ANTES de qualquer outro script
+(async function() {
+    'use strict';
+    
+    console.log('🔒 [Proteção] Iniciando verificação...');
+    
+    // 1. Verifica se tem token
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+        console.log('❌ [Proteção] Sem token - redirecionando');
+        window.location.replace('/login?erro=sem_token');
+        // Para a execução de qualquer script
+        throw new Error('Sem autenticação');
+    }
+    
+    console.log('🔑 [Proteção] Token encontrado, verificando validade...');
+    
+    // 2. Verifica validade do token
+    try {
+        const response = await fetch('http://localhost:3030/auth/verificar', {
+            method: 'GET',
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        console.log('📡 [Proteção] Status da verificação:', response.status);
+        
+        // Se não conseguir fazer a requisição ou retornar erro
+        if (!response.ok) {
+            console.log('❌ [Proteção] Resposta inválida');
+            throw new Error('Token inválido');
+        }
+        
+        const data = await response.json();
+        console.log('📦 [Proteção] Dados recebidos:', data);
+        
+        // Verifica se o token é válido
+        if (!data.valido || !data.autenticado) {
+            console.log('❌ [Proteção] Token inválido ou expirado');
+            throw new Error('Token inválido');
+        }
+        
+        console.log('✅ [Proteção] Autenticação válida! Usuário:', data.usuario?.login);
+        
+    } catch (error) {
+        console.error('❌ [Proteção] Erro na verificação:', error);
+        
+        // Limpa dados inválidos
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuario');
+        
+        // Redireciona para login
+        window.location.replace('/login?erro=token_invalido');
+        
+        // Para a execução
+        throw new Error('Falha na autenticação');
+    }
+})();
+</script>
+
+<!-- Depois carregue o authGuard.js normalmente -->
+<script src="/scripts/authGuard.js"></script>
+
   <header>
     <nav>
-      <a target="_blank" title="AgriRSlab" href="index.html"><img src="../imagens/Header/AgriRSlab.png" id="Agriheader"></a>
+      <a target="_blank" title="AgriRSlab" href="/"><img src="/imagens/Header/AgriRSlab.png" id="Agriheader"></a>
       <ul id="nav-links">
-        <li><a href="crudvagas.html">Vagas</a></li>
-        <li><a href="crud.noticias.html">Notícias</a></li>
-        <li><a href="crudpublicacoes.html">Publicações</a></li>
+        <li><a href="/admin/vagas">Vagas</a></li>
+        <li><a href="/admin/noticias">Notícias</a></li>
+        <li><a href="/admin/publicacoes">Publicações</a></li>
       </ul>
-      <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="../imagens/Header/Inpe.png" id="Inpeheader"></a>
+      <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="/imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
-
+  <button onclick="AuthGuard.logout()" id="deslogar">SAIR</button>
 	<div class="container mt-4" id="crud-news">
 		<form id="formNoticias">
       <h2>Notícias</h2>
@@ -54,7 +121,6 @@
 			  <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
 		  </div>
   </form>
-    
 
 		<div id="table-container">
 			<table class="table mt-4">
@@ -76,9 +142,22 @@
   </footer>
 
 	<script>
-    const API = 'http://localhost:3030/noticias';
+    const API = 'http://localhost:3030/api/noticias';
     let NOTICIAS = {};
     let editandoId = null;
+
+    // Função para obter o token
+    function obterToken() {
+      return localStorage.getItem('token');
+    }
+
+    // Função para obter headers com autenticação
+    function obterHeaders() {
+      return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${obterToken()}`
+      };
+    }
 
     function formatDate(v) {
       if (!v) return '-';
@@ -125,7 +204,7 @@
         const res = await fetch(API);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-        console.log('Dados carregados:', data); // debug
+        console.log('Dados carregados:', data);
         NOTICIAS = {};
         (Array.isArray(data) ? data : []).forEach(n => {
           const key = n.id;
@@ -159,67 +238,44 @@
         const file = fileInput.files[0];
         const reader = new FileReader();
         reader.onload = async () => {
-          dados.imagem = reader.result; // base64
-          try {
-            const id = document.getElementById('id').value;
-            if (id) {
-              const res = await fetch(`${API}/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-                body: JSON.stringify(dados)
-              });
-              if (!res.ok) throw new Error('Erro ao atualizar: ' + res.status);
-          } else {
-            const res = await fetch(API, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-              body: JSON.stringify(dados)
-            });
-              if (!res.ok) {
-                const txt = await res.text();
-                throw new Error('Erro ao inserir: ' + res.status + ' ' + txt);
-              }
-            }
-            limparFormulario();
-            await carregar();
-            alert(editandoId ? 'Notícia atualizada com sucesso' : 'Notícia adicionada com sucesso');
-          } catch (err) {
-            console.error('Erro ao salvar notícia:', err);
-            alert('Erro ao salvar notícia: ' + (err.message || err));
-          }
+          dados.imagem = reader.result;
+          await salvarNoticia(dados);
         };
         reader.readAsDataURL(file);
       } else {
         dados.imagem = document.getElementById('imagem').value;
-        try {
-          const id = document.getElementById('id').value;
-          if (id) {
-            const res = await fetch(`${API}/${id}`, {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-              body: JSON.stringify(dados)
-            });
-            if (!res.ok) throw new Error('Erro ao atualizar: ' + res.status);
-          } else {
-            const res = await fetch(API, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-              body: JSON.stringify(dados)
-            });
-            if (!res.ok) {
-              const txt = await res.text();
-              throw new Error('Erro ao inserir: ' + res.status + ' ' + txt);
-            }
-          }
-          limparFormulario();
-          await carregar();
-          alert(editandoId ? 'Notícia atualizada com sucesso' : 'Notícia adicionada com sucesso');
-        } catch (err) {
-          console.error('Erro ao salvar notícia:', err);
-          alert('Erro ao salvar notícia: ' + (err.message || err));
-        }
+        await salvarNoticia(dados);
       }
     });
+
+    async function salvarNoticia(dados) {
+      try {
+        const id = document.getElementById('id').value;
+        const options = {
+          method: id ? 'PUT' : 'POST',
+          headers: obterHeaders(),
+          body: JSON.stringify(dados)
+        };
+
+        const url = id ? `${API}/${id}` : API;
+        const res = await fetch(url, options);
+
+        if (res.status === 401 || res.status === 403) {
+          alert('Sessão expirada. Faça login novamente.');
+          AuthGuard.logout();
+          return;
+        }
+
+        if (!res.ok) throw new Error('Erro ao salvar: ' + res.status);
+
+        limparFormulario();
+        await carregar();
+        alert(editandoId ? 'Notícia atualizada com sucesso' : 'Notícia adicionada com sucesso');
+      } catch (err) {
+        console.error('Erro ao salvar notícia:', err);
+        alert('Erro ao salvar notícia: ' + (err.message || err));
+      }
+    }
 
     function limparFormulario() {
       document.getElementById('id').value = '';
@@ -228,24 +284,19 @@
       document.getElementById('data').value = '';
       document.getElementById('imagem').value = '';
       document.getElementById('url_leiamais').value = '';
-      // Resetar preview da imagem
       const preview = document.getElementById('preview');
       preview.src = '';
       preview.style.display = 'none';
-      // Resetar input file
       document.getElementById('imagem_file').value = '';
-      // Resetar estado de edição
       editandoId = null;
       document.getElementById('btnSubmit').textContent = 'Adicionar';
     }
 
-    // Adicionar event listener para preview da imagem
     document.getElementById('imagem_file').addEventListener('change', function(event) {
       const file = event.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-          // Mostrar preview
           const preview = document.getElementById('preview');
           preview.src = e.target.result;
           preview.style.display = 'block';
@@ -266,7 +317,6 @@
         document.getElementById('imagem').value = n.imagem || '';
         document.getElementById('url_leiamais').value = n.url_leiamais || '';
         document.getElementById('btnSubmit').textContent = 'Atualizar';
-        // Mostrar preview se houver imagem
         if (n.imagem) {
           const preview = document.getElementById('preview');
           preview.src = n.imagem;
@@ -281,8 +331,15 @@
       try {
         const res = await fetch(`${API}/${id}`, {
           method: 'DELETE',
-          headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+          headers: { 'Authorization': `Bearer ${obterToken()}` }
         });
+
+        if (res.status === 401 || res.status === 403) {
+          alert('Sessão expirada. Faça login novamente.');
+          AuthGuard.logout();
+          return;
+        }
+
         if (!res.ok) throw new Error('Erro ao excluir: ' + res.status);
         delete NOTICIAS[id];
         renderLista();
@@ -293,7 +350,6 @@
       }
     }
 
-    // inicializa
     carregar();
     </script>
 </body>

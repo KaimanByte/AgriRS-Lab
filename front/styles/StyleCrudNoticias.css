@@ -1,4 +1,26 @@
 /* ===== CRUD / Formulário / Tabela ===== */
+#deslogar {
+    position: fixed;
+    top: 125px;
+    right: 30px;
+    padding: 8px 16px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+  }
+
+#deslogar:hover {
+  background-color: #a80000;
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -45,6 +67,10 @@
 .form-control:focus {
     border-color: #3498db;
     box-shadow: 0 0 5px rgba(52,152,219,0.3);
+}
+
+textarea {
+    resize: none;
 }
 
 textarea.form-control {

@@ -1,11 +1,14 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import pool from '../controladores/bd.js';
+import pool from '../controladores/bd.js'; // Atualizado para usar o path correto
+import { verificarToken, gerarToken } from '../middleware/auth.js'; // Importar funções do middleware
 
 const router = express.Router();
 
-// Validação de entrada
+// ============================================
+// VALIDAÇÃO DE ENTRADA
+// ============================================
 const validarLogin = (req, res, next) => {
   const { login, senha } = req.body;
 
@@ -43,7 +46,9 @@ const validarLogin = (req, res, next) => {
   next();
 };
 
-// Rota de login
+// ============================================
+// ROTA DE LOGIN
+// ============================================
 router.post('/login', validarLogin, async (req, res) => {
   const { login, senha } = req.body;
 
@@ -53,10 +58,10 @@ router.post('/login', validarLogin, async (req, res) => {
   console.log('Login normalizado:', login.trim());
 
   try {
-    // Busca usuário no banco
+    // Busca usuário no banco (mantendo sua tabela tb_adm)
     const result = await pool.query(
-    'SELECT * FROM tb_adm WHERE login = $1', 
-    [login.trim()]
+      'SELECT * FROM tb_adm WHERE login = $1', 
+      [login.trim()]
     );
 
     console.log('🔍 Usuários encontrados:', result.rows.length);
@@ -96,22 +101,26 @@ router.post('/login', validarLogin, async (req, res) => {
     console.log('✅ Senha correta!');
     console.log('🎫 Gerando token JWT...');
 
-    // Gera token JWT
-    const token = jwt.sign(
-      { 
-        id: usuario.id_adm,
-        login: usuario.login 
-      }, 
-      process.env.JWT_SECRET, 
-      { expiresIn: '8h' }
-    );
+    // Usa a função gerarToken do middleware (padronizado)
+    const token = gerarToken({
+      id: usuario.id_adm,
+      idusuario: usuario.id_adm, // compatibilidade
+      login: usuario.login,
+      nivel: 'admin'
+    });
 
     console.log('✅ Token gerado:', token.substring(0, 50) + '...');
     console.log('🎉 LOGIN BEM-SUCEDIDO!\n');
 
+    // Resposta compatível com seu sistema atual
     res.json({ 
+      message: 'Login realizado com sucesso',
       token,
-      login: usuario.login 
+      login: usuario.login,
+      usuario: {
+        id: usuario.id_adm,
+        login: usuario.login
+      }
     });
 
   } catch (err) {
@@ -122,9 +131,13 @@ router.post('/login', validarLogin, async (req, res) => {
   }
 });
 
-// Rota para criar/atualizar usuário admin (protegida)
+// ============================================
+// ROTA PARA CRIAR ADMIN
+// ============================================
 router.post('/criar-admin', async (req, res) => {
   const { login, senha } = req.body;
+
+  console.log('👤 Tentando criar admin:', login);
 
   if (!login || !senha) {
     return res.status(400).json({ 
@@ -132,14 +145,29 @@ router.post('/criar-admin', async (req, res) => {
     });
   }
 
+  if (login.trim().length < 3) {
+    return res.status(400).json({ 
+      message: 'Login deve ter no mínimo 3 caracteres' 
+    });
+  }
+
+  if (senha.length < 6) {
+    return res.status(400).json({ 
+      message: 'Senha deve ter no mínimo 6 caracteres' 
+    });
+  }
+
   try {
     // Hash da senha com bcrypt
     const senhaHash = await bcrypt.hash(senha, 10);
+    console.log('🔒 Senha hasheada com sucesso');
 
     const result = await pool.query(
-    'INSERT INTO tb_adm (login, senha) VALUES ($1, $2) RETURNING id_adm, login',
-    [login.trim(), senhaHash]  // ✅ Mantém maiúsculas/minúsculas
+      'INSERT INTO tb_adm (login, senha) VALUES ($1, $2) RETURNING id_adm, login',
+      [login.trim(), senhaHash]
     );
+
+    console.log('✅ Admin criado:', result.rows[0]);
 
     res.status(201).json({ 
       message: 'Admin criado com sucesso',
@@ -148,32 +176,58 @@ router.post('/criar-admin', async (req, res) => {
 
   } catch (err) {
     if (err.code === '23505') { // duplicate key
+      console.log('⚠️  Login já existe');
       return res.status(409).json({ 
         message: 'Login já existe' 
       });
     }
-    console.error('Erro ao criar admin:', err);
+    console.error('❌ Erro ao criar admin:', err);
     res.status(500).json({ 
       message: 'Erro ao criar admin' 
     });
   }
 });
 
-// Rota para verificar se token é válido
-router.get('/verificar', (req, res) => {
-  const authHeader = req.headers.authorization;
+// ============================================
+// ROTA PARA VERIFICAR TOKEN (melhorada)
+// ============================================
+router.get('/verificar', verificarToken, (req, res) => {
+  // Se chegou aqui, o token é válido (middleware verificou)
+  res.json({ 
+    valido: true,
+    autenticado: true,
+    usuario: req.usuario // Dados do usuário do token
+  });
+});
 
-  if (!authHeader) {
-    return res.status(403).json({ valido: false });
-  }
+// ============================================
+// ROTA DE LOGOUT (opcional)
+// ============================================
+router.post('/logout', (req, res) => {
+  // No caso de JWT, o logout é feito no cliente removendo o token
+  res.json({ 
+    message: 'Logout realizado com sucesso' 
+  });
+});
 
-  const token = authHeader.split(' ')[1];
-
+// ============================================
+// ROTA PARA LISTAR ADMINS (protegida, debug)
+// ============================================
+router.get('/admins', verificarToken, async (req, res) => {
   try {
-    jwt.verify(token, process.env.JWT_SECRET);
-    res.json({ valido: true });
+    const result = await pool.query(
+      'SELECT id_adm, login FROM tb_adm ORDER BY id_adm'
+    );
+    
+    res.json({ 
+      admins: result.rows,
+      total: result.rows.length
+    });
   } catch (err) {
-    res.status(401).json({ valido: false });
+    console.error('Erro ao listar admins:', err);
+    res.status(500).json({ 
+      message: 'Erro ao listar admins' 
+    });
   }
 });
 

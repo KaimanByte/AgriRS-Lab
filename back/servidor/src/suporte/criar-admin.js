@@ -82,14 +82,13 @@ async function criarAdmin() {
 
     // Insere no banco
     const result = await pool.query(
-      'INSERT INTO tb_adm (login, senha) VALUES ($1, $2) RETURNING id_adm, login, criado_em',
+      'INSERT INTO tb_adm (login, senha) VALUES ($1, $2) RETURNING id_adm, login',
       [login.trim(), senhaHash]
     );
 
     console.log('\n✅ Admin criado com sucesso!');
     console.log(`   ID: ${result.rows[0].id_adm}`);
     console.log(`   Login: ${result.rows[0].login}`);
-    console.log(`   Criado em: ${result.rows[0].criado_em}\n`);
 
   } catch (error) {
     console.error('\n❌ Erro ao criar admin:', error.message, '\n');

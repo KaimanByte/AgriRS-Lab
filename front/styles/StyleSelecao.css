@@ -18,6 +18,36 @@ body {
   background-color: #FFFAF3;
 }
 
+#deslogar {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    padding: 10px 20px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.08s ease, box-shadow 0.12s ease;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.4);
+  }
+
+#deslogar:hover {
+  background-color: #a80000;
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+#usuario-info {
+  text-align: center;
+  color: #000000;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
 #cinza {
   background-color: rgb(213, 213, 213);
   padding: 5rem;

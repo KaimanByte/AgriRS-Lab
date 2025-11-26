@@ -3,32 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-   <link rel="stylesheet" href="../styles/StyleSelecao.css">
-</head>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
-   <link rel="stylesheet" href="../styles/StyleSelecao.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
+    <title>Menu Administrativo - AgriRSlab</title>
+    <link rel="stylesheet" href="/styles/StyleSelecao.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- ============================================ -->
+  <!-- PROTEÇÃO AUTOMÁTICA - NÃO REMOVER -->
+  <!-- ============================================ -->
+  <script>
+// PROTEÇÃO IMEDIATA - Coloque ANTES de qualquer outro script
+(async function() {
+    'use strict';
+    
+    console.log('🔒 [Proteção] Iniciando verificação...');
+    
+    // 1. Verifica se tem token
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+        console.log('❌ [Proteção] Sem token - redirecionando');
+        window.location.replace('/login?erro=sem_token');
+        // Para a execução de qualquer script
+        throw new Error('Sem autenticação');
+    }
+    
+    console.log('🔑 [Proteção] Token encontrado, verificando validade...');
+    
+    // 2. Verifica validade do token
+    try {
+        const response = await fetch('http://localhost:3030/auth/verificar', {
+            method: 'GET',
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        console.log('📡 [Proteção] Status da verificação:', response.status);
+        
+        // Se não conseguir fazer a requisição ou retornar erro
+        if (!response.ok) {
+            console.log('❌ [Proteção] Resposta inválida');
+            throw new Error('Token inválido');
+        }
+        
+        const data = await response.json();
+        console.log('📦 [Proteção] Dados recebidos:', data);
+        
+        // Verifica se o token é válido
+        if (!data.valido || !data.autenticado) {
+            console.log('❌ [Proteção] Token inválido ou expirado');
+            throw new Error('Token inválido');
+        }
+        
+        console.log('✅ [Proteção] Autenticação válida! Usuário:', data.usuario?.login);
+        
+    } catch (error) {
+        console.error('❌ [Proteção] Erro na verificação:', error);
+        
+        // Limpa dados inválidos
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuario');
+        
+        // Redireciona para login
+        window.location.replace('/login?erro=token_invalido');
+        
+        // Para a execução
+        throw new Error('Falha na autenticação');
+    }
+})();
+</script>
+  
+  <button onclick="AuthGuard.logout()" id="deslogar">
+    SAIR
+  </button>
+  
   <div id="cinza">
-    <img src="../imagens/Header/AgriRSlab.png">
+    <div id="usuario-info"></div>
+    <img src="/imagens/Header/AgriRSlab.png">
+    
     <div id="selecao-titulo">SELECIONE UMA PÁGINA PARA GERENCIAR</div>
+    
     <div id="opcoes">
-      <a href="crudvagas.html"><div class="opcoes-cards">VAGAS</div></a>
-      <a href="crud.noticias.html"><div class="opcoes-cards">NOTÍCIAS</div></a>
-      <a href="crudpublicacoes.html"><div class="opcoes-cards">PUBLICAÇÕES</div></a>
+      <a href="/admin/vagas"><div class="opcoes-cards">VAGAS</div></a>
+      <a href="/admin/noticias"><div class="opcoes-cards">NOTÍCIAS</div></a>
+      <a href="/admin/publicacoes"><div class="opcoes-cards">PUBLICAÇÕES</div></a>
     </div>
   </div>
-</body>
 
-</html>
+  <!-- AuthGuard.js -->
+  <script src="/scripts/authGuard.js"></script>
+  
+  <script>
+    // Mostrar nome do usuário logado
+    const usuario = localStorage.getItem('usuario');
+    if (usuario) {
+      document.getElementById('usuario-info').textContent = `Logado como: ${usuario}`;
+    }
+  </script>
+</body>
 </html>

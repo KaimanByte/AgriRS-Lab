@@ -4,17 +4,18 @@
   "description": "Servidor ABP 1DSM 2025-1 com CRUD de publicações",
   "type": "module",
   "scripts": {
-  "dev": "nodemon src/index.js",
-  "start": "node src/index.js",
-  "start:prod": "cross-env NODE_ENV=production node src/index.js",
-  "migrar-senhas": "node src/suporte/migrar-senhas.js",
-  "criar-admin": "node src/suporte/criar-admin.js"
-},
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "start:prod": "cross-env NODE_ENV=production node src/index.js",
+    "migrar-senhas": "node src/suporte/migrar-senhas.js",
+    "criar-admin": "node src/suporte/criar-admin.js"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.18.2",
+    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.10.0"
   },
