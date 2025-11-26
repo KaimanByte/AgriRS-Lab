@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <link rel="stylesheet" href="../styles/StyleLogin.css">
+    <link rel="stylesheet" href="/styles/StyleLogin.css">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - AgriRSlab</title>
 </head>
 <body>
 
@@ -13,7 +13,7 @@
     <div class="container">
         <div class="menu">
             <div class="menuSuperior">
-               <img src="../imagens/Header/AgriRSlab.png" alt="AgriRS Lab">
+               <img src="/imagens/Header/AgriRSlab.png" alt="AgriRS Lab">
                <h2 id="login">LOGIN</h2>
             </div>
             <div class="botao">
@@ -37,9 +37,9 @@
                     autocomplete="current-password"
                 >
                 
+                <div id="mensagemErro" style="display: none; color: #ff4444; text-align: center;"></div>
+
                 <button type="submit" id="btnEntrar">ENTRAR</button>
-                
-                <div id="mensagemErro" style="display: none; color: #ff4444; margin-top: 10px; text-align: center;"></div>
             </div>
         </div>
     </div>
@@ -48,7 +48,9 @@
 <script>
 const API_URL = 'http://localhost:3030';
 
-// Função para mostrar mensagem de erro
+// ==========================================
+// FUNÇÕES AUXILIARES
+// ==========================================
 function mostrarErro(mensagem) {
     const msgErro = document.getElementById('mensagemErro');
     msgErro.textContent = mensagem;
@@ -59,7 +61,6 @@ function mostrarErro(mensagem) {
     }, 5000);
 }
 
-// Função para desabilitar/habilitar botão
 function setBotaoCarregando(carregando) {
     const btn = document.getElementById('btnEntrar');
     const usuario = document.getElementById('usuario');
@@ -78,41 +79,56 @@ function setBotaoCarregando(carregando) {
     }
 }
 
-// Verificar se já está logado
-function verificarSessao() {
+// ==========================================
+// VERIFICAR ERROS DA URL (ADICIONE AQUI!)
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Verifica se há erro na URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const erro = urlParams.get('erro');
+    
+    if (erro === 'sem_token') {
+        mostrarErro('Você precisa fazer login para acessar essa página');
+    } else if (erro === 'token_invalido') {
+        mostrarErro('Sessão expirada. Faça login novamente');
+    }
+});
+
+// ==========================================
+// VERIFICAR SESSÃO EXISTENTE
+// ==========================================
+async function verificarSessao() {
     const token = localStorage.getItem('token');
     if (token) {
-        // Verifica se token ainda é válido
-        fetch(`${API_URL}/auth/verificar`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
+        try {
+            const res = await fetch(`${API_URL}/auth/verificar`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
             if (data.valido) {
-                window.location.href = 'crudSelecao.html';
+                window.location.href = '/admin';
             } else {
                 localStorage.removeItem('token');
+                localStorage.removeItem('usuario');
             }
-        })
-        .catch(() => {
+        } catch (error) {
             localStorage.removeItem('token');
-        });
+            localStorage.removeItem('usuario');
+        }
     }
 }
 
-// Executar ao carregar página
 verificarSessao();
 
-// Handler do formulário
+// ==========================================
+// HANDLER DO FORMULÁRIO
+// ==========================================
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     
     const usuario = document.getElementById('usuario').value.trim();
     const senha = document.getElementById('senha').value;
 
-    // Validação básica no cliente
     if (usuario.length < 3) {
         mostrarErro('Usuário deve ter no mínimo 3 caracteres');
         return;
@@ -128,28 +144,18 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     try {
         const response = await fetch(`${API_URL}/auth/login`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ 
-                login: usuario, 
-                senha: senha 
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ login: usuario, senha: senha })
         });
 
         const data = await response.json();
 
         if (response.ok) {
-            // Salva token no localStorage
             localStorage.setItem('token', data.token);
-            
-            // Salva informações do usuário (opcional)
             if (data.login) {
                 localStorage.setItem('usuario', data.login);
             }
-            
-            // Redireciona
-            window.location.href = 'crudSelecao.html';
+            window.location.href = '/admin';
         } else {
             mostrarErro(data.message || 'Usuário ou senha incorretos!');
         }
@@ -161,7 +167,9 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     }
 });
 
-// Limpar mensagem de erro ao digitar
+// ==========================================
+// LIMPAR MENSAGEM AO DIGITAR
+// ==========================================
 document.getElementById('usuario').addEventListener('input', () => {
     document.getElementById('mensagemErro').style.display = 'none';
 });

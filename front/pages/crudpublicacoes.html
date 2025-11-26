@@ -4,27 +4,94 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crud Publicações - AgriRSlab</title>
-  <link rel="stylesheet" href="../styles/StyleCrudPublicacoes.css" />
-  <link rel="stylesheet" href="../styles/StyleHeader.css"/>
-  <link rel="stylesheet" href="../styles/StyleFooterCrud.css"/>
+  <link rel="stylesheet" href="/styles/StyleCrudPublicacoes.css" />
+  <link rel="stylesheet" href="/styles/StyleHeader.css"/>
+  <link rel="stylesheet" href="/styles/StyleFooterCrud.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
+  <script>
+// PROTEÇÃO IMEDIATA - Coloque ANTES de qualquer outro script
+(async function() {
+    'use strict';
+    
+    console.log('🔒 [Proteção] Iniciando verificação...');
+    
+    // 1. Verifica se tem token
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+        console.log('❌ [Proteção] Sem token - redirecionando');
+        window.location.replace('/login?erro=sem_token');
+        // Para a execução de qualquer script
+        throw new Error('Sem autenticação');
+    }
+    
+    console.log('🔑 [Proteção] Token encontrado, verificando validade...');
+    
+    // 2. Verifica validade do token
+    try {
+        const response = await fetch('http://localhost:3030/auth/verificar', {
+            method: 'GET',
+            headers: { 
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        console.log('📡 [Proteção] Status da verificação:', response.status);
+        
+        // Se não conseguir fazer a requisição ou retornar erro
+        if (!response.ok) {
+            console.log('❌ [Proteção] Resposta inválida');
+            throw new Error('Token inválido');
+        }
+        
+        const data = await response.json();
+        console.log('📦 [Proteção] Dados recebidos:', data);
+        
+        // Verifica se o token é válido
+        if (!data.valido || !data.autenticado) {
+            console.log('❌ [Proteção] Token inválido ou expirado');
+            throw new Error('Token inválido');
+        }
+        
+        console.log('✅ [Proteção] Autenticação válida! Usuário:', data.usuario?.login);
+        
+    } catch (error) {
+        console.error('❌ [Proteção] Erro na verificação:', error);
+        
+        // Limpa dados inválidos
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuario');
+        
+        // Redireciona para login
+        window.location.replace('/login?erro=token_invalido');
+        
+        // Para a execução
+        throw new Error('Falha na autenticação');
+    }
+})();
+</script>
+
+<!-- Depois carregue o authGuard.js normalmente -->
+<script src="/scripts/authGuard.js"></script>
+
   <header>
     <nav>
-      <a target="_blank" title="AgriRSlab" href="index.html"><img src="../imagens/Header/AgriRSlab.png" id="Agriheader"></a>
+      <a target="_blank" title="AgriRSlab" href="/"><img src="/imagens/Header/AgriRSlab.png" id="Agriheader"></a>
       <ul id="nav-links">
-        <li><a href="crudvagas.html">Vagas</a></li>
-        <li><a href="crud.noticias.html">Notícias</a></li>
-        <li><a href="crudpublicacoes.html">Publicações</a></li>
+        <li><a href="/admin/vagas">Vagas</a></li>
+        <li><a href="/admin/noticias">Notícias</a></li>
+        <li><a href="/admin/publicacoes">Publicações</a></li>
       </ul>
-      <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="../imagens/Header/Inpe.png" id="Inpeheader"></a>
+      <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="/imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
-
+  <button onclick="AuthGuard.logout()" id="deslogar">SAIR</button>
   <main>
     <section class="crud-publicacoes">
       <h2 id="crud-titulo">Publicações</h2>
@@ -57,10 +124,24 @@
   <footer>
     <p>© 2025 AgriRSlab. Todos os direitos reservados.</p>
   </footer>
+
   <script>
-const API = "http://localhost:3030/publicacao";
+const API = "http://localhost:3030/api/publicacao";
 let PUBLICACOES = {};
 let editandoId = null;
+
+// Função para obter o token
+function obterToken() {
+  return localStorage.getItem('token');
+}
+
+// Função para obter headers com autenticação
+function obterHeaders() {
+  return {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${obterToken()}`
+  };
+}
 
 function formatDate(v) {
   const d = new Date(v);
@@ -97,8 +178,6 @@ function renderLista() {
   });
 }
 
-
-
 function carregar() {
   fetch(API)
     .then(r => r.json())
@@ -124,45 +203,46 @@ document.getElementById("formAdd").addEventListener("submit", async e => {
     const file = fileInput.files[0];
     const reader = new FileReader();
     reader.onload = async () => {
-      dados.imagem_url = reader.result; // base64
-      try {
-        const method = editandoId ? "PUT" : "POST";
-        const url = editandoId ? `${API}/${editandoId}` : API;
-        await fetch(url, {
-          method: method,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(dados)
-        });
-        alert(editandoId ? "Publicação atualizada com sucesso" : "Publicação adicionada com sucesso");
-        limparFormulario();
-        editandoId = null;
-        document.getElementById("btnSubmit").textContent = "Adicionar";
-        carregar();
-      } catch (err) {
-        alert("Erro ao salvar publicação: " + err.message);
-      }
+      dados.imagem_url = reader.result;
+      await salvarPublicacao(dados);
     };
     reader.readAsDataURL(file);
   } else {
     dados.imagem_url = document.getElementById("imagem_url").value;
-    try {
-      const method = editandoId ? "PUT" : "POST";
-      const url = editandoId ? `${API}/${editandoId}` : API;
-      await fetch(url, {
-        method: method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dados)
-      });
-      alert(editandoId ? "Publicação atualizada com sucesso" : "Publicação adicionada com sucesso");
-      limparFormulario();
-      editandoId = null;
-      document.getElementById("btnSubmit").textContent = "Adicionar";
-      carregar();
-    } catch (err) {
-      alert("Erro ao salvar publicação: " + err.message);
-    }
+    await salvarPublicacao(dados);
   }
 });
+
+async function salvarPublicacao(dados) {
+  try {
+    const method = editandoId ? "PUT" : "POST";
+    const url = editandoId ? `${API}/${editandoId}` : API;
+    
+    const response = await fetch(url, {
+      method: method,
+      headers: obterHeaders(),
+      body: JSON.stringify(dados)
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      alert('Sessão expirada. Faça login novamente.');
+      AuthGuard.logout();
+      return;
+    }
+
+    if (!response.ok) {
+      throw new Error('Erro ao salvar publicação');
+    }
+
+    alert(editandoId ? "Publicação atualizada com sucesso" : "Publicação adicionada com sucesso");
+    limparFormulario();
+    editandoId = null;
+    document.getElementById("btnSubmit").textContent = "Adicionar";
+    carregar();
+  } catch (err) {
+    alert("Erro ao salvar publicação: " + err.message);
+  }
+}
 
 function editar(id) {
   const pub = PUBLICACOES[id];
@@ -177,7 +257,6 @@ function editar(id) {
     document.getElementById("citacao_url").value = pub.citacao_url;
     document.getElementById("doi_url").value = pub.doi_url;
     document.getElementById("btnSubmit").textContent = "Atualizar";
-    // Mostrar preview se houver imagem
     if (pub.imagem_url) {
       const preview = document.getElementById("preview");
       preview.src = pub.imagem_url;
@@ -187,14 +266,29 @@ function editar(id) {
   }
 }
 
-function excluir(id) {
+async function excluir(id) {
   if (confirm("Confirma exclusão?")) {
-    fetch(`${API}/${id}`, { method: "DELETE" })
-      .then(() => {
-        alert("Publicação excluída com sucesso");
-        carregar();
-      })
-      .catch(err => alert("Erro ao excluir publicação: " + err.message));
+    try {
+      const response = await fetch(`${API}/${id}`, { 
+        method: "DELETE",
+        headers: { "Authorization": `Bearer ${obterToken()}` }
+      });
+
+      if (response.status === 401 || response.status === 403) {
+        alert('Sessão expirada. Faça login novamente.');
+        AuthGuard.logout();
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error('Erro ao excluir publicação');
+      }
+
+      alert("Publicação excluída com sucesso");
+      carregar();
+    } catch (err) {
+      alert("Erro ao excluir publicação: " + err.message);
+    }
   }
 }
 
@@ -206,34 +300,28 @@ function limparFormulario() {
   document.getElementById("pdf_url").value = "";
   document.getElementById("citacao_url").value = "";
   document.getElementById("doi_url").value = "";
-  // Resetar preview
   const preview = document.getElementById("preview");
   preview.src = "";
   preview.style.display = "none";
-  // Resetar input file
   document.getElementById("imagem_file").value = "";
-  // Resetar estado de edição
   editandoId = null;
   document.getElementById("btnSubmit").textContent = "Adicionar";
 }
 
+document.getElementById("imagem_file").addEventListener("change", function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const preview = document.getElementById("preview");
+      preview.src = event.target.result;
+      preview.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
-
-  // Adicionar event listener para preview da imagem
-  document.getElementById("imagem_file").addEventListener("change", function(e) {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        const preview = document.getElementById("preview");
-        preview.src = event.target.result;
-        preview.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  carregar();
+carregar();
 </script>
 </body>
 </html>

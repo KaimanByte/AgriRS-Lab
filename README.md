@@ -37,7 +37,7 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 |------: |---------------|:------:|:------------------------------------------:|
 | 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](./documentação/sprints/sprint_1.md)|
 | 2      | 📅 04/11/2025 | ✅  | [Ver Backlog](./documentação/sprints/sprint_2.md)|
-| 3      | 📅 25/11/2025 | —      | —                                          |
+| 3      | 📅 25/11/2025 | ✅      | [Ver Backlog](./documentação/sprints/sprint_3.md)|
 
 
 </div>
@@ -82,5 +82,5 @@ O protótipo do website pode ser acessado clicando no link abaixo:
 | Rafael Melo | Desenvolvedor | [Github](https://github.com/RafaelPMR) | [LinkedIn](https://www.linkedin.com/in/rafael-prado-de-melo-raimundo-55a150144?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app) |
 | João Pedro | Desenvolvedor | [Github](https://github.com/JoaoPedroLuvisariSeveriano) | [LinkedIn](https://www.linkedin.com/in/jo%C3%A3o-pedro-luvisari-severiano-bb1aa9303/) |
 | Breno Augusto | Desenvolvedor | [Github](https://github.com/brenoasj) | [LinkedIn](https://www.linkedin.com/in/brenoaugusto1910?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app) |
-| Gabriel Oliveira | Desenvolvddor  | [Github](https://github.com/GabrielOlsa) | [LinkedIn]() |
-| Thiago Guedes | Desenvolvedor | [Github](https://github.com/GabrielOlsa) | [LinkedIn]() |
+| Gabriel Oliveira | Desenvolvddor  | [Github](https://github.com/GabrielOlsa) | [LinkedIn](https://www.linkedin.com/in/gabriel-oliveira-96013138b?utm_source=share_via&utm_content=profile&utm_medium=member_android) |
+| Thiago Guedes | Desenvolvedor | [Github](https://github.com/Thiago-Tolosa) | [LinkedIn](https://www.linkedin.com/in/thiago-guedes-4965b0390?utm_source=share_via&utm_content=profile&utm_medium=member_android) |
