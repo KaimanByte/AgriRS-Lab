@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="./documentação/imagens/LogoKaymanByte.png"
-       alt="Logo 404NotFound"
+       alt="Sai fora"
        style="max-width: 260px; width: 60%; height: auto;">
 </p>
 
@@ -33,12 +33,11 @@ Todas as entregas serão realizadas conforme os prazos acordados com o cliente. 
 
 <div align="center">
 
-| Sprint | Entrega       | Status |                 Relatório                  |
-|------: |---------------|:------:|:------------------------------------------:|
-| 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](./documentação/sprints/sprint_1.md)|
-| 2      | 📅 04/11/2025 | ✅  | [Ver Backlog](./documentação/sprints/sprint_2.md)|
-| 3      | 📅 25/11/2025 | ✅      | [Ver Backlog](./documentação/sprints/sprint_3.md)|
-
+| Sprint | Entrega       | Status |                 Relatório                  |                Apresentação                |
+|------: |---------------|:------:|:------------------------------------------:|:------------------------------------------:|
+| 1      | 📅 08/10/2025 | ✅     | [Ver Backlog](./documentação/sprints/sprint_1.md) | [Apresentação](https://youtu.be/PMBobDD5Eb4) |
+| 2      | 📅 04/11/2025 | ✅     | [Ver Backlog](./documentação/sprints/sprint_2.md) | [Apresentação](https://youtu.be/u_ALKMT5F3A) |
+| 3      | 📅 25/11/2025 | ✅     | [Ver Backlog](./documentação/sprints/sprint_3.md) | [Apresentação](https://youtu.be/jQnsITIP0jw) |
 
 </div>
 
