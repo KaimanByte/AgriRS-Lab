@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <script defer src="https://barra.brasil.gov.br/barra.js" type="text/javascript"></script>
     <script>
-    const API = 'http://localhost:3030/api/noticias';
+    const API = `${window.location.origin}/api/noticias`;
 
     async function carregarNoticias() {
       try {
