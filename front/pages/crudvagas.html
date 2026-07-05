@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/imagens/Header/AgriRSlab.webp" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crud Vagas - AgriRSlab</title>
   <link rel="stylesheet" href="/styles/StyleCrudVagas.css"/>
@@ -34,7 +35,7 @@
     
     // 2. Verifica validade do token
     try {
-        const response = await fetch('http://localhost:3030/auth/verificar', {
+        const response = await fetch('/auth/verificar', { // Rota relativa ajustada
             method: 'GET',
             headers: { 
                 'Authorization': `Bearer ${token}`,
@@ -77,21 +78,22 @@
 })();
 </script>
 
-<!-- Depois carregue o authGuard.js normalmente -->
 <script src="/scripts/authGuard.js"></script>
 
   <header>
     <nav>
       <a target="_blank" title="AgriRSlab" href="/"><img src="/imagens/Header/AgriRSlab.png" id="Agriheader"></a>
       <ul id="nav-links">
-        <li><a href="/admin/vagas">Vagas</a></li>
+        <li><a href="#">Vagas</a></li>
         <li><a href="/admin/noticias">Notícias</a></li>
         <li><a href="/admin/publicacoes">Publicações</a></li>
       </ul>
       <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="/imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
-  <button onclick="AuthGuard.logout()" id="deslogar">SAIR</button>
+  
+  <button id="deslogar">SAIR</button>
+  
   <div class="crud-container">
   <form class="crud-form" id="crud-form">
     <h2 class="crud-form-titulo">Vagas</h2>
@@ -104,7 +106,7 @@
       <input type="text" name="contato" placeholder="CONTATO" />
       <div class="button-group">
         <button type="submit" class="btn-adicionar" id="btnSubmit">Adicionar</button>
-        <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
+        <button type="button" class="btn-limpar" id="btnLimpar">Limpar</button>
       </div>
   </div>
   </form>
@@ -118,7 +120,7 @@
 </footer>
 
 <script>
-  const API_URL = "http://localhost:3030/api/oportunidades";
+  const API_URL = "/api/oportunidades"; // Rota relativa ajustada
   const form = document.getElementById("crud-form");
   const cardsContainer = document.getElementById("crud-cards");
   let editandoId = null;
@@ -154,8 +156,8 @@
           ${o.prazo ? `<p><strong>Prazo:</strong> ${o.prazo}</p>` : ""}
           <p><strong>Contato:</strong> ${o.contato || "Não informado"}</p>
           <div class="crud-actions">
-            <button class="crud-edit-btn" onclick="editarCard(${o.id})">Editar</button>
-            <button class="crud-delete-btn" onclick="excluirCard(${o.id})">Excluir</button>
+            <button class="crud-edit-btn" data-id="${o.id}">Editar</button>
+            <button class="crud-delete-btn" data-id="${o.id}">Excluir</button>
           </div>
         `;
         cardsContainer.appendChild(card);
@@ -196,7 +198,7 @@
         throw new Error('Erro ao salvar vaga');
       }
 
-      alert(isEdit ? "Vaga atualizada com sucesso" : "Vaga adicionada com sucesso");
+      alert(isEdit ? "Vaga updated com sucesso" : "Vaga adicionada com sucesso");
       limparFormulario();
       editandoId = null;
       carregarCards();
@@ -257,6 +259,36 @@
     document.querySelector('input[name="contato"]').value = "";
     editandoId = null;
     document.getElementById("btnSubmit").textContent = "Adicionar";
+  }
+
+  // --- CONFIGURAÇÃO DOS LISTENERS CORRIGIDOS ---
+
+  // Botão Limpar tradicional
+  document.getElementById('btnLimpar').addEventListener('click', limparFormulario);
+
+  // Delegação de eventos para os botões dinâmicos de Editar e Excluir
+  document.getElementById('crud-cards').addEventListener('click', (e) => {
+    if (e.target.classList.contains('crud-edit-btn')) {
+      const id = e.target.getAttribute('data-id');
+      editarCard(id);
+    } else if (e.target.classList.contains('crud-delete-btn')) {
+      const id = e.target.getAttribute('data-id');
+      excluirCard(id);
+    }
+  });
+
+  // Botão SAIR dinamicamente configurado
+  const botaoSair = document.getElementById('deslogar');
+  if (botaoSair) {
+      botaoSair.addEventListener('click', () => {
+          if (typeof AuthGuard !== 'undefined' && AuthGuard.logout) {
+              AuthGuard.logout();
+          } else {
+              localStorage.removeItem('token');
+              localStorage.removeItem('usuario');
+              window.location.replace('/login');
+          }
+      });
   }
 
   carregarCards();

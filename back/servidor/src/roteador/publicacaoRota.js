@@ -1,19 +1,39 @@
 import express from "express";
 import PublicacaoCtrl from "../controle/publicacaoCtrl.js";
-import autenticarJWT from "../middleware/auth.js";
+import { verificarToken } from "../middleware/auth.js";
 
 const rota = express.Router();
 
-// Rotas públicas (GET) - qualquer um pode listar e buscar
-rota.get("/", PublicacaoCtrl.listar);
-rota.get("/:id", PublicacaoCtrl.buscar);
+console.log('🔧 Rota de publicações carregada');
 
-// PROTEÇÃO: Aplicar autenticação JWT nas rotas de modificação
-rota.use(autenticarJWT);
+// Rotas públicas (listar e buscar por ID)
+rota.get("/", (req, res, next) => {
+    console.log(`🌐 [Publicações] GET ${req.baseUrl || '/api/publicacoes'}${req.path}`);
+    PublicacaoCtrl.listar(req, res, next);
+});
 
-// Rotas protegidas (POST, PUT, DELETE) - apenas usuários autenticados
-rota.post("/", PublicacaoCtrl.criar);
-rota.put("/:id", PublicacaoCtrl.atualizar);
-rota.delete("/:id", PublicacaoCtrl.excluir);
+rota.get("/:id", (req, res, next) => {
+    console.log(`🌐 [Publicações] GET ${req.baseUrl || '/api/publicacoes'}${req.path} | ID: ${req.params.id}`);
+    PublicacaoCtrl.buscar(req, res, next);
+});
+
+// Middleware de autenticação para rotas protegidas
+rota.use(verificarToken);
+
+// Rotas protegidas (criar, atualizar, deletar)
+rota.post("/", (req, res, next) => {
+    console.log(`🔐 [Publicações] POST ${req.baseUrl || '/api/publicacoes'}${req.path} (Protegida)`);
+    PublicacaoCtrl.criar(req, res, next);
+});
+
+rota.put("/:id", (req, res, next) => {
+    console.log(`🔐 [Publicações] PUT ${req.baseUrl || '/api/publicacoes'}${req.path} (Protegida) | ID: ${req.params.id}`);
+    PublicacaoCtrl.atualizar(req, res, next);
+});
+
+rota.delete("/:id", (req, res, next) => {
+    console.log(`🔐 [Publicações] DELETE ${req.baseUrl || '/api/publicacoes'}${req.path} (Protegida) | ID: ${req.params.id}`);
+    PublicacaoCtrl.excluir(req, res, next);
+});
 
 export default rota;

@@ -1,2 +1,28 @@
-node_modules
+# Dependências e Ambientes
+node_modules/
+.env
+
+# Configurações de Editores e IDEs
 .vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Logs do Node e do Sistema
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+logs/
+*.log
+
+# Arquivos do Sistema Operacional
+Thumbs.db
+desktop.ini
+
+# Pasta de uploads locais (para não misturar fotos de teste locais com a produção)
+src/uploads/
+uploads/

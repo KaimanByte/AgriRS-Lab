@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
+import compression from "compression";
+import helmet from "helmet";
 import rotaPublicacao from "./roteador/publicacaoRota.js";
 import vagasRouter from "./roteador/vagasRota.js";
 import noticiaRota from './roteador/noticiaRota.js';
@@ -26,6 +28,54 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use(compression());
+app.use(helmet({
+  noSniff: false, 
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: [
+        "'self'", 
+        "'unsafe-inline'", 
+        "'unsafe-eval'", 
+        "https://barra.brasil.gov.br", 
+        "https://vlibras.gov.br",
+        "https://cdn.jsdelivr.net"
+      ],
+      styleSrc: [
+        "'self'", 
+        "'unsafe-inline'", 
+        "https://fonts.googleapis.com", 
+        "https://vlibras.gov.br",
+        "https://cdn.jsdelivr.net"
+      ],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "data:", "https://barra.brasil.gov.br"],
+      imgSrc: [
+        "'self'", 
+        "data:", 
+        "https://barra.brasil.gov.br", 
+        "https://vlibras.gov.br",
+        "https://cdn.jsdelivr.net",
+        "https://*.google.com",
+        "https://*.gstatic.com"
+      ],
+      connectSrc: [
+        "'self'", 
+        "https://vlibras.gov.br", 
+        "https://*.vlibras.gov.br",
+        "https://cdn.jsdelivr.net",
+        "https://*.google.com",
+        "https://api.emailjs.com"
+      ],
+      frameSrc: [
+        "'self'", 
+        "https://vlibras.gov.br",
+        "https://cdn.jsdelivr.net",
+        "https://*.google.com"
+      ],
+    }
+  }
+}));
 
 // Parse de JSON e URL-encoded
 app.use(express.json({ limit: '10mb' }));
@@ -41,11 +91,21 @@ console.log('   Front:', frontPath);
 console.log('   Pages:', pagesPath);
 console.log('   Uploads:', uploadsPath);
 
-// Servir apenas arquivos estáticos públicos (CSS, JS, imagens)
-app.use('/styles', express.static(path.join(frontPath, 'styles')));
-app.use('/scripts', express.static(path.join(frontPath, 'scripts')));
-app.use('/imagens', express.static(path.join(frontPath, 'imagens')));
-app.use('/uploads', express.static(uploadsPath));
+// Configuração padrão de cache para arquivos que mudam pouco (CSS, JS, Imagens da identidade)
+const cacheOptions = {
+  maxAge: '14d', // Mantém em cache por 14 dias (pode mudar para '30d' se quiser)
+  immutable: true // Informa ao navegador que o arquivo não mudará nesse período
+};
+
+// Configuração de cache para uploads dos usuários (fotos de notícias, etc)
+const uploadsCacheOptions = {
+  maxAge: '1d', // Cache menor (1 dia) para conteúdos dinâmicos que podem ser substituídos
+};
+
+app.use('/styles', express.static(path.join(frontPath, 'styles'), cacheOptions));
+app.use('/scripts', express.static(path.join(frontPath, 'scripts'), cacheOptions));
+app.use('/imagens', express.static(path.join(frontPath, 'imagens'), cacheOptions));
+app.use('/uploads', express.static(uploadsPath, uploadsCacheOptions));
 
 // BLOQUEAR acesso direto à pasta pages
 app.use('/pages', (req, res) => {
@@ -72,41 +132,41 @@ app.use('/api/noticias', noticiaRota);
 
 // Página inicial
 app.get('/', (req, res) => {
-  res.sendFile(path.join(pagesPath, '../../front/pages/index.html'));
+  res.sendFile(path.join(pagesPath, 'index.html'));
 });
 
 // Páginas públicas
 app.get('/sobre', (req, res) => {
-  res.sendFile(path.join(pagesPath, '../../front/pages/Sobre.html'));
+  res.sendFile(path.join(pagesPath, 'Sobre.html'));
 });
 
 app.get('/contato', (req, res) => {
-  res.sendFile(path.join(pagesPath, '../../front/pages/contato.html'));
+  res.sendFile(path.join(pagesPath, 'contato.html'));
 });
 
 app.get('/membros', (req, res) => {
-  res.sendFile(path.join(pagesPath, '../../front/pages/membros.html'));
+  res.sendFile(path.join(pagesPath, 'membros.html'));
 });
 
 app.get('/noticias', (req, res) => {
-  res.sendFile(path.join(pagesPath, '../../front/pages/noticias.html'));
+  res.sendFile(path.join(pagesPath, 'noticias.html'));
 });
 
 app.get('/projetos', (req, res) => {
-  res.sendFile(path.join(pagesPath, '../../front/pages/projetos.html'));
+  res.sendFile(path.join(pagesPath, 'projetos.html'));
 });
 
 app.get('/publicacoes', (req, res) => {
-  res.sendFile(path.join(pagesPath, '../../front/pages/publicacoes.html'));
+  res.sendFile(path.join(pagesPath, 'publicacoes.html'));
 });
 
 app.get('/vagas', (req, res) => {
-  res.sendFile(path.join(pagesPath, '../../front/pages/vagas.html'));
+  res.sendFile(path.join(pagesPath, 'vagas.html'));
 });
 
 // Página de login
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(pagesPath, '../../front/pages/login.html'));
+  res.sendFile(path.join(pagesPath, 'login.html'));
 });
 
 // Health check
@@ -136,22 +196,22 @@ const noCache = (req, res, next) => {
 
 app.get('/admin', noCache, (req, res) => {
   console.log('📄 Servindo: /admin (sem verificação de token no servidor)');
-  res.sendFile(path.join(pagesPath, '../../front/pages/crudSelecao.html'));
+  res.sendFile(path.join(pagesPath, 'crudSelecao.html'));
 });
 
 app.get('/admin/noticias', noCache, (req, res) => {
   console.log('📄 Servindo: /admin/noticias (sem verificação de token no servidor)');
-  res.sendFile(path.join(pagesPath, '../../front/pages/crud.noticias.html'));
+  res.sendFile(path.join(pagesPath, 'crud.noticias.html'));
 });
 
 app.get('/admin/publicacoes', noCache, (req, res) => {
   console.log('📄 Servindo: /admin/publicacoes (sem verificação de token no servidor)');
-  res.sendFile(path.join(pagesPath, '../../front/pages/crudpublicacoes.html'));
+  res.sendFile(path.join(pagesPath, 'crudpublicacoes.html'));
 });
 
 app.get('/admin/vagas', noCache, (req, res) => {
   console.log('📄 Servindo: /admin/vagas (sem verificação de token no servidor)');
-  res.sendFile(path.join(pagesPath, '../../front/pages/crudvagas.html'));
+  res.sendFile(path.join(pagesPath, 'crudvagas.html'));
 });
 
 // ============================================
@@ -179,7 +239,7 @@ app.use((err, req, res, next) => {
 // ============================================
 // INICIALIZAÇÃO DO SERVIDOR
 // ============================================
-const PORTA = process.env.PORTA || 3030;
+const PORTA = process.env.PORT || 3030;
 
 app.listen(PORTA, () => {
   console.log(`\n${'='.repeat(60)}`);

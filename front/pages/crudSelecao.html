@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/imagens/Header/AgriRSlab.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Administrativo - AgriRSlab</title>
     <link rel="stylesheet" href="/styles/StyleSelecao.css">
@@ -10,9 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- ============================================ -->
-  <!-- PROTEÇÃO AUTOMÁTICA - NÃO REMOVER -->
-  <!-- ============================================ -->
   <script>
 // PROTEÇÃO IMEDIATA - Coloque ANTES de qualquer outro script
 (async function() {
@@ -34,7 +32,7 @@
     
     // 2. Verifica validade do token
     try {
-        const response = await fetch('http://localhost:3030/auth/verificar', {
+        const response = await fetch('/auth/verificar', { // Ajustado para usar rota relativa (essencial para o Render)
             method: 'GET',
             headers: { 
                 'Authorization': `Bearer ${token}`,
@@ -77,7 +75,7 @@
 })();
 </script>
   
-  <button onclick="AuthGuard.logout()" id="deslogar">
+  <button id="deslogar">
     SAIR
   </button>
   
@@ -91,10 +89,8 @@
       <a href="/admin/vagas"><div class="opcoes-cards">VAGAS</div></a>
       <a href="/admin/noticias"><div class="opcoes-cards">NOTÍCIAS</div></a>
       <a href="/admin/publicacoes"><div class="opcoes-cards">PUBLICAÇÕES</div></a>
-    </div>
   </div>
 
-  <!-- AuthGuard.js -->
   <script src="/scripts/authGuard.js"></script>
   
   <script>
@@ -102,6 +98,21 @@
     const usuario = localStorage.getItem('usuario');
     if (usuario) {
       document.getElementById('usuario-info').textContent = `Logado como: ${usuario}`;
+    }
+
+    // Atrela o evento de clique ao botão após o script AuthGuard ser carregado
+    const botaoSair = document.getElementById('deslogar');
+    if (botaoSair) {
+        botaoSair.addEventListener('click', () => {
+            if (typeof AuthGuard !== 'undefined' && AuthGuard.logout) {
+                AuthGuard.logout();
+            } else {
+                // Fallback caso o script falhe por algum motivo
+                localStorage.removeItem('token');
+                localStorage.removeItem('usuario');
+                window.location.replace('/login');
+            }
+        });
     }
   </script>
 </body>

@@ -1,19 +1,39 @@
 import express from "express";
 import VagasCtrl from "../controle/vagasCtrl.js";
-import autenticarJWT from "../middleware/auth.js";
+import { verificarToken } from "../middleware/auth.js";
 
 const rota = express.Router();
 
-// Rotas públicas (GET) - qualquer um pode listar e buscar
-rota.get("/", VagasCtrl.listar);
-rota.get("/:id", VagasCtrl.buscar);
+console.log('🔧 Rota de vagas carregada');
 
-// PROTEÇÃO: Aplicar autenticação JWT nas rotas de modificação
-rota.use(autenticarJWT);
+// Rotas públicas (listar e buscar por ID)
+rota.get("/", (req, res, next) => {
+    console.log(`🌐 [Vagas] GET ${req.baseUrl || '/api/vagas'}${req.path}`);
+    VagasCtrl.listar(req, res, next);
+});
 
-// Rotas protegidas (POST, PUT, DELETE) - apenas usuários autenticados
-rota.post("/", VagasCtrl.criar);
-rota.put("/:id", VagasCtrl.atualizar);
-rota.delete("/:id", VagasCtrl.excluir);
+rota.get("/:id", (req, res, next) => {
+    console.log(`🌐 [Vagas] GET ${req.baseUrl || '/api/vagas'}${req.path} | ID: ${req.params.id}`);
+    VagasCtrl.buscar(req, res, next);
+});
+
+// Middleware de autenticação para rotas protegidas
+rota.use(verificarToken);
+
+// Rotas protegidas (criar, atualizar, deletar)
+rota.post("/", (req, res, next) => {
+    console.log(`🔐 [Vagas] POST ${req.baseUrl || '/api/vagas'}${req.path} (Protegida)`);
+    VagasCtrl.criar(req, res, next);
+});
+
+rota.put("/:id", (req, res, next) => {
+    console.log(`🔐 [Vagas] PUT ${req.baseUrl || '/api/vagas'}${req.path} (Protegida) | ID: ${req.params.id}`);
+    VagasCtrl.atualizar(req, res, next);
+});
+
+rota.delete("/:id", (req, res, next) => {
+    console.log(`🔐 [Vagas] DELETE ${req.baseUrl || '/api/vagas'}${req.path} (Protegida) | ID: ${req.params.id}`);
+    VagasCtrl.excluir(req, res, next);
+});
 
 export default rota;
