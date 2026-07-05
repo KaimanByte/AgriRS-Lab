@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 // Chave secreta (deve estar no .env)
-const JWT_SECRET = process.env.JWT_SECRET || 'sua_chave_secreta_aqui_mude_em_producao';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 /**
  * Gera um token JWT com os dados do usuário

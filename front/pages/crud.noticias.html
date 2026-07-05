@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/imagens/Header/AgriRSlab.webp" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Crud Notícias - AgriRSlab</title>
 	<link rel="stylesheet" href="/styles/StyleCrudNoticias.css">
@@ -34,7 +35,7 @@
     
     // 2. Verifica validade do token
     try {
-        const response = await fetch('http://localhost:3030/auth/verificar', {
+        const response = await fetch('/auth/verificar', { // Rota relativa ajustada
             method: 'GET',
             headers: { 
                 'Authorization': `Bearer ${token}`,
@@ -77,7 +78,6 @@
 })();
 </script>
 
-<!-- Depois carregue o authGuard.js normalmente -->
 <script src="/scripts/authGuard.js"></script>
 
   <header>
@@ -85,13 +85,15 @@
       <a target="_blank" title="AgriRSlab" href="/"><img src="/imagens/Header/AgriRSlab.png" id="Agriheader"></a>
       <ul id="nav-links">
         <li><a href="/admin/vagas">Vagas</a></li>
-        <li><a href="/admin/noticias">Notícias</a></li>
+        <li><a href="#">Notícias</a></li>
         <li><a href="/admin/publicacoes">Publicações</a></li>
       </ul>
       <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="/imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
-  <button onclick="AuthGuard.logout()" id="deslogar">SAIR</button>
+  
+  <button id="deslogar">SAIR</button>
+  
 	<div class="container mt-4" id="crud-news">
 		<form id="formNoticias">
       <h2>Notícias</h2>
@@ -109,7 +111,7 @@
 			  <div class="form-group">
 				  <div style="display: flex; align-items: center;">
 					  <input type="text" class="form-control" id="imagem" placeholder="URL DA IMAGEM">
-					  <span onclick="document.getElementById('imagem_file').click()" style="cursor: pointer; margin-left: 10px; font-size: 20px;">📁</span>
+					  <span id="btn-trigger-file" style="cursor: pointer; margin-left: 10px; font-size: 20px;">📁</span>
 				  </div>
 				  <input type="file" id="imagem_file" accept="image/*" style="display: none;"/>
 				  <img id="preview" src="" alt="Preview da imagem" style="max-width: 200px; max-height: 200px; display: none; margin-top: 10px;"/>
@@ -118,7 +120,7 @@
 				  <input type="text" class="form-control" id="url_leiamais" placeholder="URL PARA NOTICIA INTEIRA">
 			  </div>
 			  <button type="submit" class="btn btn-primary btn-adicionar" id="btnSubmit">Adicionar</button>
-			  <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
+			  <button type="button" class="btn-limpar" id="btnLimpar">Limpar</button>
 		  </div>
   </form>
 
@@ -142,7 +144,7 @@
   </footer>
 
 	<script>
-    const API = 'http://localhost:3030/api/noticias';
+    const API = '/api/noticias'; // Rota relativa ajustada
     let NOTICIAS = {};
     let editandoId = null;
 
@@ -190,8 +192,8 @@
                 </div>
               </td>
               <td>
-                <button class="btn btn-sm btn-info" onclick="editar(${n.id})">Editar</button>
-                <button class="btn btn-sm btn-danger" onclick="excluir(${n.id})">Excluir</button>
+                <button class="btn btn-sm btn-info btn-editar" data-id="${n.id}">Editar</button>
+                <button class="btn btn-sm btn-danger btn-excluir" data-id="${n.id}">Excluir</button>
               </td>
             </tr>
           `;
@@ -348,6 +350,37 @@
         console.error('Erro ao excluir:', e);
         alert('Erro ao excluir: ' + (e.message || e));
       }
+    }
+
+    // Configuração dos Event Listeners Corrigidos
+    document.getElementById('btnLimpar').addEventListener('click', limparFormulario);
+    
+    document.getElementById('btn-trigger-file').addEventListener('click', () => {
+      document.getElementById('imagem_file').click();
+    });
+
+    // Delegação de eventos para elementos gerados dinamicamente na tabela
+    document.getElementById('tbodyNoticias').addEventListener('click', (e) => {
+      if (e.target.classList.contains('btn-editar')) {
+        const id = e.target.getAttribute('data-id');
+        editar(id);
+      } else if (e.target.classList.contains('btn-excluir')) {
+        const id = e.target.getAttribute('data-id');
+        excluir(id);
+      }
+    });
+
+    const botaoSair = document.getElementById('deslogar');
+    if (botaoSair) {
+        botaoSair.addEventListener('click', () => {
+            if (typeof AuthGuard !== 'undefined' && AuthGuard.logout) {
+                AuthGuard.logout();
+            } else {
+                localStorage.removeItem('token');
+                localStorage.removeItem('usuario');
+                window.location.replace('/login');
+            }
+        });
     }
 
     carregar();

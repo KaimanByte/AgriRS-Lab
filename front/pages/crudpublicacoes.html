@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/imagens/Header/AgriRSlab.webp" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Crud Publicações - AgriRSlab</title>
   <link rel="stylesheet" href="/styles/StyleCrudPublicacoes.css" />
@@ -34,7 +35,7 @@
     
     // 2. Verifica validade do token
     try {
-        const response = await fetch('http://localhost:3030/auth/verificar', {
+        const response = await fetch('/auth/verificar', { // Rota relativa ajustada
             method: 'GET',
             headers: { 
                 'Authorization': `Bearer ${token}`,
@@ -77,7 +78,6 @@
 })();
 </script>
 
-<!-- Depois carregue o authGuard.js normalmente -->
 <script src="/scripts/authGuard.js"></script>
 
   <header>
@@ -86,12 +86,14 @@
       <ul id="nav-links">
         <li><a href="/admin/vagas">Vagas</a></li>
         <li><a href="/admin/noticias">Notícias</a></li>
-        <li><a href="/admin/publicacoes">Publicações</a></li>
+        <li><a href="#">Publicações</a></li>
       </ul>
       <a target="_blank" title="Inpe" href="https://www.gov.br/inpe/pt-br"><img src="/imagens/Header/Inpe.png" id="Inpeheader"></a>
     </nav>
   </header>
-  <button onclick="AuthGuard.logout()" id="deslogar">SAIR</button>
+  
+  <button id="deslogar">SAIR</button>
+  
   <main>
     <section class="crud-publicacoes">
       <h2 id="crud-titulo">Publicações</h2>
@@ -103,7 +105,7 @@
         <textarea type="text" id="descricao" placeholder="DESCRIÇÃO" required></textarea>
         <div style="display: flex; align-items: center; width: 100%;">
           <input type="text" id="imagem_url" placeholder="URL DA IMAGEM (imagem_url)" style="flex: 1;"/>
-          <span onclick="document.getElementById('imagem_file').click()" style="cursor: pointer; margin-left: 10px; font-size: 20px;">📁</span>
+          <span id="btn-trigger-file" style="cursor: pointer; margin-left: 10px; font-size: 20px;">📁</span>
         </div>
         <input type="file" id="imagem_file" accept="image/*" style="display: none;"/>
         <img id="preview" src="" alt="Preview da imagem" style="max-width: 200px; max-height: 200px; display: none; margin-top: 10px;"/>
@@ -112,7 +114,7 @@
         <input type="text" id="doi_url" placeholder="URL DOI (doi_url)"/>
         <div class="button-group">
           <button type="submit" class="btn-adicionar" id="btnSubmit">Adicionar</button>
-          <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
+          <button type="button" class="btn-limpar" id="btnLimpar">Limpar</button>
         </div>
       </form>
 
@@ -126,7 +128,7 @@
   </footer>
 
   <script>
-const API = "http://localhost:3030/api/publicacao";
+const API = "/api/publicacao"; // Rota relativa ajustada
 let PUBLICACOES = {};
 let editandoId = null;
 
@@ -138,6 +140,7 @@ function obterToken() {
 // Função para obter headers com autenticação
 function obterHeaders() {
   return {
+    "Content-Type": "text/html",
     "Content-Type": "application/json",
     "Authorization": `Bearer ${obterToken()}`
   };
@@ -170,8 +173,8 @@ function renderLista() {
         <small class="timestamps">Criado: ${formatDate(pub.criado_em)} • Atualizado: ${formatDate(pub.atualizado_em)}</small>
       </div>
       <div class="crud-actions">
-        <button id="azul" onclick="editar(${pub.idpublicacao})">Editar</button>
-        <button id="vermelho" onclick="excluir(${pub.idpublicacao})">Excluir</button>
+        <button id="azul" class="btn-editar" data-id="${pub.idpublicacao}">Editar</button>
+        <button id="vermelho" class="btn-excluir" data-id="${pub.idpublicacao}">Excluir</button>
       </div>
     `;
     lista.appendChild(li);
@@ -234,7 +237,7 @@ async function salvarPublicacao(dados) {
       throw new Error('Erro ao salvar publicação');
     }
 
-    alert(editandoId ? "Publicação atualizada com sucesso" : "Publicação adicionada com sucesso");
+    alert(editandoId ? "Publicação updated com sucesso" : "Publicação adicionada com sucesso");
     limparFormulario();
     editandoId = null;
     document.getElementById("btnSubmit").textContent = "Adicionar";
@@ -320,6 +323,37 @@ document.getElementById("imagem_file").addEventListener("change", function(e) {
     reader.readAsDataURL(file);
   }
 });
+
+// Configuração dos Event Listeners Corrigidos
+document.getElementById('btnLimpar').addEventListener('click', limparFormulario);
+
+document.getElementById('btn-trigger-file').addEventListener('click', () => {
+  document.getElementById('imagem_file').click();
+});
+
+// Delegação de eventos na lista dinâmica
+document.getElementById('lista').addEventListener('click', (e) => {
+  if (e.target.classList.contains('btn-editar')) {
+    const id = e.target.getAttribute('data-id');
+    editar(id);
+  } else if (e.target.classList.contains('btn-excluir')) {
+    const id = e.target.getAttribute('data-id');
+    excluir(id);
+  }
+});
+
+const botaoSair = document.getElementById('deslogar');
+if (botaoSair) {
+    botaoSair.addEventListener('click', () => {
+        if (typeof AuthGuard !== 'undefined' && AuthGuard.logout) {
+            AuthGuard.logout();
+        } else {
+            localStorage.removeItem('token');
+            localStorage.removeItem('usuario');
+            window.location.replace('/login');
+        }
+    });
+}
 
 carregar();
 </script>

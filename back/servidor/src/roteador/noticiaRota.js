@@ -8,12 +8,12 @@ console.log('🔧 Rota de notícias carregada');
 
 // Rotas públicas (listar e buscar por ID)
 rota.get('/', (req, res, next) => {
-    console.log('🌐 Rota GET / executada');
+    console.log(`🌐 [Notícias] GET ${req.baseUrl || '/api/noticias'}${req.path}`);
     noticiasCtrl.listar(req, res, next);
 });
 
 rota.get('/:id', (req, res, next) => {
-    console.log(`🌐 Rota GET /:id executada (ID: ${req.params.id})`);
+    console.log(`🌐 [Notícias] GET ${req.baseUrl || '/api/noticias'}${req.path} | ID: ${req.params.id}`);
     noticiasCtrl.buscarPorId(req, res, next);
 });
 
@@ -22,17 +22,17 @@ rota.use(verificarToken);
 
 // Rotas protegidas (criar, atualizar, deletar)
 rota.post('/', (req, res, next) => {
-    console.log('🔐 Rota POST / executada (protegida)');
+    console.log(`🔐 [Notícias] POST ${req.baseUrl || '/api/noticias'}${req.path} (Protegida)`);
     noticiasCtrl.inserir(req, res, next);
 });
 
 rota.put('/:id', (req, res, next) => {
-    console.log(`🔐 Rota PUT /:id executada (protegida, ID: ${req.params.id})`);
+    console.log(`🔐 [Notícias] PUT ${req.baseUrl || '/api/noticias'}${req.path} (Protegida) | ID: ${req.params.id}`);
     noticiasCtrl.atualizar(req, res, next);
 });
 
 rota.delete('/:id', (req, res, next) => {
-    console.log(`🔐 Rota DELETE /:id executada (protegida, ID: ${req.params.id})`);
+    console.log(`🔐 [Notícias] DELETE ${req.baseUrl || '/api/noticias'}${req.path} (Protegida) | ID: ${req.params.id}`);
     noticiasCtrl.deletar(req, res, next);
 });
 

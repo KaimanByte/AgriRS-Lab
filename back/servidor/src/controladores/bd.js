@@ -8,57 +8,69 @@ const { Pool } = pg;
 const connectionStringEnv = process.env.DATABASE_URL || process.env.PG_CONNECTION || process.env.BD_CONNECTION;
 
 function buildPoolConfig() {
-	// se houver connection string, garantir que seja string
-	if (connectionStringEnv) {
-		return { connectionString: typeof connectionStringEnv === 'string' ? connectionStringEnv : String(connectionStringEnv) };
-	}
+    // se houver connection string, garantir que seja string
+    if (connectionStringEnv) {
+        const str = typeof connectionStringEnv === 'string' ? connectionStringEnv : String(connectionStringEnv);
+        
+        const cfg = { connectionString: str };
 
-	const cfg = {};
-	// Prioriza variáveis BD* (do seu .env) e em seguida PG* (compatibilidade)
-	const user = process.env.BDUSUARIO || process.env.PGUSER;
-	const host = process.env.BDHOST || process.env.PGHOST;
-	const database = process.env.BDNOME || process.env.PGDATABASE;
-	const password = process.env.BDSENHA || process.env.PGPASSWORD;
-	const portEnv = process.env.BDPORTA || process.env.PGPORT;
+        // Configuração inteligente de SSL:
+        // Só ativa se NÃO for localhost / 127.0.0.1 (evita erros no ambiente local)
+        if (!str.includes('localhost') && !str.includes('127.0.0.1')) {
+            cfg.ssl = {
+                rejectUnauthorized: false
+            };
+        }
 
-	if (user !== undefined) cfg.user = String(user);
-	if (host !== undefined) cfg.host = String(host);
-	if (database !== undefined) cfg.database = String(database);
-	if (password !== undefined) cfg.password = String(password); // coerir para string
-	if (portEnv !== undefined) {
-		const p = Number(portEnv);
-		if (!Number.isNaN(p)) cfg.port = p;
-	}
-	// Se cfg ficar vazio, Pool tentará usar variáveis padrão do ambiente (ou falhar mais adiante)
-	return cfg;
+        return cfg;
+    }
+
+    const cfg = {};
+    // Prioriza variáveis BD* (do seu .env) e em seguida PG* (compatibilidade)
+    const user = process.env.BDUSUARIO || process.env.PGUSER;
+    const host = process.env.BDHOST || process.env.PGHOST;
+    const database = process.env.BDNOME || process.env.PGDATABASE;
+    const password = process.env.BDSENHA || process.env.PGPASSWORD;
+    const portEnv = process.env.BDPORTA || process.env.PGPORT;
+
+    if (user !== undefined) cfg.user = String(user);
+    if (host !== undefined) cfg.host = String(host);
+    if (database !== undefined) cfg.database = String(database);
+    if (password !== undefined) cfg.password = String(password); // coerir para string
+    if (portEnv !== undefined) {
+        const p = Number(portEnv);
+        if (!Number.isNaN(p)) cfg.port = p;
+    }
+    // Se cfg ficar vazio, Pool tentará usar variáveis padrão do ambiente (ou falhar mais adiante)
+    return cfg;
 }
 
 const poolConfig = buildPoolConfig();
 
 let pool;
 try {
-	pool = new Pool(poolConfig);
-	// previne crash por erro não tratado no cliente conectado
-	pool.on('error', (err) => {
-		console.error('pool error:', err && err.message ? err.message : err);
-	});
+    pool = new Pool(poolConfig);
+    // previne crash por erro não tratado no cliente conectado
+    pool.on('error', (err) => {
+        console.error('pool error:', err && err.message ? err.message : err);
+    });
 } catch (e) {
-	// em caso de erro ao criar Pool (ex: formato inválido), criamos um fallback leve
-	console.error('Erro ao criar Pool do pg:', e && e.message ? e.message : e);
-	pool = {
-		// fallback para não quebrar imports; queries lançam erro claro
-		query: async () => { throw new Error('Conexão com o banco indisponível: ' + (e && e.message ? e.message : 'erro ao criar pool')); }
-	};
+    // em caso de erro ao criar Pool (ex: formato inválido), criamos um fallback leve
+    console.error('Erro ao criar Pool do pg:', e && e.message ? e.message : e);
+    pool = {
+        // fallback para não quebrar imports; queries lançam erro claro
+        query: async () => { throw new Error('Conexão com o banco indisponível: ' + (e && e.message ? e.message : 'erro ao criar pool')); }
+    };
 }
 
 // Função utilitária para executar queries e logar erros sem lançar exceção que derrube o servidor
 async function execCreate(sql) {
-	try {
-		await pool.query(sql);
-		console.log('OK:', sql.split('\n')[0].trim());
-	} catch (e) {
-		console.log('Erro ao executar criação de tabela:', e && e.message ? e.message : e);
-	}
+    try {
+        await pool.query(sql);
+        console.log('OK:', sql.split('\n')[0].trim());
+    } catch (e) {
+        console.log('Erro ao executar criação de tabela:', e && e.message ? e.message : e);
+    }
 }
 
 // Criação das tabelas compatíveis com os DAOs existentes
@@ -118,11 +130,11 @@ CREATE TABLE IF NOT EXISTS tbnoticias (
 
 // Executa criações em background (não bloqueia o start do servidor)
 (async () => {
-	await execCreate(sqlNoticias);
-	await execCreate(sqlVagas);
-	await execCreate(sqlPublicacoes);
-	await execCreate(sqlTbPublicacao);
-	await execCreate(sqlTbNoticias);
+    await execCreate(sqlNoticias);
+    await execCreate(sqlVagas);
+    await execCreate(sqlPublicacoes);
+    await execCreate(sqlTbPublicacao);
+    await execCreate(sqlTbNoticias);
 })();
 
 // Exporta pool (default e named) para compatibilidade com importações do projeto
