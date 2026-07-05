@@ -46,7 +46,7 @@ export const uploadImagem = async (base64String, pastaCloudinary = 'agri_rslab')
     const filepath = path.join(uploadDir, filename);
     fs.writeFileSync(filepath, buffer);
     
-    return `http://localhost:3030/uploads/${filename}`;
+    return `/uploads/${filename}`;
   }
 };
 
@@ -56,7 +56,7 @@ export const deletarImagem = async (urlImagem, pastaCloudinary = 'agri_rslab') =
   if (usarCloudinary && urlImagem.includes('cloudinary')) {
     const publicId = urlImagem.split('/').pop().split('.')[0];
     await cloudinary.uploader.destroy(`${pastaCloudinary}/${publicId}`).catch(() => {});
-  } else if (urlImagem.startsWith('http://localhost:3030/uploads/')) {
+  } else if (urlImagem.startsWith('/uploads/') || urlImagem.includes('/uploads/')) {
     const filename = urlImagem.split('/').pop();
     const filepath = path.join(process.cwd(), '..', 'uploads', filename);
     if (fs.existsSync(filepath)) {
