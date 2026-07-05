@@ -1,5 +1,5 @@
 
-    const API = "http://localhost:3030/publicacao";
+    const API = `${window.location.origin}/publicacao`;
     let PUBLICACOES = {}; // mapa local id -> objeto pub
 
     function formatDate(v) {

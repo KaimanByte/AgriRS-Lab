@@ -4,7 +4,7 @@
  */
 
 const AuthGuard = {
-    API_URL: 'http://localhost:3030',
+    API_URL: window.location.origin,
     
     // Obter token do localStorage
     getToken() {

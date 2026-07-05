@@ -38,31 +38,61 @@ app.use(helmet({
         "'self'", 
         "'unsafe-inline'", 
         "'unsafe-eval'", 
+        "blob:", 
         "https://barra.brasil.gov.br", 
         "https://vlibras.gov.br",
+        "https://*.vlibras.gov.br",
         "https://cdn.jsdelivr.net"
       ],
+      scriptSrcElem: [
+        "'self'", 
+        "'unsafe-inline'", 
+        "'unsafe-eval'", 
+        "blob:", 
+        "https://barra.brasil.gov.br", 
+        "https://vlibras.gov.br",
+        "https://*.vlibras.gov.br",
+        "https://cdn.jsdelivr.net"
+      ],
+      workerSrc: ["'self'", "blob:"],
+      childSrc: ["'self'", "blob:", "https://vlibras.gov.br", "https://*.vlibras.gov.br"],
+      
       styleSrc: [
         "'self'", 
         "'unsafe-inline'", 
         "https://fonts.googleapis.com", 
         "https://vlibras.gov.br",
+        "https://*.vlibras.gov.br",
         "https://cdn.jsdelivr.net"
       ],
-      fontSrc: ["'self'", "https://fonts.gstatic.com", "data:", "https://barra.brasil.gov.br"],
+      fontSrc: [
+        "'self'", 
+        "https://fonts.gstatic.com", 
+        "data:", 
+        "https://barra.brasil.gov.br",
+        "https://vlibras.gov.br",
+        "https://*.vlibras.gov.br",
+        "https://cdn.jsdelivr.net",   
+        "https://*.jsdelivr.net"     
+      ],
       imgSrc: [
         "'self'", 
         "data:", 
         "https://barra.brasil.gov.br", 
         "https://vlibras.gov.br",
+        "https://*.vlibras.gov.br",
         "https://cdn.jsdelivr.net",
         "https://*.google.com",
-        "https://*.gstatic.com"
+        "https://*.gstatic.com",
+        "https://res.cloudinary.com", // <-- ADICIONADO AQUI para liberar as imagens do Cloudinary
+        "https://*.cloudinary.com"    // <-- ADICIONADO AQUI por segurança
       ],
       connectSrc: [
         "'self'", 
         "https://vlibras.gov.br", 
         "https://*.vlibras.gov.br",
+        "https://dicionario.vlibras.gov.br",  
+        "https://dicionario2.vlibras.gov.br", 
         "https://cdn.jsdelivr.net",
         "https://*.google.com",
         "https://api.emailjs.com"
@@ -70,9 +100,20 @@ app.use(helmet({
       frameSrc: [
         "'self'", 
         "https://vlibras.gov.br",
+        "https://*.vlibras.gov.br",
         "https://cdn.jsdelivr.net",
         "https://*.google.com"
       ],
+      // 👇 ADICIONE ESSAS DUAS DIRETIVAS ABAIXO PARA LIBERAR OS BINÁRIOS DE ANIMAÇÃO DA UNITY!
+      mediaSrc: [
+        "'self'", 
+        "https://vlibras.gov.br", 
+        "https://*.vlibras.gov.br", 
+        "https://dicionario2.vlibras.gov.br"
+      ],
+      objectSrc: [
+        "'none'"
+      ]
     }
   }
 }));
