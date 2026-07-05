@@ -301,7 +301,7 @@ navItems.forEach(item => {
 <!-- 📌 SCRIPT 3 — CARREGAR CARDS    -->
 <!-- =============================== -->
 <script>
-const API_URL = "http://localhost:3030/api/oportunidades";
+const API_URL = `${window.location.origin}/api/oportunidades`;
 
 function criarCard(o) {
   const card = document.createElement('div');
